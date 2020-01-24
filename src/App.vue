@@ -1,32 +1,81 @@
-<template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
-  </div>
+<template lang="pug">
+  q-layout(view='lHh Lpr lFf')
+    q-header.glossy(elevated='')
+      q-toolbar
+        q-btn(flat='', dense='', round='', @click='leftDrawerOpen = !leftDrawerOpen', aria-label='Menu', icon='menu')
+          q-toolbar-title
+            | @oarepo/invenio-quasar
+          div Quasar v{{ $q.version }}
+    q-drawer(v-model='leftDrawerOpen', show-if-above='', bordered='', content-class='bg-grey-2')
+      q-list
+        q-expansion-item(header='' label="Basic Editors")
+          q-card
+            q-card-section
+              q-list
+                q-item(clickable='' :to="{name: 'simple-edit'}")
+                  q-item-section(avatar='')
+                    q-icon(name='list')
+                  q-item-section
+                    q-item-label Edit simple object
+                q-item(clickable='' :to="{name: 'simple-default-value-edit'}")
+                  q-item-section(avatar='')
+                    q-icon(name='list')
+                  q-item-section
+                    q-item-label Edit simple object with default value
+      q-list
+        q-expansion-item(header='' label="Array Editors")
+          q-card
+            q-card-section
+              q-list
+                q-item(clickable='' :to="{name: 'array-edit'}")
+                  q-item-section(avatar='')
+                    q-icon(name='list')
+                  q-item-section
+                    q-item-label Edit array
+                q-item(clickable='' :to="{name: 'default-value-array-edit'}")
+                  q-item-section(avatar='')
+                    q-icon(name='list')
+                  q-item-section
+                    q-item-label Edit array with default value
+                q-item(clickable='' :to="{name: 'default-value-complex-array-edit'}")
+                  q-item-section(avatar='')
+                    q-icon(name='list')
+                  q-item-section
+                    q-item-label Edit complex array with default value
+        q-expansion-item(header='' label="Tree Editors")
+          q-card
+            q-card-section
+              q-list
+                q-item(clickable='' :to="{name: 'tree-edit'}")
+                  q-item-section(avatar='')
+                    q-icon(name='list')
+                  q-item-section
+                    q-item-label Edit tree object
+        q-expansion-item(header='' label="Object Editors")
+          q-card
+            q-card-section
+              q-list
+                q-item(clickable='' :to="{name: 'object-with-no-values-edit'}")
+                  q-item-section(avatar='')
+                    q-icon(name='list')
+                  q-item-section
+                    q-item-label Edit object with no values
+    q-page-container
+      q-page.q-ma-lg
+        router-view
 </template>
 
+<script>
+export default {
+  name: 'LayoutDefault',
+  components: {},
+  data () {
+    return {
+      leftDrawerOpen: false
+    }
+  }
+}
+</script>
+
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-#nav {
-  padding: 30px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
 </style>
