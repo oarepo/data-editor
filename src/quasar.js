@@ -21,7 +21,10 @@ import {
   QExpansionItem,
   QCard,
   QCardSection,
-  QInput
+  QInput,
+  QDialog,
+  QForm,
+  QCardActions
 } from 'quasar'
 
 Vue.use(Quasar, {
@@ -43,10 +46,13 @@ Vue.use(Quasar, {
     QExpansionItem,
     QCard,
     QCardSection,
-    QInput
+    QInput,
+    QForm,
+    QCardActions
   },
   directives: {
   },
   plugins: {
+    QDialog
   }
 })

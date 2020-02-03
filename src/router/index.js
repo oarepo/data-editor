@@ -7,6 +7,8 @@ import DefaultValueComplexArrayEdit from '../components/DefaultValueComplexArray
 import TreeEdit from '../components/TreeEdit'
 import ObjectWithNoValuesEdit from '../components/ObjectWithNoValuesEdit'
 import SimpleDefaultValueEdit from '../components/SimpleDefaultValueEdit'
+import AdditionalPropsEdit from '../components/AdditionalPropsEdit'
+import DialogEdit from '../components/DialogEdit'
 
 Vue.use(VueRouter)
 
@@ -50,6 +52,16 @@ const routes = [
     path: '/simple-default-value-edit',
     name: 'simple-default-value-edit',
     component: SimpleDefaultValueEdit
+  },
+  {
+    path: '/additional-props-edit',
+    name: 'additional-props-edit',
+    component: AdditionalPropsEdit
+  },
+  {
+    path: '/dialog-edit',
+    name: 'dialog-edit',
+    component: DialogEdit
   }
 ]
 

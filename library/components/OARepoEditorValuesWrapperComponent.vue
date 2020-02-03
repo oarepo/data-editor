@@ -43,7 +43,6 @@ export default {
       return this.layout.array || (this.pathValues && this.pathValues.length && Array.isArray(this.pathValues[0].value))
     },
     addArrayProps () {
-      console.log('addObj')
       return {
         ...this.$props,
         context: this.currentValue,
@@ -55,7 +54,6 @@ export default {
       }
     },
     addObjectProps () {
-      // console.log('sdf', this.$props)
       return {
         ...this.$props,
         context: this.context,
@@ -70,10 +68,13 @@ export default {
       return `${this.parentJSONPointer}/${this.layout.path}`
     },
     currentValue () {
+      console.log(this.context[this.layout.path])
       return this.context[this.layout.path]
     },
     defaultValue () {
       const dv = this.layout.defaultValue
+      // console.log('dv', dv)
+      // console.log('this', this)
       if (dv === null || dv === undefined) {
         return dv
       }
@@ -92,7 +93,7 @@ export default {
   methods: {
     async startEditing () {
       const dv = await this.defaultValue
-      console.log('dv', dv)
+      console.log(dv)
       if (dv) {
         this.addDefaultValue(dv)
       } else {

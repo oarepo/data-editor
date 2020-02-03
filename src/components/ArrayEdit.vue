@@ -22,22 +22,22 @@ export default {
   },
   methods: {
     submit ({ path, context, prop, value, op, pathValues }) {
-      console.log('saving', context, prop, value, path, pathValues)
+      if (op === 'add') {
+        if (Array.isArray(context)) {
+          context.push(value)
+        } else {
+          context[prop] = value
+        }
+      }
+      if (op === 'replace') {
+        context[prop] = value
+      }
       if (op === 'remove') {
         if (Array.isArray(context)) {
           context.splice(prop, 1)
         } else {
           delete context[prop]
         }
-      }
-      if (op === 'replace') {
-        context[prop] = value
-      }
-      if (op === 'add') {
-        if (Array.isArray(context)) {
-          context.push(value)
-        }
-        console.log(context, prop, value)
       }
     },
     cancel ({ props }) {

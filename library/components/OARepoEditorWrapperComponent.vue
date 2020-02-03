@@ -3,6 +3,7 @@ div
   div.row(v-if="!editing")
     view-renderer.col(:def="layout" :props="this.$props" code="value-viewer" @dblclick.native="startEditing" ref="viewer")
     q-btn(icon="remove" color="primary" size="x-small" dense flat v-if="isArray" @click="onRemove")
+    // q-btn(icon="remove" color="primary" size="x-small" dense flat v-if="!isArray" @click="onRemove") r
     q-btn(icon="edit" color="primary" size="x-small" dense flat v-if="layout && !layout.disabled" @click="startEditing")
   div.row(v-else)
     edit-renderer(:def="layout" :props="this.$props" code="value-editor" ref="editor")
@@ -25,10 +26,10 @@ const ViewRenderer = {
   },
   render (h) {
     const collected = {}
-    // console.log('render(h)', this, this.def, this.code, this.props.values.length)
     const els = this.renderElement(collected, h, this.def, this.code,
       this.props, () => {
         const value = this.props.context[this.props.layout.path]
+        console.log(this.props, 'this.props')
         // console.log(value)
         return [value !== undefined ? value : '---']
       })
@@ -147,6 +148,9 @@ export default {
     },
     isArray () {
       return Array.isArray(this.context)
+    },
+    isUndefinedObjectOrValue () {
+      return !this.isArray && this.pathValues === undefined
     }
   },
   data: function () {
@@ -171,8 +175,6 @@ export default {
         context: this.context,
         prop: this.layout.path,
         pathValues: this.pathValues
-        // valueIndex: this.valueIndex,
-        // values: this.values
       }
       console.log('submit', submitData)
       this.editing = false
@@ -184,7 +186,8 @@ export default {
         path: this.currentJsonPointer,
         op: 'remove',
         context: this.context,
-        prop: this.layout.path
+        prop: this.layout.path,
+        valueIndex: this.valueIndex
       }
       console.log('remove', removeData)
       this.editing = false

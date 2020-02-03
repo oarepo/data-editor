@@ -46,7 +46,6 @@ export default {
           'element': options.editorValuesWrapperComponent || OARepoEditorValuesWrapperComponent
         }
       }
-      console.log(layout)
       layout.inplaceEditorTranslated = true
       return layout
     }

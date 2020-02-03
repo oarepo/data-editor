@@ -1,27 +1,26 @@
 <template lang="pug">
 div
-  oarepo-record-inplace-editor(:record="record" :options="options")
+  oarepo-record-inplace-editor(:record="record" :options="options" :layout="layout")
 </template>
 
 <script>
 export default {
-  name: 'DefaultValueArrayEdit',
+  name: 'AdditionalPropsEdit',
   data: function () {
     return {
       record: {
-        defaultValueArray: [1, 2]
+        a: 1,
+        b: 2,
+        c: 3
       },
+      layout: [{ 'path': 'a' }, { 'path': 'b' }, { 'path': 'c' }, { 'path': 'd' }, { 'path': 'e' }],
       options: {
         schema: 'table',
         extraProps: {
           submit: this.submit,
           cancel: this.cancel
         },
-        pathLayouts: {
-          defaultValueArray: {
-            defaultValue: () => 8
-          }
-        }
+        showEmpty: true
       }
     }
   },

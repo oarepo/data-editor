@@ -1,6 +1,6 @@
 <template lang="pug">
 div
-  oarepo-record-inplace-editor(:record="record" :options="options")
+  oarepo-record-inplace-editor(:record="record" :options="options" :layout="layout")
 </template>
 
 <script>
@@ -15,28 +15,33 @@ export default {
         extraProps: {
           submit: this.submit,
           cancel: this.cancel
-        }
-      }
+        },
+        showEmpty: true
+      },
+      // layout: [{ path: 'a' }, { key: 'aaa' }, { children: ['b', 'c'] }]
+      layout: [{ 'path': 'a' }, { 'path': 'b' }, { 'path': 'c' }]
+      // layout: [{ 'path': 'a', 'label': 'a' }, { 'path': 'b', 'label': 'b' }, { 'path': 'c', 'label': 'c' }]
+      // layout: ['a', 'b', 'c']
     }
   },
   methods: {
     submit ({ path, context, prop, value, op, pathValues }) {
-      console.log('saving', context, prop, value, path, pathValues)
+      if (op === 'add') {
+        if (Array.isArray(context)) {
+          context.push(value)
+        } else {
+          context[prop] = value
+        }
+      }
+      if (op === 'replace') {
+        context[prop] = value
+      }
       if (op === 'remove') {
         if (Array.isArray(context)) {
           context.splice(prop, 1)
         } else {
           delete context[prop]
         }
-      }
-      if (op === 'replace') {
-        context[prop] = value
-      }
-      if (op === 'add') {
-        if (Array.isArray(context)) {
-          context.push(value)
-        }
-        console.log(context, prop, value)
       }
     },
     cancel ({ props }) {

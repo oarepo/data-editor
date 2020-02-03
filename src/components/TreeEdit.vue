@@ -9,13 +9,18 @@ export default {
   data: function () {
     return {
       record: {
-        tree: [1, 2, 3, [4, 5, 6, [7, 8, 9, [10]]]]
+        tree: [{ 1: [1, 2, 3] }, { 2: [1, 2, 3] }, { 2: [{ 5: 5 }] }]
       },
       options: {
         schema: 'table',
         extraProps: {
           submit: this.submit,
           cancel: this.cancel
+        },
+        pathLayouts: {
+          tree: {
+            defaultValue: () => ({ 3: [1, 2, 3] })
+          }
         }
       }
     }

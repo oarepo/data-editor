@@ -8,6 +8,7 @@
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint"
   },
+  "main": "oarepo-data-editor.esm.js",
   "dependencies": {
     "@oarepo/data-renderer": "^1.14.0",
     "@quasar/extras": "^1.0.0",
@@ -28,6 +29,7 @@
     "@vue/test-utils": "1.0.0-beta.29",
     "babel-eslint": "^10.0.3",
     "babel-plugin-transform-imports": "1.5.0",
+    "bili": "^4.8.1",
     "chai": "^4.1.2",
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.0.0",

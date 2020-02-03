@@ -1,15 +1,19 @@
 <template lang="pug">
 div
   oarepo-record-inplace-editor(:record="record" :options="options")
+  q-btn(@click="openDialog") dialog
 </template>
 
 <script>
+import DialogTemplate from './DialogTemplate'
 export default {
-  name: 'DefaultValueArrayEdit',
+  name: 'DialogEdit',
   data: function () {
     return {
       record: {
-        defaultValueArray: [1, 2]
+        a: 1,
+        b: 2,
+        c: 3
       },
       options: {
         schema: 'table',
@@ -17,15 +21,19 @@ export default {
           submit: this.submit,
           cancel: this.cancel
         },
-        pathLayouts: {
-          defaultValueArray: {
-            defaultValue: () => 8
-          }
-        }
+        showEmpty: true
       }
     }
   },
   methods: {
+    openDialog () {
+      this.$q.dialog({
+        component: DialogTemplate,
+        parent: this
+      }).onOk(() => {
+        console.log('ok')
+      })
+    },
     submit ({ path, context, prop, value, op, pathValues }) {
       if (op === 'add') {
         if (Array.isArray(context)) {

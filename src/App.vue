@@ -60,6 +60,16 @@
                     q-icon(name='list')
                   q-item-section
                     q-item-label Edit object with no values
+                q-item(clickable='' :to="{name: 'additional-props-edit'}")
+                  q-item-section(avatar='')
+                    q-icon(name='list')
+                  q-item-section
+                    q-item-label Edit object with additional props
+                q-item(clickable='' :to="{name: 'dialog-edit'}")
+                  q-item-section(avatar='')
+                    q-icon(name='list')
+                  q-item-section
+                    q-item-label Edit object in dialog
     q-page-container
       q-page.q-ma-lg
         router-view
