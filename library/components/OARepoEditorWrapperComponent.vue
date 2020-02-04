@@ -1,10 +1,13 @@
 <template lang="pug">
 div
   div.row(v-if="!editing")
+    // q-btn(@click="toggleDialogs")
     view-renderer.col(:def="layout" :props="this.$props" code="value-viewer" @dblclick.native="startEditing" ref="viewer")
     q-btn(icon="remove" color="primary" size="x-small" dense flat v-if="isArray" @click="onRemove")
-    // q-btn(icon="remove" color="primary" size="x-small" dense flat v-if="!isArray" @click="onRemove") r
+    //q-btn(icon="remove" color="primary" size="x-small" dense flat v-if="!isArray" @click="onRemove") r
     q-btn(icon="edit" color="primary" size="x-small" dense flat v-if="layout && !layout.disabled" @click="startEditing")
+    // q-btn(@click="openDialog" v-if="showDialogs") dialog
+    q-btn(@click="openDialog") dialog
   div.row(v-else)
     edit-renderer(:def="layout" :props="this.$props" code="value-editor" ref="editor")
     div.q-mt-sm
@@ -14,6 +17,7 @@ div
 <script>
 
 import { RendererMixin } from '@oarepo/data-renderer'
+import DialogTemplate from '../../src/components/DialogTemplate'
 
 const ViewRenderer = {
   mixins: [
@@ -29,8 +33,7 @@ const ViewRenderer = {
     const els = this.renderElement(collected, h, this.def, this.code,
       this.props, () => {
         const value = this.props.context[this.props.layout.path]
-        console.log(this.props, 'this.props')
-        // console.log(value)
+        console.log('value', value)
         return [value !== undefined ? value : '---']
       })
     return els[0]
@@ -156,11 +159,37 @@ export default {
   data: function () {
     return {
       editing: false
+      // showDialogs: false
     }
   },
   methods: {
     startEditing () {
       this.editing = true
+    },
+    // toggleDialogs () {
+    //   this.showDialogs = !this.showDialogs
+    // },
+    openDialog () {
+      // console.log(this)
+      this.$q.dialog({
+        component: DialogTemplate,
+        parent: this,
+        initialValue: this.value
+      }).onOk((value) => {
+        console.log('ok', value)
+        const submitData = {
+          path: this.currentJsonPointer,
+          value: value,
+          op: this.patchOperation,
+          context: this.context,
+          prop: this.layout.path,
+          pathValues: this.pathValues
+        }
+        console.log('submit', submitData)
+        this.editing = false
+        this.$emit('stop-editing')
+        this.submit(submitData)
+      })
     },
     onCancel () {
       this.editing = false

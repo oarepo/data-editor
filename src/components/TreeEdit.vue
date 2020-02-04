@@ -5,7 +5,7 @@ div
 
 <script>
 export default {
-  name: 'TreeEdit',
+  name: 'tree-edit',
   data: function () {
     return {
       record: {

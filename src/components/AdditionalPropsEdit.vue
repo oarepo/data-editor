@@ -5,7 +5,7 @@ div
 
 <script>
 export default {
-  name: 'AdditionalPropsEdit',
+  name: 'additional-props-edit',
   data: function () {
     return {
       record: {

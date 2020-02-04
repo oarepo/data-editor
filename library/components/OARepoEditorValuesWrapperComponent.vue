@@ -6,6 +6,8 @@ component(:is="component")
     q-btn(icon="playlist_add" flat color="primary" @click="startEditing" v-if="!editing")
   div(v-if="isUndefinedObjectOrValue")
     oarepo-editor-wrapper(v-bind="addObjectProps" patch-operation="add" ref="edit" @stop-editing="stopEditing" :submit="submit" :cancel="cancel")
+  // div(v-else)
+  //   q-btn(icon="playlist_add" flat color="primary" v-if="!editing" @click="startEditing") z
 </template>
 <script>
 
@@ -74,7 +76,6 @@ export default {
     defaultValue () {
       const dv = this.layout.defaultValue
       // console.log('dv', dv)
-      // console.log('this', this)
       if (dv === null || dv === undefined) {
         return dv
       }

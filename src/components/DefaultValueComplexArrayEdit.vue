@@ -5,7 +5,7 @@ div
 
 <script>
 export default {
-  name: 'DefaultValueComplexArrayEdit',
+  name: 'default-value-complex-array-edit',
   data: function () {
     return {
       record: {

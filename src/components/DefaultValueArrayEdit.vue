@@ -5,7 +5,7 @@ div
 
 <script>
 export default {
-  name: 'DefaultValueArrayEdit',
+  name: 'default-value-array-edit',
   data: function () {
     return {
       record: {

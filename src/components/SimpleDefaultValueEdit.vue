@@ -5,7 +5,7 @@ div
 
 <script>
 export default {
-  name: 'SimpleDefaultValueEdit',
+  name: 'simple-default-value-edit',
   data: function () {
     return {
       record: {
@@ -33,11 +33,16 @@ export default {
   methods: {
     submit ({ context, op, prop, value }) {
       console.log('saving', context, prop, value)
+      if (op === 'add') {
+        this.$set(context, prop, value)
+      }
       if (op === 'replace') {
+        // this.$set(context, prop, value)
         context[prop] = value
       }
       if (op === 'remove') {
-        delete context[prop]
+        this.$delete(context, prop)
+        // delete context[prop]
       }
     },
     cancel (props) {

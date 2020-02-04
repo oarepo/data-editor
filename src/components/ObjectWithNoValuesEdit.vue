@@ -5,7 +5,7 @@ div
 
 <script>
 export default {
-  name: 'ObjectWithNoValuesEdit',
+  name: 'object-with-no-values-edit',
   // layout: [{ 'path': 'a' }, { 'path': 'b' }],
   data: function () {
     return {

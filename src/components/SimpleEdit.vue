@@ -5,7 +5,7 @@ div
 
 <script>
 export default {
-  name: 'SimpleEdit',
+  name: 'simple-edit',
   data: function () {
     return {
       record: {

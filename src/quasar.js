@@ -23,6 +23,7 @@ import {
   QCardSection,
   QInput,
   QDialog,
+  Dialog,
   QForm,
   QCardActions
 } from 'quasar'
@@ -48,11 +49,12 @@ Vue.use(Quasar, {
     QCardSection,
     QInput,
     QForm,
-    QCardActions
+    QCardActions,
+    QDialog
   },
   directives: {
   },
   plugins: {
-    QDialog
+    Dialog
   }
 })
