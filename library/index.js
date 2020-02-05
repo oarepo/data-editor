@@ -1,4 +1,4 @@
-import OARepoRecordInplaceEditor from './components/OARepoRecordInplaceEditor'
+import OARepoRecordInplaceEditor from './components/OARepoRecordInplaceEditor.vue'
 
 export default {
   install (Vue, options) {
