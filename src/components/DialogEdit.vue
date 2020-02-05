@@ -1,7 +1,6 @@
 <template lang="pug">
 div
   oarepo-record-inplace-editor(:record="record" :options="options" :dialog-component="dialogComponent")
-  // q-btn(@click="openDialog") dialog
 </template>
 
 <script>

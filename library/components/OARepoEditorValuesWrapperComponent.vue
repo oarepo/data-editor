@@ -95,18 +95,8 @@ export default {
   },
   methods: {
     async startEditing () {
-      console.log(this)
-      // let dv = await this.defaultValue
       const dv = await this.defaultValue
       console.log(dv)
-      // if (!this.parentJSONPointer) {
-      //   console.log('if', dv)
-      //   dv = dv.rootDefault
-      // } else {
-      //   console.log('else', dv)
-      //   dv = dv.childDefault
-      // }
-      // console.log(dv)
       if (dv) {
         this.addDefaultValue(dv)
       } else {
@@ -117,17 +107,23 @@ export default {
       }
     },
     openDialog () {
-      // console.log('v', this.value, 'p', this.prop, 'cV', this.currentValue[0], 'dV', this.defaultValue)
-      // console.log(Object.getOwnPropertyNames(this.currentValue[0])[0])
       this.$q.dialog({
         component: this.layout.dialogComponent || this.dialogComponent,
         parent: this
       }).onOk((value) => {
+        const submitData = {
+          path: `${this.currentJsonPointer}/-`,
+          value: value,
+          op: 'add',
+          context: this.currentValue,
+          prop: '-',
+          pathValues: [],
+          values: [value]
+        }
+        console.log('submit', submitData)
         this.editing = false
         this.$emit('stop-editing')
-        this.addDefaultValue({ key: Object.getOwnPropertyNames(this.currentValue[0])[0], value: value })
-        // this.addDefaultValue({ key: 'a', value: value })
-        // this.addDefaultValue(value)
+        this.submit(submitData)
       })
     },
     stopEditing () {

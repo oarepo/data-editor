@@ -28,14 +28,7 @@ export default {
     submit ({ path, context, prop, value, op, pathValues }) {
       if (op === 'add') {
         if (Array.isArray(context)) {
-          if (typeof value === 'object') {
-            const obj = {}
-            obj[value.key] = value.value
-            context.push(obj)
-          } else {
-            context.push(value)
-          }
-          // context.push({ a: value })
+          context.push(value)
         } else {
           context[prop] = value
         }

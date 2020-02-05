@@ -6,7 +6,6 @@ div
 <script>
 export default {
   name: 'object-with-children-edit',
-  // layout: [{ 'path': 'a' }, { 'path': 'b' }],
   data: function () {
     return {
       record: {},

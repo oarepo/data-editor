@@ -34,14 +34,12 @@ export default {
       console.log('saving', context, prop, value)
       if (op === 'add') {
         context[prop] = value
-        // this.$set(context, prop, value)
       }
       if (op === 'replace') {
         context[prop] = value
       }
       if (op === 'remove') {
         delete context[prop]
-        // this.$delete(context, prop)
       }
     },
     cancel (props) {

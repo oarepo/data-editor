@@ -3,7 +3,7 @@ q-dialog(ref="dialog" @hide="onDialogHide")
   q-card
     q-card-section
       q-form(ref="form")
-        q-input(label="Value" v-model="value")
+        q-input(label="a" v-model="a")
     q-card-actions(align="right")
       q-btn(color="primary" type="submit" label="OK" @click="onOKClick")
       q-btn(color="primary" label="Cancel" @click="onCancelClick")
@@ -14,7 +14,7 @@ export default {
   name: 'dialog-component',
   data: function () {
     return {
-      value: null
+      a: null
     }
   },
   props: {
@@ -37,7 +37,7 @@ export default {
     },
     async onOKClick () {
       if (await this.$refs.form.validate()) {
-        this.$emit('ok', this.value)
+        this.$emit('ok', { a: this.a })
         this.hide()
       }
     },
