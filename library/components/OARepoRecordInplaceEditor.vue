@@ -12,8 +12,8 @@ div
 <script>
 
 import OARepoRecordMixin from './OARepoRecordMixin'
-import OARepoEditorWrapperComponent from './OARepoEditorWrapperComponent'
-import OARepoEditorValuesWrapperComponent from './OARepoEditorValuesWrapperComponent'
+import OARepoEditorWrapperComponent from './OARepoEditorWrapperComponent.vue'
+import OARepoEditorValuesWrapperComponent from './OARepoEditorValuesWrapperComponent.vue'
 
 export default {
   name: 'oarepo-record-inplace-editor',

@@ -11,7 +11,7 @@ component(:is="component")
 </template>
 <script>
 
-import OARepoEditorWrapperComponent from './OARepoEditorWrapperComponent'
+import OARepoEditorWrapperComponent from './OARepoEditorWrapperComponent.vue'
 import { SKIP_WRAPPER } from '@oarepo/data-renderer'
 
 export default {
