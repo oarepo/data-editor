@@ -19,8 +19,8 @@ export default {
         showEmpty: true
       },
       // layout: [{ path: 'a' }, { key: 'aaa' }, { children: ['b', 'c'] }]
-      layout: [{ 'path': 'a' }, { 'path': 'b' }, { 'path': 'c' }]
-      // layout: [{ 'path': 'a', 'label': 'a' }, { 'path': 'b', 'label': 'b' }, { 'path': 'c', 'label': 'c' }]
+      // layout: [{ 'path': 'a' }, { 'path': 'b' }, { 'path': 'c' }]
+      layout: [{ 'path': 'a', 'label': 'a' }, { 'path': 'b', 'label': 'b' }, { 'path': 'c', 'label': 'c' }]
       // layout: ['a', 'b', 'c']
     }
   },

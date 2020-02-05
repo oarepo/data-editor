@@ -23,7 +23,6 @@ export default {
         showEmpty: true,
         pathLayouts: {
           simpleObject: {
-            // children: ['firstname', 'lastname'],
             defaultValue: () => ({ a: '1' })
           }
         }
@@ -34,15 +33,15 @@ export default {
     submit ({ context, op, prop, value }) {
       console.log('saving', context, prop, value)
       if (op === 'add') {
-        this.$set(context, prop, value)
+        context[prop] = value
+        // this.$set(context, prop, value)
       }
       if (op === 'replace') {
-        // this.$set(context, prop, value)
         context[prop] = value
       }
       if (op === 'remove') {
-        this.$delete(context, prop)
-        // delete context[prop]
+        delete context[prop]
+        // this.$delete(context, prop)
       }
     },
     cancel (props) {

@@ -56,6 +56,10 @@ export default {
       const opts = {
         ...this.options
       }
+      if (opts.extraProps === undefined) {
+        opts.extraProps = {}
+      }
+      opts.extraProps.dialogComponent = this.dialogComponent
       opts.layoutTranslator = (layout, options) => this.layoutTranslator(layout, {
         ...options,
         nextLayoutTranslator

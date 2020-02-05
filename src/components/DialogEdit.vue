@@ -1,11 +1,12 @@
 <template lang="pug">
 div
-  oarepo-record-inplace-editor(:record="record" :options="options")
+  oarepo-record-inplace-editor(:record="record" :options="options" :dialog-component="dialogComponent")
   // q-btn(@click="openDialog") dialog
 </template>
 
 <script>
-import DialogTemplate from './DialogTemplate'
+import DialogComponent from './DialogComponent'
+
 export default {
   name: 'dialog-edit',
   data: function () {
@@ -22,13 +23,14 @@ export default {
           cancel: this.cancel
         },
         showEmpty: true
-      }
+      },
+      dialogComponent: DialogComponent
     }
   },
   methods: {
     openDialog () {
       this.$q.dialog({
-        component: DialogTemplate,
+        component: DialogComponent,
         parent: this
       }).onOk((value) => {
         console.log('ok', value)

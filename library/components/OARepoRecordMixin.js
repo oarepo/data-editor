@@ -9,6 +9,7 @@ export default {
     options: {
       type: Object,
       default: () => ({})
-    }
+    },
+    dialogComponent: Object
   }
 }

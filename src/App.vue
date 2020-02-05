@@ -42,6 +42,11 @@
                     q-icon(name='list')
                   q-item-section
                     q-item-label Edit complex array with default value
+                q-item(clickable='' :to="{name: 'complex-array-dialog-edit'}")
+                  q-item-section(avatar='')
+                    q-icon(name='list')
+                  q-item-section
+                    q-item-label Edit complex array with dialog
         q-expansion-item(header='' label="Tree Editors")
           q-card
             q-card-section
@@ -60,6 +65,11 @@
                     q-icon(name='list')
                   q-item-section
                     q-item-label Edit object with no values
+                q-item(clickable='' :to="{name: 'object-with-children-edit'}")
+                  q-item-section(avatar='')
+                    q-icon(name='list')
+                  q-item-section
+                    q-item-label Edit object with children
                 q-item(clickable='' :to="{name: 'additional-props-edit'}")
                   q-item-section(avatar='')
                     q-icon(name='list')

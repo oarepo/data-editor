@@ -9,7 +9,8 @@ export default {
   data: function () {
     return {
       record: {
-        tree: [{ 1: [1, 2, 3] }, { 2: [1, 2, 3] }, { 2: [{ 5: 5 }] }]
+        // tree: [{ 1: [{ 1: [1, 2, 3] }, { 1: [1, 2, 3] }, { 1: [1, 2, 3] }] }, { 2: [{ 1: [1, 2, 3] }, { 1: [1, 2, 3] }, { 1: [1, 2, 3] }] }, { 2: [{ 1: [1, 2, 3] }] }]
+        tree: [{ 0: [1, 2, 3] }, { 2: [1, 2, 3] }, { 2: [5] }]
       },
       options: {
         schema: 'table',
@@ -21,6 +22,13 @@ export default {
           tree: {
             defaultValue: () => ({ 3: [1, 2, 3] })
           }
+          // defaultValue: () => ({ 3: [1, 2, 3] }),
+          // a: { defaultValue: () => 1 }
+          // defaultValue: {
+          //   rootDefault: { 3: [1, 2, 3] },
+          //   childDefault: 1
+          // }
+          // }
         }
       }
     }

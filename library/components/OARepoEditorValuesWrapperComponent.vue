@@ -2,12 +2,11 @@
 component(:is="component")
   slot
   div(v-if='isArray')
-    oarepo-editor-wrapper(v-bind="addArrayProps" patch-operation="add" v-if="editing" ref="edit" @stop-editing="stopEditing" :submit="submit" :cancel="cancel")
-    q-btn(icon="playlist_add" flat color="primary" @click="startEditing" v-if="!editing")
+    oarepo-editor-wrapper(v-bind="addArrayProps" patch-operation="add" v-if="editing" ref="edit" @stop-editing="stopEditing" :submit="submit" :cancel="cancel" :dialog-component="dialogComponent")
+    q-btn(icon="playlist_add" flat color="primary" @click="startEditing" v-if="!editing && !hasDialog")
+    q-btn(icon="playlist_add" flat color="primary" @click="openDialog" v-if="hasDialog")
   div(v-if="isUndefinedObjectOrValue")
-    oarepo-editor-wrapper(v-bind="addObjectProps" patch-operation="add" ref="edit" @stop-editing="stopEditing" :submit="submit" :cancel="cancel")
-  // div(v-else)
-  //   q-btn(icon="playlist_add" flat color="primary" v-if="!editing" @click="startEditing") z
+    oarepo-editor-wrapper(v-bind="addObjectProps" patch-operation="add" ref="edit" @stop-editing="stopEditing" :submit="submit" :cancel="cancel" :dialog-component="dialogComponent")
 </template>
 <script>
 
@@ -30,7 +29,8 @@ export default {
     valueIndex: Number,
     parentJSONPointer: String,
     submit: Function,
-    cancel: Function
+    cancel: Function,
+    dialogComponent: Object
   },
   components: {
     'oarepo-editor-wrapper': OARepoEditorWrapperComponent
@@ -63,6 +63,9 @@ export default {
         values: []
       }
     },
+    hasDialog () {
+      return this.layout.dialogComponent || this.dialogComponent
+    },
     isUndefinedObjectOrValue () {
       return !this.isArray && this.pathValues === undefined
     },
@@ -70,7 +73,6 @@ export default {
       return `${this.parentJSONPointer}/${this.layout.path}`
     },
     currentValue () {
-      console.log(this.context[this.layout.path])
       return this.context[this.layout.path]
     },
     defaultValue () {
@@ -93,8 +95,18 @@ export default {
   },
   methods: {
     async startEditing () {
+      console.log(this)
+      // let dv = await this.defaultValue
       const dv = await this.defaultValue
       console.log(dv)
+      // if (!this.parentJSONPointer) {
+      //   console.log('if', dv)
+      //   dv = dv.rootDefault
+      // } else {
+      //   console.log('else', dv)
+      //   dv = dv.childDefault
+      // }
+      // console.log(dv)
       if (dv) {
         this.addDefaultValue(dv)
       } else {
@@ -103,6 +115,20 @@ export default {
           this.$refs.edit.startEditing()
         })
       }
+    },
+    openDialog () {
+      // console.log('v', this.value, 'p', this.prop, 'cV', this.currentValue[0], 'dV', this.defaultValue)
+      // console.log(Object.getOwnPropertyNames(this.currentValue[0])[0])
+      this.$q.dialog({
+        component: this.layout.dialogComponent || this.dialogComponent,
+        parent: this
+      }).onOk((value) => {
+        this.editing = false
+        this.$emit('stop-editing')
+        this.addDefaultValue({ key: Object.getOwnPropertyNames(this.currentValue[0])[0], value: value })
+        // this.addDefaultValue({ key: 'a', value: value })
+        // this.addDefaultValue(value)
+      })
     },
     stopEditing () {
       this.editing = false

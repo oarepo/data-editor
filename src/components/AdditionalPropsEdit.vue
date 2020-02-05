@@ -13,7 +13,7 @@ export default {
         b: 2,
         c: 3
       },
-      layout: [{ 'path': 'a' }, { 'path': 'b' }, { 'path': 'c' }, { 'path': 'd' }, { 'path': 'e' }],
+      layout: [{ 'path': 'a', 'label': 'a' }, { 'path': 'b', 'label': 'b' }, { 'path': 'c', 'label': 'c' }, { 'path': 'd', 'label': 'd' }, { 'path': 'e', 'label': 'e' }],
       options: {
         schema: 'table',
         extraProps: {

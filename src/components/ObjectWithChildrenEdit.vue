@@ -1,23 +1,39 @@
 <template lang="pug">
 div
-  oarepo-record-inplace-editor(:record="record" :options="options")
+  oarepo-record-inplace-editor(:record="record" :options="options" :layout="layout")
 </template>
 
 <script>
 export default {
-  name: 'array-edit',
+  name: 'object-with-children-edit',
+  // layout: [{ 'path': 'a' }, { 'path': 'b' }],
   data: function () {
     return {
-      record: {
-        array: [1, 2]
-      },
+      record: {},
       options: {
         schema: 'table',
         extraProps: {
           submit: this.submit,
           cancel: this.cancel
-        }
-      }
+        },
+        showEmpty: true
+      },
+      layout: [
+        { 'path': 'a', 'label': 'a' },
+        { 'path': 'b', 'label': 'b' },
+        { 'path': 'c', 'label': 'c' },
+        {
+          children: [
+            { 'path': 'a', 'label': 'a' },
+            { 'path': 'b', 'label': 'b' },
+            {
+              children: [
+                { 'path': 'a', 'label': 'a' },
+                { 'path': 'b', 'label': 'b' }
+              ]
+            }
+          ]
+        }]
     }
   },
   methods: {

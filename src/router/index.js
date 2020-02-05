@@ -9,6 +9,8 @@ import ObjectWithNoValuesEdit from '../components/ObjectWithNoValuesEdit'
 import SimpleDefaultValueEdit from '../components/SimpleDefaultValueEdit'
 import AdditionalPropsEdit from '../components/AdditionalPropsEdit'
 import DialogEdit from '../components/DialogEdit'
+import ComplexArrayDialogEdit from '../components/ComplexArrayDialogEdit'
+import ObjectWithChildrenEdit from '../components/ObjectWithChildrenEdit'
 
 Vue.use(VueRouter)
 
@@ -39,9 +41,19 @@ const routes = [
     component: DefaultValueComplexArrayEdit
   },
   {
+    path: '/complex-array-dialog-edit',
+    name: 'complex-array-dialog-edit',
+    component: ComplexArrayDialogEdit
+  },
+  {
     path: '/tree-edit',
     name: 'tree-edit',
     component: TreeEdit
+  },
+  {
+    path: '/object-with-children-edit',
+    name: 'object-with-children-edit',
+    component: ObjectWithChildrenEdit
   },
   {
     path: '/object-with-no-values-edit',

@@ -1,30 +1,41 @@
 <template lang="pug">
 div
-  oarepo-record-inplace-editor(:record="record" :options="options")
+  oarepo-record-inplace-editor(:record="record" :options="options" :dialog-component="dialogComponent")
 </template>
 
 <script>
+import DialogComponent from './DialogComponent'
+
 export default {
-  name: 'array-edit',
+  name: 'complex-array-dialog-edit',
   data: function () {
     return {
       record: {
-        array: [1, 2]
+        complexArray: [{ a: 1 }, { a: 2 }, { a: 3 }]
       },
       options: {
         schema: 'table',
+        showEmpty: true,
         extraProps: {
           submit: this.submit,
           cancel: this.cancel
         }
-      }
+      },
+      dialogComponent: DialogComponent
     }
   },
   methods: {
     submit ({ path, context, prop, value, op, pathValues }) {
       if (op === 'add') {
         if (Array.isArray(context)) {
-          context.push(value)
+          if (typeof value === 'object') {
+            const obj = {}
+            obj[value.key] = value.value
+            context.push(obj)
+          } else {
+            context.push(value)
+          }
+          // context.push({ a: value })
         } else {
           context[prop] = value
         }
