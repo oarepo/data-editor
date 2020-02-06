@@ -7,7 +7,7 @@ div
 import Vue from 'vue'
 
 export default {
-  name: 'non-existing-array-edit',
+  name: 'non-existing-default-value-complex-array-edit',
   data: function () {
     return {
       record: {},
@@ -19,7 +19,7 @@ export default {
           cancel: this.cancel
         }
       },
-      layout: [{ 'path': 'a', 'label': 'a', defaultValue: () => 8, array: true }]
+      layout: [{ 'path': 'a', 'label': 'a', defaultValue: () => ({ a: 8 }), array: true, dynamic: true }]
     }
   },
   methods: {

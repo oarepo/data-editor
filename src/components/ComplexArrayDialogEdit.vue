@@ -4,13 +4,16 @@ div
 </template>
 
 <script>
+import Vue from 'vue'
 import DialogComponent from './DialogComponent'
 
 export default {
-  name: 'non-existing-complex-array-dialog-edit',
+  name: 'complex-array-dialog-edit',
   data: function () {
     return {
-      record: {},
+      record: {
+        complexArray: [{ a: 1 }, { a: 2 }, { a: 3 }]
+      },
       options: {
         schema: 'table',
         showEmpty: true,
@@ -28,7 +31,8 @@ export default {
         if (Array.isArray(context)) {
           context.push(value)
         } else {
-          context[prop] = value
+          Vue.set(context, prop, value)
+          // context[prop] = value
         }
       }
       if (op === 'replace') {

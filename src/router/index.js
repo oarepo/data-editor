@@ -11,9 +11,10 @@ import AdditionalPropsEdit from '../components/AdditionalPropsEdit'
 import DialogEdit from '../components/DialogEdit'
 import ComplexArrayDialogEdit from '../components/ComplexArrayDialogEdit'
 import ObjectWithChildrenEdit from '../components/ObjectWithChildrenEdit'
-import NonExistingArrayEdit from '../components/NonExistingArrayEdit'
+import NonExistingDefaultValueArrayEdit from '../components/NonExistingDefaultValueArrayEdit'
 import NonExistingComplexArrayDialogEdit from '../components/NonExistingComplexArrayDialogEdit'
 import NonExistingComplexObjectDialogEdit from '../components/NonExistingComplexObjectDialogEdit'
+import NonExistingDefaultValueComplexArrayEdit from '../components/NonExistingDefaultValueComplexArrayEdit'
 
 Vue.use(VueRouter)
 
@@ -79,9 +80,14 @@ const routes = [
     component: DialogEdit
   },
   {
-    path: '/non-existing-array-edit',
-    name: 'non-existing-array-edit',
-    component: NonExistingArrayEdit
+    path: '/non-existing-default-value-array-edit',
+    name: 'non-existing-default-value-array-edit',
+    component: NonExistingDefaultValueArrayEdit
+  },
+  {
+    path: '/non-existing-default-value-complex-array-edit',
+    name: 'non-existing-default-value-complex-array-edit',
+    component: NonExistingDefaultValueComplexArrayEdit
   },
   {
     path: '/non-existing-complex-array-edit',

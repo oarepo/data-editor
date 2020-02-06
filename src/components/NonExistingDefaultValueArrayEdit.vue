@@ -4,23 +4,22 @@ div
 </template>
 
 <script>
-import DialogComponent from './DialogComponent'
 import Vue from 'vue'
 
 export default {
-  name: 'object-with-no-values-edit',
+  name: 'non-existing-default-value-array-edit',
   data: function () {
     return {
       record: {},
       options: {
         schema: 'table',
+        showEmpty: true,
         extraProps: {
           submit: this.submit,
           cancel: this.cancel
-        },
-        showEmpty: true
+        }
       },
-      layout: [{ 'path': 'a', 'label': 'a', defaultValue: () => ({ a: '1' }), dynamic: true }, { 'path': 'b', 'label': 'b' }, { 'path': 'c', 'label': 'c', dialogComponent: DialogComponent, dynamic: true }]
+      layout: [{ 'path': 'a', 'label': 'a', defaultValue: () => 8, array: true }]
     }
   },
   methods: {
@@ -30,7 +29,6 @@ export default {
           context.push(value)
         } else {
           Vue.set(context, prop, value)
-          // context[prop] = value
         }
       }
       if (op === 'replace') {

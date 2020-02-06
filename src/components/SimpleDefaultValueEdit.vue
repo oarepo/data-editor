@@ -16,11 +16,11 @@ export default {
       },
       options: {
         schema: 'table',
+        showEmpty: true,
         extraProps: {
           submit: this.submit,
           cancel: this.cancel
         },
-        showEmpty: true,
         pathLayouts: {
           simpleObject: {
             defaultValue: () => ({ a: '1' })

@@ -1,20 +1,18 @@
 <template lang="pug">
 component(:is="component")
   slot
-  div(v-if='isArray')
-    add-array-item-component(v-bind="$props")
-  div(v-if='isUndefinedObjectOrValue')
-    add-object-property-component(v-bind="$props")
-  // div(v-if='isArray')
+  //div(v-if='isArray')
   //  oarepo-editor-wrapper(v-bind="addArrayProps" patch-operation="add" v-if="editing" ref="edit" @stop-editing="stopEditing"
   //    :submit="submit" :cancel="cancel" :dialog-component="dialogComponent")
   //  q-btn(icon="playlist_add" flat color="primary" @click="startEditing" v-if="!editing && !hasDialog")
   //  q-btn(icon="playlist_add" flat color="primary" @click="openDialog" v-if="hasDialog")
-  // div(v-if="isUndefinedObjectOrValue")
-  //   oarepo-editor-wrapper(v-bind="addObjectProps" patch-operation="add" ref="edit" @stop-editing="stopEditing"
-  //     v-if="!hasDialog" :submit="submit" :cancel="cancel" :dialog-component="dialogComponent")
-  //   // q-btn(icon="playlist_add" flat color="primary" @click="startEditing" v-if="!editing && !hasDialog")
-  //   q-btn(icon="playlist_add" flat color="primary" @click="openDialog" v-if="hasDialog")
+  //div(v-if="isUndefinedObjectOrValue")
+  //  oarepo-editor-wrapper(v-bind="addObjectProps" patch-operation="add" ref="edit" @stop-editing="stopEditing"
+  //    v-if="!hasDialog" :submit="submit" :cancel="cancel" :dialog-component="dialogComponent")
+  //  // q-btn(icon="playlist_add" flat color="primary" @click="startEditing" v-if="!editing && !hasDialog")
+  //  q-btn(icon="playlist_add" flat color="primary" @click="openDialog" v-if="hasDialog")
+  add-array-item-component(v-bind="$props" v-if='isArray')
+  add-object-property-component(v-bind="$props" v-if='isUndefinedObjectOrValue')
 </template>
 <script>
 
@@ -56,152 +54,8 @@ export default {
     isArray () {
       return this.layout.array || (this.pathValues && this.pathValues.length && Array.isArray(this.pathValues[0].value))
     },
-    addArrayProps () {
-      return {
-        ...this.$props,
-        context: this.currentValue,
-        layout: { ...this.layout, path: '-' },
-        parentJSONPointer: this.currentJSONPointer,
-        pathValues: [],
-        value: undefined,
-        values: []
-      }
-    },
-    addObjectProps () {
-      return {
-        ...this.$props,
-        context: this.context,
-        value: undefined,
-        values: []
-      }
-    },
-    hasDialog () {
-      return !!this.currentDialogComponent
-    },
     isUndefinedObjectOrValue () {
       return !this.isArray && this.pathValues === undefined
-    },
-    currentJSONPointer () {
-      // console.log('aaa', this.parentJSONPointer, this.layout.path)
-      return `${this.parentJSONPointer}/${this.layout.path}`
-    },
-    currentValue () {
-      return this.context[this.layout.path]
-    },
-    defaultValue () {
-      const dv = this.layout.defaultValue
-      // console.log('dv', dv)
-      if (dv === null || dv === undefined) {
-        return dv
-      }
-      if (dv instanceof Function) {
-        return dv(this.$props)
-      } else {
-        return dv
-      }
-    },
-    currentDialogComponent () {
-      console.log(this)
-      return this.layout.dialogComponent || this.dialogComponent
-    }
-  },
-  data: function () {
-    return {
-      editing: false
-    }
-  },
-  methods: {
-    async startEditing () {
-      const dv = await this.defaultValue
-      console.log(dv)
-      if (dv) {
-        this.addDefaultValue(dv)
-      } else {
-        this.editing = true
-        this.$nextTick(() => {
-          this.$refs.edit.startEditing()
-        })
-      }
-    },
-    openDialog () {
-      // console.log('dialog', this.currentJSONPointer, this.currentValue, this.context)
-      this.$q.dialog({
-        component: this.layout.dialogComponent || this.dialogComponent,
-        parent: this
-      }).onOk((value) => {
-        const submitData = {
-          op: 'add',
-          pathValues: [],
-          values: [value]
-        }
-        if (this.currentValue === undefined) {
-          if (this.isArray) {
-            console.log('a')
-            submitData.value = [value]
-          } else {
-            console.log('b')
-            submitData.value = value
-          }
-          submitData.context = this.context
-          // submitData.value = [value]
-          submitData.path = this.currentJSONPointer
-          submitData.prop = this.layout.path
-        } else {
-          submitData.context = this.currentValue
-          submitData.value = value
-          submitData.path = `${this.currentJSONPointer}/-`
-          submitData.prop = '-'
-        }
-        // const submitData = {
-        //   path: `${this.currentJSONPointer}/-`,
-        //   value: value,
-        //   op: 'add',
-        //   context: this.currentValue,
-        //   prop: '-',
-        //   pathValues: [],
-        //   values: [value]
-        // }
-        console.log('submit', submitData)
-        this.editing = false
-        this.$emit('stop-editing')
-        this.submit(submitData)
-      })
-    },
-    stopEditing () {
-      this.editing = false
-    },
-    addDefaultValue (dv) {
-      const submitData = {
-        op: 'add',
-        pathValues: [],
-        values: [dv]
-      }
-      // if (this.currentValue === undefined) {
-      //   if (this.isArray) {
-      //     console.log('a')
-      //     submitData.value = [dv]
-      //   } else {
-      //     console.log('b')
-      //     submitData.value = dv
-      //   }
-      //   submitData.context = this.context
-      //   // submitData.value = [value]
-      //   submitData.path = this.currentJSONPointer
-      //   submitData.prop = this.layout.path
-      // }
-      if (this.currentValue === undefined) {
-        submitData.context = this.context
-        submitData.value = [dv]
-        submitData.path = this.currentJSONPointer
-        submitData.prop = this.layout.path
-      } else {
-        submitData.context = this.currentValue
-        submitData.value = dv
-        submitData.path = `${this.currentJSONPointer}/-`
-        submitData.prop = '-'
-      }
-      console.log('submit', submitData)
-      this.submit(submitData)
     }
   }
 }

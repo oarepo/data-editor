@@ -1,44 +1,22 @@
 <template lang="pug">
-component(:is="component")
-  div
-    oarepo-editor-wrapper(v-bind="addObjectProps" patch-operation="add" ref="edit" @stop-editing="stopEditing"
-      v-if="!hasDialog" :submit="submit" :cancel="cancel" :dialog-component="dialogComponent")
-    // q-btn(icon="playlist_add" flat color="primary" @click="startEditing" v-if="!editing && !hasDialog")
-    q-btn(icon="playlist_add" flat color="primary" @click="openDialog" v-if="hasDialog")
+div
+  oarepo-editor-wrapper(v-bind="addObjectProps" patch-operation="add" ref="edit" @stop-editing="stopEditing"
+    v-if="!hasDialog" :submit="submit" :cancel="cancel" :dialog-component="dialogComponent")
+  // q-btn(icon="playlist_add" flat color="primary" @click="startEditing" v-if="!editing && !hasDialog")
+  q-btn(icon="playlist_add" flat color="primary" @click="openDialog" v-if="hasDialog")
 </template>
 <script>
 
 import OARepoEditorWrapperComponent from './OARepoEditorWrapperComponent.vue'
-import { SKIP_WRAPPER } from '@oarepo/data-renderer'
+import AdditionMixin from './AdditionMixin'
 
 export default {
-  props: {
-    context: [Object, Array],
-    layout: Object,
-    data: Object,
-    paths: Array,
-    value: {},
-    url: String,
-    values: Array,
-    pathValues: Array,
-    pathLayouts: [Object, Array],
-    schema: String,
-    currentSchema: Object,
-    valueIndex: Number,
-    parentJSONPointer: String,
-    submit: Function,
-    cancel: Function,
-    dialogComponent: Object
-  },
+  mixins: [AdditionMixin],
   components: {
     'oarepo-editor-wrapper': OARepoEditorWrapperComponent
   },
   name: 'oarepo-record-inplace-editor-values-wrapper-component',
   computed: {
-    component () {
-      const ret = this.layout['value-wrapper-viewer']['component'] || this.layout['value-wrapper-viewer']['element']
-      return ret !== SKIP_WRAPPER ? ret : 'div'
-    },
     addObjectProps () {
       return {
         ...this.$props,
@@ -46,99 +24,25 @@ export default {
         value: undefined,
         values: []
       }
-    },
-    hasDialog () {
-      return !!this.currentDialogComponent
-    },
-    currentJSONPointer () {
-      return `${this.parentJSONPointer}/${this.layout.path}`
-    },
-    currentValue () {
-      return this.context[this.layout.path]
-    },
-    defaultValue () {
-      const dv = this.layout.defaultValue
-      if (dv === null || dv === undefined) {
-        return dv
-      }
-      if (dv instanceof Function) {
-        return dv(this.$props)
-      } else {
-        return dv
-      }
-    },
-    currentDialogComponent () {
-      console.log(this)
-      return this.layout.dialogComponent || this.dialogComponent
-    }
-  },
-  data: function () {
-    return {
-      editing: false
     }
   },
   methods: {
-    async startEditing () {
-      const dv = await this.defaultValue
-      console.log(dv)
-      if (dv) {
-        this.addDefaultValue(dv)
-      } else {
-        this.editing = true
-        this.$nextTick(() => {
-          this.$refs.edit.startEditing()
-        })
-      }
-    },
-    openDialog () {
-      this.$q.dialog({
-        component: this.layout.dialogComponent || this.dialogComponent,
-        parent: this
-      }).onOk((value) => {
-        const submitData = {
-          op: 'add',
-          pathValues: [],
-          values: [value]
-        }
-        if (this.currentValue === undefined) {
-          submitData.context = this.context
-          submitData.value = value
-          submitData.path = this.currentJSONPointer
-          submitData.prop = this.layout.path
-        } else {
-          submitData.context = this.currentValue
-          submitData.value = value
-          submitData.path = `${this.currentJSONPointer}/-`
-          submitData.prop = '-'
-        }
-        console.log('submit', submitData)
-        this.editing = false
-        this.$emit('stop-editing')
-        this.submit(submitData)
-      })
-    },
-    stopEditing () {
-      this.editing = false
-    },
-    addDefaultValue (dv) {
-      const submitData = {
+    submitData (value) {
+      const submittedData = {
         op: 'add',
         pathValues: [],
-        values: [dv]
+        values: [value]
       }
       if (this.currentValue === undefined) {
-        submitData.context = this.context
-        submitData.value = [dv]
-        submitData.path = this.currentJSONPointer
-        submitData.prop = this.layout.path
-      } else {
-        submitData.context = this.currentValue
-        submitData.value = dv
-        submitData.path = `${this.currentJSONPointer}/-`
-        submitData.prop = '-'
+        submittedData.context = this.context
+        submittedData.value = value
+        submittedData.path = this.currentJSONPointer
+        submittedData.prop = this.layout.path
       }
-      console.log('submit', submitData)
-      this.submit(submitData)
+      console.log('submit', submittedData)
+      this.editing = false
+      this.$emit('stop-editing')
+      this.submit(submittedData)
     }
   }
 }

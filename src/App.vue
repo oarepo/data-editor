@@ -47,11 +47,16 @@
                     q-icon(name='list')
                   q-item-section
                     q-item-label Edit complex array with dialog
-                q-item(clickable='' :to="{name: 'non-existing-array-edit'}")
+                q-item(clickable='' :to="{name: 'non-existing-default-value-array-edit'}")
                   q-item-section(avatar='')
                     q-icon(name='list')
                   q-item-section
-                    q-item-label Edit non-existing array
+                    q-item-label Edit non-existing array with default value
+                q-item(clickable='' :to="{name: 'non-existing-default-value-complex-array-edit'}")
+                  q-item-section(avatar='')
+                    q-icon(name='list')
+                  q-item-section
+                    q-item-label Edit non-existing complex array with default value
                 q-item(clickable='' :to="{name: 'non-existing-complex-array-edit'}")
                   q-item-section(avatar='')
                     q-icon(name='list')
