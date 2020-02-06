@@ -18,7 +18,7 @@ export default {
     }
   },
   props: {
-    initialValue: [String, Number, Object]
+    initialValue: [String, Number]
   },
   mounted () {
     if (this.initialValue) {

@@ -10,7 +10,7 @@ export default {
     return {
       record: {
         // tree: [{ 1: [{ 1: [1, 2, 3] }, { 1: [1, 2, 3] }, { 1: [1, 2, 3] }] }, { 2: [{ 1: [1, 2, 3] }, { 1: [1, 2, 3] }, { 1: [1, 2, 3] }] }, { 2: [{ 1: [1, 2, 3] }] }]
-        tree: [{ 0: [1, 2, 3] }, { 2: [1, 2, 3] }, { 2: [5] }]
+        tree: [{ a: [1, 2, 3] }, { b: [1, 2, 3] }, { c: [5] }]
       },
       options: {
         schema: 'table',
@@ -20,7 +20,7 @@ export default {
         },
         pathLayouts: {
           tree: {
-            defaultValue: () => ({ 3: [1, 2, 3] })
+            defaultValue: () => ({ d: [1, 2, 3] })
           }
           // defaultValue: () => ({ 3: [1, 2, 3] }),
           // a: { defaultValue: () => 1 }

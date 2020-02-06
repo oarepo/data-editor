@@ -4,6 +4,9 @@ div
 </template>
 
 <script>
+import DialogComponent from './DialogComponent'
+import Vue from 'vue'
+
 export default {
   name: 'object-with-no-values-edit',
   data: function () {
@@ -17,7 +20,7 @@ export default {
         },
         showEmpty: true
       },
-      layout: [{ 'path': 'a', 'label': 'a' }, { 'path': 'b', 'label': 'b' }, { 'path': 'c', 'label': 'c' }]
+      layout: [{ 'path': 'a', 'label': 'a' }, { 'path': 'b', 'label': 'b' }, { 'path': 'c', 'label': 'c', dialogComponent: DialogComponent, dynamic: true }]
     }
   },
   methods: {
@@ -26,7 +29,8 @@ export default {
         if (Array.isArray(context)) {
           context.push(value)
         } else {
-          context[prop] = value
+          Vue.set(context, prop, value)
+          // context[prop] = value
         }
       }
       if (op === 'replace') {

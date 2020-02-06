@@ -47,6 +47,16 @@
                     q-icon(name='list')
                   q-item-section
                     q-item-label Edit complex array with dialog
+                q-item(clickable='' :to="{name: 'non-existing-array-edit'}")
+                  q-item-section(avatar='')
+                    q-icon(name='list')
+                  q-item-section
+                    q-item-label Edit non-existing array
+                q-item(clickable='' :to="{name: 'non-existing-complex-array-edit'}")
+                  q-item-section(avatar='')
+                    q-icon(name='list')
+                  q-item-section
+                    q-item-label Edit non-existing complex array
         q-expansion-item(header='' label="Tree Editors")
           q-card
             q-card-section
@@ -80,6 +90,11 @@
                     q-icon(name='list')
                   q-item-section
                     q-item-label Edit object in dialog
+                q-item(clickable='' :to="{name: 'non-existing-complex-object-edit'}")
+                  q-item-section(avatar='')
+                    q-icon(name='list')
+                  q-item-section
+                    q-item-label Edit non-existing complex object
     q-page-container
       q-page.q-ma-lg
         router-view

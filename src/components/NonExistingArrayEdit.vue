@@ -1,13 +1,13 @@
 <template lang="pug">
 div
-  oarepo-record-inplace-editor(:record="record" :options="options" :dialog-component="dialogComponent")
+  oarepo-record-inplace-editor(:record="record" :options="options" :layout="layout")
 </template>
 
 <script>
-import DialogComponent from './DialogComponent'
+import Vue from 'vue'
 
 export default {
-  name: 'non-existing-complex-array-dialog-edit',
+  name: 'non-existing-array-edit',
   data: function () {
     return {
       record: {},
@@ -19,7 +19,7 @@ export default {
           cancel: this.cancel
         }
       },
-      dialogComponent: DialogComponent
+      layout: [{ 'path': 'a', 'label': 'a', defaultValue: () => 8, array: true }]
     }
   },
   methods: {
@@ -28,7 +28,7 @@ export default {
         if (Array.isArray(context)) {
           context.push(value)
         } else {
-          context[prop] = value
+          Vue.set(context, prop, value)
         }
       }
       if (op === 'replace') {
