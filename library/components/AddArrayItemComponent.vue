@@ -1,27 +1,15 @@
 <template lang="pug">
 component(:is="component")
-  slot
-  div(v-if='isArray')
-    add-array-item-component(v-bind="$props")
-  div(v-if='isUndefinedObjectOrValue')
-    add-object-property-component(v-bind="$props")
-  // div(v-if='isArray')
-  //  oarepo-editor-wrapper(v-bind="addArrayProps" patch-operation="add" v-if="editing" ref="edit" @stop-editing="stopEditing"
-  //    :submit="submit" :cancel="cancel" :dialog-component="dialogComponent")
-  //  q-btn(icon="playlist_add" flat color="primary" @click="startEditing" v-if="!editing && !hasDialog")
-  //  q-btn(icon="playlist_add" flat color="primary" @click="openDialog" v-if="hasDialog")
-  // div(v-if="isUndefinedObjectOrValue")
-  //   oarepo-editor-wrapper(v-bind="addObjectProps" patch-operation="add" ref="edit" @stop-editing="stopEditing"
-  //     v-if="!hasDialog" :submit="submit" :cancel="cancel" :dialog-component="dialogComponent")
-  //   // q-btn(icon="playlist_add" flat color="primary" @click="startEditing" v-if="!editing && !hasDialog")
-  //   q-btn(icon="playlist_add" flat color="primary" @click="openDialog" v-if="hasDialog")
+  div
+    oarepo-editor-wrapper(v-bind="addArrayProps" patch-operation="add" v-if="editing" ref="edit" @stop-editing="stopEditing"
+      :submit="submit" :cancel="cancel" :dialog-component="dialogComponent")
+    q-btn(icon="playlist_add" flat color="primary" @click="startEditing" v-if="!editing && !hasDialog")
+    q-btn(icon="playlist_add" flat color="primary" @click="openDialog" v-if="hasDialog")
 </template>
 <script>
 
 import OARepoEditorWrapperComponent from './OARepoEditorWrapperComponent.vue'
 import { SKIP_WRAPPER } from '@oarepo/data-renderer'
-import AddArrayItemComponent from './AddArrayItemComponent'
-import AddObjectPropertyComponent from './AddObjectPropertyComponent'
 
 export default {
   props: {
@@ -43,18 +31,15 @@ export default {
     dialogComponent: Object
   },
   components: {
-    'add-array-item-component': AddArrayItemComponent,
-    'add-object-property-component': AddObjectPropertyComponent,
+    // 'add-array-item-component': AddArrayItemComponent,
     'oarepo-editor-wrapper': OARepoEditorWrapperComponent
   },
-  name: 'oarepo-record-inplace-editor-values-wrapper-component',
+  name: 'add-array-item-component',
   computed: {
     component () {
+      console.log(this)
       const ret = this.layout['value-wrapper-viewer']['component'] || this.layout['value-wrapper-viewer']['element']
       return ret !== SKIP_WRAPPER ? ret : 'div'
-    },
-    isArray () {
-      return this.layout.array || (this.pathValues && this.pathValues.length && Array.isArray(this.pathValues[0].value))
     },
     addArrayProps () {
       return {
@@ -67,22 +52,10 @@ export default {
         values: []
       }
     },
-    addObjectProps () {
-      return {
-        ...this.$props,
-        context: this.context,
-        value: undefined,
-        values: []
-      }
-    },
     hasDialog () {
       return !!this.currentDialogComponent
     },
-    isUndefinedObjectOrValue () {
-      return !this.isArray && this.pathValues === undefined
-    },
     currentJSONPointer () {
-      // console.log('aaa', this.parentJSONPointer, this.layout.path)
       return `${this.parentJSONPointer}/${this.layout.path}`
     },
     currentValue () {
@@ -90,7 +63,6 @@ export default {
     },
     defaultValue () {
       const dv = this.layout.defaultValue
-      // console.log('dv', dv)
       if (dv === null || dv === undefined) {
         return dv
       }
@@ -124,7 +96,6 @@ export default {
       }
     },
     openDialog () {
-      // console.log('dialog', this.currentJSONPointer, this.currentValue, this.context)
       this.$q.dialog({
         component: this.layout.dialogComponent || this.dialogComponent,
         parent: this
@@ -135,15 +106,8 @@ export default {
           values: [value]
         }
         if (this.currentValue === undefined) {
-          if (this.isArray) {
-            console.log('a')
-            submitData.value = [value]
-          } else {
-            console.log('b')
-            submitData.value = value
-          }
+          submitData.value = [value]
           submitData.context = this.context
-          // submitData.value = [value]
           submitData.path = this.currentJSONPointer
           submitData.prop = this.layout.path
         } else {
@@ -152,15 +116,6 @@ export default {
           submitData.path = `${this.currentJSONPointer}/-`
           submitData.prop = '-'
         }
-        // const submitData = {
-        //   path: `${this.currentJSONPointer}/-`,
-        //   value: value,
-        //   op: 'add',
-        //   context: this.currentValue,
-        //   prop: '-',
-        //   pathValues: [],
-        //   values: [value]
-        // }
         console.log('submit', submitData)
         this.editing = false
         this.$emit('stop-editing')
@@ -176,19 +131,6 @@ export default {
         pathValues: [],
         values: [dv]
       }
-      // if (this.currentValue === undefined) {
-      //   if (this.isArray) {
-      //     console.log('a')
-      //     submitData.value = [dv]
-      //   } else {
-      //     console.log('b')
-      //     submitData.value = dv
-      //   }
-      //   submitData.context = this.context
-      //   // submitData.value = [value]
-      //   submitData.path = this.currentJSONPointer
-      //   submitData.prop = this.layout.path
-      // }
       if (this.currentValue === undefined) {
         submitData.context = this.context
         submitData.value = [dv]
