@@ -9,14 +9,29 @@ div
 
 import OARepoEditorWrapperComponent from './OARepoEditorWrapperComponent.vue'
 import AdditionMixin from './AdditionMixin'
+// import Vue from 'vue'
 
 export default {
   mixins: [AdditionMixin],
   components: {
     'oarepo-editor-wrapper': OARepoEditorWrapperComponent
   },
-  name: 'add-object-property-component',
+  name: 'add-additional-property-component',
   computed: {
+    currentDialogComponent () {
+      return this.layout.additionalProps.dialogComponent
+    },
+    defaultValue () {
+      const dv = this.layout.additionalProps.defaultValue
+      if (dv === null || dv === undefined) {
+        return dv
+      }
+      if (dv instanceof Function) {
+        return dv(this.$props)
+      } else {
+        return dv
+      }
+    },
     addObjectProps () {
       return {
         ...this.$props,
@@ -31,18 +46,19 @@ export default {
       const submittedData = {
         op: 'add',
         pathValues: [],
-        values: [value]
-      }
-      if (this.currentValue === undefined) {
-        submittedData.context = this.context
-        submittedData.value = value
-        submittedData.path = this.currentJSONPointer
-        submittedData.prop = this.layout.path
+        values: [value.value],
+        context: this.currentValue,
+        value: value.value,
+        path: `${this.currentJSONPointer}/${value.prop}`,
+        prop: value.prop
       }
       console.log('submit', submittedData)
       this.editing = false
       this.$emit('stop-editing')
       this.submit(submittedData)
+    },
+    validate (value) {
+      throw new Error('validation not succesful')
     }
   }
 }

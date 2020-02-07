@@ -2,7 +2,8 @@
 component(:is="component")
   slot
   add-array-item-component(v-bind="$props" v-if='isArray')
-  add-object-property-component(v-bind="$props" v-if='isUndefinedObjectOrValue')
+  add-object-property-component(v-bind="$props" v-if='isUndefinedObjectOrValue && !hasAdditionalProps')
+  add-additional-property-component(v-bind="$props" v-if="hasAdditionalProps && !isArray")
 </template>
 <script>
 
@@ -10,6 +11,7 @@ import OARepoEditorWrapperComponent from './OARepoEditorWrapperComponent.vue'
 import { SKIP_WRAPPER } from '@oarepo/data-renderer'
 import AddArrayItemComponent from './AddArrayItemComponent'
 import AddObjectPropertyComponent from './AddObjectPropertyComponent'
+import AddAdditionalPropertyComponent from './AddAdditionalPropertyComponent'
 
 export default {
   props: {
@@ -33,6 +35,7 @@ export default {
   components: {
     'add-array-item-component': AddArrayItemComponent,
     'add-object-property-component': AddObjectPropertyComponent,
+    'add-additional-property-component': AddAdditionalPropertyComponent,
     'oarepo-editor-wrapper': OARepoEditorWrapperComponent
   },
   name: 'oarepo-record-inplace-editor-values-wrapper-component',
@@ -46,6 +49,9 @@ export default {
     },
     isUndefinedObjectOrValue () {
       return !this.isArray && this.pathValues === undefined
+    },
+    hasAdditionalProps () {
+      return this.layout.additionalProps
     }
   }
 }

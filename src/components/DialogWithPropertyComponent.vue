@@ -3,8 +3,9 @@ q-dialog(ref="dialog" @hide="onDialogHide")
   q-card
     q-card-section
       q-form(ref="form")
-        q-input(label="Property" v-model="property")
+        q-input(label="Property" v-model="prop")
         q-input(label="Value" v-model="value")
+      div.text-warning(v-if="errorMessage") {{errorMessage}}
     q-card-actions(align="right")
       q-btn(color="primary" type="submit" label="OK" @click="onOKClick")
       q-btn(color="primary" label="Cancel" @click="onCancelClick")
@@ -16,15 +17,16 @@ export default {
   data: function () {
     return {
       value: null,
-      property: null
+      prop: null
     }
   },
   props: {
-    initialValue: [String, Number]
+    initialValue: Object,
+    errorMessage: String
   },
   mounted () {
     if (this.initialValue) {
-      this.property = this.initialValue.property
+      this.prop = this.initialValue.prop
       this.value = this.initialValue.value
     }
   },
@@ -40,7 +42,7 @@ export default {
     },
     async onOKClick () {
       if (await this.$refs.form.validate()) {
-        this.$emit('ok', { property: this.property, value: this.value })
+        this.$emit('ok', { prop: this.prop, value: this.value })
         this.hide()
       }
     },

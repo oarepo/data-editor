@@ -95,6 +95,11 @@
                     q-icon(name='list')
                   q-item-section
                     q-item-label Edit non-existing object with default value
+                q-item(clickable='' :to="{name: 'object-dialog-with-property-edit'}")
+                  q-item-section(avatar='')
+                    q-icon(name='list')
+                  q-item-section
+                    q-item-label Edit object in dialog with property
     q-page-container
       q-page.q-ma-lg
         router-view

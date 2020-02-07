@@ -20,7 +20,6 @@ export default {
   mixins: [OARepoRecordMixin],
   methods: {
     layoutTranslator (layout, options) {
-      // console.log(layout, options)
       if (layout.inplaceEditorTranslated) {
         return layout
       }

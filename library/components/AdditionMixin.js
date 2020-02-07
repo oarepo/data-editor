@@ -66,16 +66,25 @@ export default {
     stopEditing () {
       this.editing = false
     },
-    openDialog () {
+    openDialog (initialValue = null, errorMessage = null) {
       this.$q.dialog({
-        component: this.layout.dialogComponent || this.dialogComponent,
-        parent: this
+        component: this.currentDialogComponent,
+        parent: this,
+        initialValue: initialValue,
+        errorMessage: errorMessage
       }).onOk((value) => {
-        this.submitData(value)
+        try {
+          this.validate(value)
+          this.submitData(value)
+        } catch (e) {
+          this.openDialog(value, e.message)
+        }
       })
     },
     addDefaultValue (dv) {
       this.submitData(dv)
+    },
+    validate (value) {
     }
   }
 }

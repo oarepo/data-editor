@@ -4,45 +4,42 @@ div
 </template>
 
 <script>
+import Vue from 'vue'
+import DialogWithPropertyComponent from './DialogWithPropertyComponent'
+
 export default {
-  name: 'additional-props-edit',
+  name: 'object-dialog-with-property-edit',
   data: function () {
     return {
-      record: {
-        a: 1,
-        b: 2,
-        c: 3
-      },
-      layout: [{ 'path': 'a', 'label': 'a' }, { 'path': 'b', 'label': 'b' }, { 'path': 'c', 'label': 'c' }, { 'path': 'd', 'label': 'd' }, { 'path': 'e', 'label': 'e' }],
+      record: { a: {} },
       options: {
         schema: 'table',
+        showEmpty: true,
         extraProps: {
           submit: this.submit,
           cancel: this.cancel
-        },
-        showEmpty: true
-        // pathLayouts: {addditionalProps: {} }
-      }
+        }
+      },
+      layout: [{
+        'path': 'a',
+        'label': 'a',
+        dynamic: true,
+        additionalProps: { dialogComponent: DialogWithPropertyComponent }
+      }]
     }
   },
   methods: {
     submit ({ path, context, prop, value, op, pathValues }) {
+      console.log('submitting', context, prop, value, path, pathValues)
       if (op === 'add') {
         if (Array.isArray(context)) {
           context.push(value)
         } else {
-          context[prop] = value
+          Vue.set(context, prop, value)
         }
       }
       if (op === 'replace') {
         context[prop] = value
-      }
-      if (op === 'remove') {
-        if (Array.isArray(context)) {
-          context.splice(prop, 1)
-        } else {
-          delete context[prop]
-        }
       }
     },
     cancel ({ props }) {

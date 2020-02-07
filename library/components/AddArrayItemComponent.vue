@@ -3,7 +3,7 @@ div
   oarepo-editor-wrapper(v-bind="addArrayProps" patch-operation="add" v-if="editing" ref="edit" @stop-editing="stopEditing"
     :submit="submit" :cancel="cancel" :dialog-component="dialogComponent")
   q-btn(icon="playlist_add" flat color="primary" @click="startEditing" v-if="!editing && !hasDialog")
-  q-btn(icon="playlist_add" flat color="primary" @click="openDialog" v-if="hasDialog")
+  q-btn(icon="playlist_add" flat color="primary" @click="openDialog()" v-if="hasDialog")
 </template>
 <script>
 
@@ -13,7 +13,6 @@ import AdditionMixin from './AdditionMixin'
 export default {
   mixins: [AdditionMixin],
   components: {
-    // 'add-array-item-component': AddArrayItemComponent,
     'oarepo-editor-wrapper': OARepoEditorWrapperComponent
   },
   name: 'add-array-item-component',

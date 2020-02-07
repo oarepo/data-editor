@@ -3,7 +3,7 @@ div
   div.row(v-if="!editing")
     view-renderer.col(:def="layout" :props="this.$props" code="value-viewer" @dblclick.native="startEditing" ref="viewer")
     q-btn(icon="remove" color="primary" size="x-small" dense flat v-if="isArray" @click="onRemove")
-    q-btn(icon="edit" color="primary" size="x-small" dense flat v-if="layout && !layout.disabled" @click="startEditing")
+    q-btn(icon="edit" color="primary" size="x-small" dense flat v-if="layout && !layout.disabled && !isObject" @click="startEditing")
   div.row(v-else)
     edit-renderer(:def="layout" :props="this.$props" code="value-editor" ref="editor")
     div.q-mt-sm
@@ -28,8 +28,20 @@ const ViewRenderer = {
     const els = this.renderElement(collected, h, this.def, this.code,
       this.props, () => {
         const value = this.props.context[this.props.layout.path]
-        // console.log('value', value)
-        return [value !== undefined ? value : '---']
+        if (value === undefined) {
+          return ['---']
+        }
+        if (Array.isArray(value)) {
+          return []
+        }
+        if (Object(value) === value) {
+          if (!Object.keys(value).length) {
+            return []
+          } else {
+            return [JSON.stringify(value)]
+          }
+        }
+        return [value]
       })
     return els[0]
   },
@@ -150,6 +162,10 @@ export default {
     },
     isUndefinedObjectOrValue () {
       return !this.isArray && this.pathValues === undefined
+    },
+    isObject () {
+      const value = this.context[this.layout.path]
+      return Object(value) === value
     }
   },
   data: function () {
