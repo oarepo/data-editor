@@ -1,8 +1,8 @@
 <template lang="pug">
 div
   oarepo-editor-wrapper(v-bind="addObjectProps" patch-operation="add" ref="edit" @stop-editing="stopEditing"
-    v-if="!hasDialog" :submit="submit" :cancel="cancel" :dialog-component="dialogComponent")
-  // q-btn(icon="playlist_add" flat color="primary" @click="startEditing" v-if="!editing && !hasDialog")
+    v-if="!hasDialog && !hasDefaultValue" :submit="submit" :cancel="cancel" :dialog-component="dialogComponent")
+  q-btn(icon="playlist_add" flat color="primary" @click="startEditing" v-if="hasDefaultValue")
   q-btn(icon="playlist_add" flat color="primary" @click="openDialog" v-if="hasDialog")
 </template>
 <script>
@@ -15,7 +15,7 @@ export default {
   components: {
     'oarepo-editor-wrapper': OARepoEditorWrapperComponent
   },
-  name: 'oarepo-record-inplace-editor-values-wrapper-component',
+  name: 'add-object-property-component',
   computed: {
     addObjectProps () {
       return {

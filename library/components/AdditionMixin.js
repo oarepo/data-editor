@@ -21,6 +21,9 @@ export default {
     hasDialog () {
       return !!this.currentDialogComponent
     },
+    hasDefaultValue () {
+      return !!this.defaultValue
+    },
     currentValue () {
       return this.context[this.layout.path]
     },
