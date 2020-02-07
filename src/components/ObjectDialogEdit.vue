@@ -7,7 +7,7 @@ div
 import DialogComponent from './DialogComponent'
 
 export default {
-  name: 'dialog-edit',
+  name: 'object-dialog-edit',
   data: function () {
     return {
       record: {

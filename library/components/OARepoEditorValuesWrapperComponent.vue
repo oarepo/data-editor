@@ -1,16 +1,6 @@
 <template lang="pug">
 component(:is="component")
   slot
-  //div(v-if='isArray')
-  //  oarepo-editor-wrapper(v-bind="addArrayProps" patch-operation="add" v-if="editing" ref="edit" @stop-editing="stopEditing"
-  //    :submit="submit" :cancel="cancel" :dialog-component="dialogComponent")
-  //  q-btn(icon="playlist_add" flat color="primary" @click="startEditing" v-if="!editing && !hasDialog")
-  //  q-btn(icon="playlist_add" flat color="primary" @click="openDialog" v-if="hasDialog")
-  //div(v-if="isUndefinedObjectOrValue")
-  //  oarepo-editor-wrapper(v-bind="addObjectProps" patch-operation="add" ref="edit" @stop-editing="stopEditing"
-  //    v-if="!hasDialog" :submit="submit" :cancel="cancel" :dialog-component="dialogComponent")
-  //  // q-btn(icon="playlist_add" flat color="primary" @click="startEditing" v-if="!editing && !hasDialog")
-  //  q-btn(icon="playlist_add" flat color="primary" @click="openDialog" v-if="hasDialog")
   add-array-item-component(v-bind="$props" v-if='isArray')
   add-object-property-component(v-bind="$props" v-if='isUndefinedObjectOrValue')
 </template>

@@ -20,7 +20,7 @@ export default {
         },
         showEmpty: true
       },
-      layout: [{ 'path': 'a', 'label': 'a', defaultValue: () => ({ a: '1' }), dynamic: true }, { 'path': 'b', 'label': 'b' }, { 'path': 'c', 'label': 'c', dialogComponent: DialogComponent, dynamic: true }]
+      layout: [{ 'path': 'a', 'label': 'a' }, { 'path': 'b', 'label': 'b' }, { 'path': 'c', 'label': 'c', dialogComponent: DialogComponent, dynamic: true }]
     }
   },
   methods: {

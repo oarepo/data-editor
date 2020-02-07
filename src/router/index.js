@@ -8,7 +8,7 @@ import TreeEdit from '../components/TreeEdit'
 import ObjectWithNoValuesEdit from '../components/ObjectWithNoValuesEdit'
 import SimpleDefaultValueEdit from '../components/SimpleDefaultValueEdit'
 import AdditionalPropsEdit from '../components/AdditionalPropsEdit'
-import DialogEdit from '../components/DialogEdit'
+import ObjectDialogEdit from '../components/ObjectDialogEdit'
 import ComplexArrayDialogEdit from '../components/ComplexArrayDialogEdit'
 import ObjectWithChildrenEdit from '../components/ObjectWithChildrenEdit'
 import NonExistingDefaultValueArrayEdit from '../components/NonExistingDefaultValueArrayEdit'
@@ -75,9 +75,9 @@ const routes = [
     component: AdditionalPropsEdit
   },
   {
-    path: '/dialog-edit',
-    name: 'dialog-edit',
-    component: DialogEdit
+    path: '/object-dialog-edit',
+    name: 'object-dialog-edit',
+    component: ObjectDialogEdit
   },
   {
     path: '/non-existing-default-value-array-edit',
