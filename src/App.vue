@@ -85,16 +85,16 @@
                     q-icon(name='list')
                   q-item-section
                     q-item-label Edit object with additional props
-                q-item(clickable='' :to="{name: 'non-existing-complex-object-dialog-edit'}")
+                q-item(clickable='' :to="{name: 'non-existing-object-dialog-edit'}")
                   q-item-section(avatar='')
                     q-icon(name='list')
                   q-item-section
-                    q-item-label Edit non-existing complex object in dialog
-                q-item(clickable='' :to="{name: 'non-existing-complex-object-default-value-edit'}")
+                    q-item-label Edit non-existing object in dialog
+                q-item(clickable='' :to="{name: 'non-existing-object-default-value-edit'}")
                   q-item-section(avatar='')
                     q-icon(name='list')
                   q-item-section
-                    q-item-label Edit non-existing complex object with default value
+                    q-item-label Edit non-existing object with default value
     q-page-container
       q-page.q-ma-lg
         router-view

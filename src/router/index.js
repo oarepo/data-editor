@@ -11,9 +11,9 @@ import ComplexArrayDialogEdit from '../components/ComplexArrayDialogEdit'
 import ObjectWithChildrenEdit from '../components/ObjectWithChildrenEdit'
 import NonExistingDefaultValueArrayEdit from '../components/NonExistingDefaultValueArrayEdit'
 import NonExistingComplexArrayDialogEdit from '../components/NonExistingComplexArrayDialogEdit'
-import NonExistingComplexObjectDialogEdit from '../components/NonExistingComplexObjectDialogEdit'
+import NonExistingObjectDialogEdit from '../components/NonExistingObjectDialogEdit'
 import NonExistingDefaultValueComplexArrayEdit from '../components/NonExistingDefaultValueComplexArrayEdit'
-import NonExistingComplexObjectDefaultValueEdit from '../components/NonExistingComplexObjectDefaultValueEdit'
+import NonExistingObjectDefaultValueEdit from '../components/NonExistingObjectDefaultValueEdit'
 
 Vue.use(VueRouter)
 
@@ -84,14 +84,14 @@ const routes = [
     component: NonExistingComplexArrayDialogEdit
   },
   {
-    path: '/non-existing-complex-object-dialog-edit',
-    name: 'non-existing-complex-object-dialog-edit',
-    component: NonExistingComplexObjectDialogEdit
+    path: '/non-existing-object-dialog-edit',
+    name: 'non-existing-object-dialog-edit',
+    component: NonExistingObjectDialogEdit
   },
   {
-    path: '/non-existing-complex-object-default-value-edit',
-    name: 'non-existing-complex-object-default-value-edit',
-    component: NonExistingComplexObjectDefaultValueEdit
+    path: '/non-existing-object-default-value-edit',
+    name: 'non-existing-object-default-value-edit',
+    component: NonExistingObjectDefaultValueEdit
   }
 ]
 
