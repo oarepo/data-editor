@@ -53,7 +53,6 @@ export default {
   methods: {
     async startEditing () {
       const dv = await this.defaultValue
-      console.log(dv)
       if (dv) {
         this.addDefaultValue(dv)
       } else {
