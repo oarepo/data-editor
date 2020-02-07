@@ -6,7 +6,13 @@ div
 <script>
 import DialogWithPropertyComponent from './DialogWithPropertyComponent'
 import Vue from 'vue'
-
+function defaultValue ({ context, layout }) {
+  for (const prop of 'abcdefghijklmnopqrstuvwxyz'.split('')) {
+    if (context[layout.path][prop] === undefined) {
+      return { prop: prop, value: 1 }
+    }
+  }
+}
 export default {
   name: 'additional-props-edit',
   data: function () {
@@ -23,8 +29,7 @@ export default {
         { 'path': 'b', 'label': 'b', dynamic: true, additionalProps: { dialogComponent: DialogWithPropertyComponent } },
         { 'path': 'c', 'label': 'c', dynamic: true, additionalProps: { dialogComponent: DialogWithPropertyComponent } },
         { 'path': 'd', 'label': 'd', dynamic: true, additionalProps: { dialogComponent: DialogWithPropertyComponent } },
-        // { 'path': 'e', 'label': 'e', dynamic: true, additionalProps: { defaultValue: () => ({ prop: ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'], value: 1 }) } }],
-        { 'path': 'e', 'label': 'e', dynamic: true, additionalProps: { defaultValue: () => ({ prop: [...'abcdefghijklmnopqrstuvwxyz'.split('')], value: 1 }) } }],
+        { 'path': 'e', 'label': 'e', dynamic: true, additionalProps: { defaultValue: defaultValue } }],
       options: {
         schema: 'table',
         extraProps: {

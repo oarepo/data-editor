@@ -23,7 +23,6 @@ export default {
   },
   methods: {
     submit ({ context, prop, value }) {
-      console.log('saving', context, prop, value)
       context[prop] = value
     },
     cancel (props) {
