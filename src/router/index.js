@@ -6,7 +6,6 @@ import DefaultValueArrayEdit from '../components/DefaultValueArrayEdit'
 import DefaultValueComplexArrayEdit from '../components/DefaultValueComplexArrayEdit'
 import TreeEdit from '../components/TreeEdit'
 import ObjectWithNoValuesEdit from '../components/ObjectWithNoValuesEdit'
-import SimpleDefaultValueEdit from '../components/SimpleDefaultValueEdit'
 import AdditionalPropsEdit from '../components/AdditionalPropsEdit'
 import ComplexArrayDialogEdit from '../components/ComplexArrayDialogEdit'
 import ObjectWithChildrenEdit from '../components/ObjectWithChildrenEdit'
@@ -63,11 +62,6 @@ const routes = [
     path: '/object-with-no-values-edit',
     name: 'object-with-no-values-edit',
     component: ObjectWithNoValuesEdit
-  },
-  {
-    path: '/simple-default-value-edit',
-    name: 'simple-default-value-edit',
-    component: SimpleDefaultValueEdit
   },
   {
     path: '/additional-props-edit',

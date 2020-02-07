@@ -17,11 +17,6 @@
                     q-icon(name='list')
                   q-item-section
                     q-item-label Edit simple object
-                q-item(clickable='' :to="{name: 'simple-default-value-edit'}")
-                  q-item-section(avatar='')
-                    q-icon(name='list')
-                  q-item-section
-                    q-item-label Edit simple object with default value
       q-list
         q-expansion-item(header='' label="Array Editors")
           q-card
