@@ -82,6 +82,7 @@ export default {
       })
     },
     addDefaultValue (dv) {
+      this.validate(dv)
       this.submitData(dv)
     },
     validate (value) {

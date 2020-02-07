@@ -23,7 +23,8 @@ export default {
         { 'path': 'b', 'label': 'b', dynamic: true, additionalProps: { dialogComponent: DialogWithPropertyComponent } },
         { 'path': 'c', 'label': 'c', dynamic: true, additionalProps: { dialogComponent: DialogWithPropertyComponent } },
         { 'path': 'd', 'label': 'd', dynamic: true, additionalProps: { dialogComponent: DialogWithPropertyComponent } },
-        { 'path': 'e', 'label': 'e', dynamic: true, additionalProps: { dialogComponent: DialogWithPropertyComponent } }],
+        // { 'path': 'e', 'label': 'e', dynamic: true, additionalProps: { defaultValue: () => ({ prop: ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'], value: 1 }) } }],
+        { 'path': 'e', 'label': 'e', dynamic: true, additionalProps: { defaultValue: () => ({ prop: [...'abcdefghijklmnopqrstuvwxyz'.split('')], value: 1 }) } }],
       options: {
         schema: 'table',
         extraProps: {

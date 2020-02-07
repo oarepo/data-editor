@@ -58,7 +58,19 @@ export default {
       this.submit(submittedData)
     },
     validate (value) {
-      throw new Error('validation not succesful')
+      if (Array.isArray(value.prop)) {
+        for (let i = 0; i < value.prop.length; i++) {
+          if (this.currentValue[value.prop[i]] !== undefined) {
+          } else {
+            value.prop = value.prop[i]
+            return
+          }
+        }
+        throw new Error('data-editor.errors.property-exists')
+      }
+      if (this.currentValue[value.prop] !== undefined) {
+        throw new Error('data-editor.errors.property-exists')
+      }
     }
   }
 }
