@@ -5,10 +5,9 @@ div
 
 <script>
 import Vue from 'vue'
-import DialogComponent from './DialogComponent'
 
 export default {
-  name: 'non-existing-complex-object-dialog-edit',
+  name: 'non-existing-complex-object-default-value-edit',
   data: function () {
     return {
       record: {},
@@ -20,7 +19,7 @@ export default {
           cancel: this.cancel
         }
       },
-      layout: [{ 'path': 'a', 'label': 'a', dialogComponent: DialogComponent, dynamic: true }]
+      layout: [{ 'path': 'a', 'label': 'a', defaultValue: () => ({ a: '1' }), dynamic: true }]
     }
   },
   methods: {

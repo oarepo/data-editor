@@ -4,7 +4,6 @@ div
 </template>
 
 <script>
-import DialogComponent from './DialogComponent'
 import Vue from 'vue'
 
 export default {
@@ -20,7 +19,7 @@ export default {
         },
         showEmpty: true
       },
-      layout: [{ 'path': 'a', 'label': 'a' }, { 'path': 'b', 'label': 'b' }, { 'path': 'c', 'label': 'c', dialogComponent: DialogComponent, dynamic: true }]
+      layout: [{ 'path': 'a', 'label': 'a' }, { 'path': 'b', 'label': 'b' }]
     }
   },
   methods: {
