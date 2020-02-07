@@ -90,11 +90,6 @@
                     q-icon(name='list')
                   q-item-section
                     q-item-label Edit object with additional props
-                q-item(clickable='' :to="{name: 'object-dialog-edit'}")
-                  q-item-section(avatar='')
-                    q-icon(name='list')
-                  q-item-section
-                    q-item-label Edit object in dialog
                 q-item(clickable='' :to="{name: 'non-existing-complex-object-dialog-edit'}")
                   q-item-section(avatar='')
                     q-icon(name='list')
