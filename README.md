@@ -25,6 +25,7 @@ A library for editing of rendered JSON data
   * [Complex array with dialog](#complex-array-with-dialog)
   * [Record with dialog component and no data layout](#record-with-dialog-component-and-no-data)
   * [Empty object with dialog component and default value function](#empty-object-with-dialog-component-and-default-value-function)
+  * [Record as a tree](#record-as-a-tree)
 
 <!-- tocstop -->
 
@@ -299,7 +300,7 @@ export default {
 </script>
 ```
 
-##### Record with dialog component and no data
+#### Record with dialog component and no data
 
  Src at [/src/components/NonExistingObjectDialogEdit.vue](https://github.com/oarepo/data-editor/blob/master/src/components/NonExistingObjectDialogEdit.vue):
 ```vue
@@ -402,7 +403,7 @@ export default {
 </script>
 ```
 
-##### Empty object with dialog component and default value function
+#### Empty object with dialog component and default value function
 
 ```vue
 <template lang="pug">
@@ -454,6 +455,63 @@ export default {
           context.push(value)
         } else {
           Vue.set(context, prop, value)
+        }
+      }
+      if (op === 'replace') {
+        context[prop] = value
+      }
+      if (op === 'remove') {
+        if (Array.isArray(context)) {
+          context.splice(prop, 1)
+        } else {
+          delete context[prop]
+        }
+      }
+    },
+    cancel ({ props }) {
+      console.log('cancelling')
+    }
+  }
+}
+</script>
+```
+
+#### Record as a tree
+
+ Src at [/src/components/TreeEdit.vue](https://github.com/oarepo/data-editor/blob/master/src/components/TreeEdit.vue):
+```vue
+<template lang="pug">
+div
+  oarepo-record-inplace-editor(:record="record" :options="options")
+</template>
+
+<script>
+export default {
+  name: 'tree-edit',
+  data: function () {
+    return {
+      record: {
+        tree: [{ a: [1, 2, 3] }, { b: [1, 2, 3] }, { c: [5] }, { d: { e: 1, f: 2 } }]
+      },
+      options: {
+        schema: 'table',
+        extraProps: {
+          submit: this.submit,
+          cancel: this.cancel
+        },
+        pathLayouts: {
+          tree: {
+            defaultValue: () => ({ d: [1, 2, 3] })
+          }
+        }
+      }
+    }
+  },
+  methods: {
+    submit ({ path, context, prop, value, op, pathValues }) {
+      if (op === 'add') {
+        if (Array.isArray(context)) {
+          context.push(value)
         }
       }
       if (op === 'replace') {
