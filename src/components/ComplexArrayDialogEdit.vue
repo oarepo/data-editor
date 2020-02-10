@@ -32,7 +32,6 @@ export default {
           context.push(value)
         } else {
           Vue.set(context, prop, value)
-          // context[prop] = value
         }
       }
       if (op === 'replace') {
