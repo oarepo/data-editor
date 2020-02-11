@@ -1,18 +1,17 @@
 <template lang="pug">
 component(:is="component")
   slot
-  div(v-if='isArray')
-    oarepo-editor-wrapper(v-bind="addArrayProps" patch-operation="add" v-if="editing" ref="edit" @stop-editing="stopEditing" :submit="submit" :cancel="cancel")
-    q-btn(icon="playlist_add" flat color="primary" @click="startEditing" v-if="!editing")
-  div(v-if="isUndefinedObjectOrValue")
-    oarepo-editor-wrapper(v-bind="addObjectProps" patch-operation="add" ref="edit" @stop-editing="stopEditing" :submit="submit" :cancel="cancel")
-  // div(v-else)
-  //   q-btn(icon="playlist_add" flat color="primary" v-if="!editing" @click="startEditing") z
+  add-array-item-component(v-bind="$props" v-if='isArray')
+  add-object-property-component(v-bind="$props" v-if='isUndefinedObjectOrValue && !hasAdditionalProps')
+  add-additional-property-component(v-bind="$props" v-if="hasAdditionalProps && !isArray")
 </template>
 <script>
 
 import OARepoEditorWrapperComponent from './OARepoEditorWrapperComponent.vue'
 import { SKIP_WRAPPER } from '@oarepo/data-renderer'
+import AddArrayItemComponent from './AddArrayItemComponent'
+import AddObjectPropertyComponent from './AddObjectPropertyComponent'
+import AddAdditionalPropertyComponent from './AddAdditionalPropertyComponent'
 
 export default {
   props: {
@@ -30,9 +29,13 @@ export default {
     valueIndex: Number,
     parentJSONPointer: String,
     submit: Function,
-    cancel: Function
+    cancel: Function,
+    dialogComponent: Object
   },
   components: {
+    'add-array-item-component': AddArrayItemComponent,
+    'add-object-property-component': AddObjectPropertyComponent,
+    'add-additional-property-component': AddAdditionalPropertyComponent,
     'oarepo-editor-wrapper': OARepoEditorWrapperComponent
   },
   name: 'oarepo-record-inplace-editor-values-wrapper-component',
@@ -44,81 +47,11 @@ export default {
     isArray () {
       return this.layout.array || (this.pathValues && this.pathValues.length && Array.isArray(this.pathValues[0].value))
     },
-    addArrayProps () {
-      return {
-        ...this.$props,
-        context: this.currentValue,
-        layout: { ...this.layout, path: '-' },
-        parentJSONPointer: this.currentJSONPointer,
-        pathValues: [],
-        value: undefined,
-        values: []
-      }
-    },
-    addObjectProps () {
-      return {
-        ...this.$props,
-        context: this.context,
-        value: undefined,
-        values: []
-      }
-    },
     isUndefinedObjectOrValue () {
       return !this.isArray && this.pathValues === undefined
     },
-    currentJSONPointer () {
-      return `${this.parentJSONPointer}/${this.layout.path}`
-    },
-    currentValue () {
-      console.log(this.context[this.layout.path])
-      return this.context[this.layout.path]
-    },
-    defaultValue () {
-      const dv = this.layout.defaultValue
-      // console.log('dv', dv)
-      if (dv === null || dv === undefined) {
-        return dv
-      }
-      if (dv instanceof Function) {
-        return dv(this.$props)
-      } else {
-        return dv
-      }
-    }
-  },
-  data: function () {
-    return {
-      editing: false
-    }
-  },
-  methods: {
-    async startEditing () {
-      const dv = await this.defaultValue
-      console.log(dv)
-      if (dv) {
-        this.addDefaultValue(dv)
-      } else {
-        this.editing = true
-        this.$nextTick(() => {
-          this.$refs.edit.startEditing()
-        })
-      }
-    },
-    stopEditing () {
-      this.editing = false
-    },
-    addDefaultValue (dv) {
-      const submitData = {
-        path: `${this.currentJsonPointer}/-`,
-        value: dv,
-        op: 'add',
-        context: this.currentValue,
-        prop: '-',
-        pathValues: [],
-        values: [dv]
-      }
-      console.log('submit', submitData)
-      this.submit(submitData)
+    hasAdditionalProps () {
+      return this.layout.additionalProps
     }
   }
 }

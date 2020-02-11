@@ -4,16 +4,32 @@ div
 </template>
 
 <script>
+import DialogWithPropertyComponent from './DialogWithPropertyComponent'
+import Vue from 'vue'
+function defaultValue ({ context, layout }) {
+  for (const prop of 'abcdefghijklmnopqrstuvwxyz'.split('')) {
+    if (context[layout.path][prop] === undefined) {
+      return { prop: prop, value: 1 }
+    }
+  }
+}
 export default {
   name: 'additional-props-edit',
   data: function () {
     return {
       record: {
-        a: 1,
-        b: 2,
-        c: 3
+        a: { a: 1 },
+        b: { b: 2 },
+        c: { c: 3 },
+        d: {},
+        e: {}
       },
-      layout: [{ 'path': 'a' }, { 'path': 'b' }, { 'path': 'c' }, { 'path': 'd' }, { 'path': 'e' }],
+      layout: [
+        { 'path': 'a', 'label': 'a', dynamic: true, additionalProps: { dialogComponent: DialogWithPropertyComponent } },
+        { 'path': 'b', 'label': 'b', dynamic: true, additionalProps: { dialogComponent: DialogWithPropertyComponent } },
+        { 'path': 'c', 'label': 'c', dynamic: true, additionalProps: { dialogComponent: DialogWithPropertyComponent } },
+        { 'path': 'd', 'label': 'd', dynamic: true, additionalProps: { dialogComponent: DialogWithPropertyComponent } },
+        { 'path': 'e', 'label': 'e', dynamic: true, additionalProps: { defaultValue: defaultValue } }],
       options: {
         schema: 'table',
         extraProps: {
@@ -30,7 +46,7 @@ export default {
         if (Array.isArray(context)) {
           context.push(value)
         } else {
-          context[prop] = value
+          Vue.set(context, prop, value)
         }
       }
       if (op === 'replace') {

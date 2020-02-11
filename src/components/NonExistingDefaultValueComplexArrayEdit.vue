@@ -1,45 +1,34 @@
 <template lang="pug">
 div
-  oarepo-record-inplace-editor(:record="record" :options="options")
-  // q-btn(@click="openDialog") dialog
+  oarepo-record-inplace-editor(:record="record" :options="options" :layout="layout")
 </template>
 
 <script>
-import DialogTemplate from './DialogTemplate'
+import Vue from 'vue'
+
 export default {
-  name: 'dialog-edit',
+  name: 'non-existing-default-value-complex-array-edit',
   data: function () {
     return {
-      record: {
-        a: 1,
-        b: 2,
-        c: 3
-      },
+      record: {},
       options: {
         schema: 'table',
+        showEmpty: true,
         extraProps: {
           submit: this.submit,
           cancel: this.cancel
-        },
-        showEmpty: true
-      }
+        }
+      },
+      layout: [{ 'path': 'a', 'label': 'a', defaultValue: () => ({ a: 8 }), array: true, dynamic: true }]
     }
   },
   methods: {
-    openDialog () {
-      this.$q.dialog({
-        component: DialogTemplate,
-        parent: this
-      }).onOk((value) => {
-        console.log('ok', value)
-      })
-    },
     submit ({ path, context, prop, value, op, pathValues }) {
       if (op === 'add') {
         if (Array.isArray(context)) {
           context.push(value)
         } else {
-          context[prop] = value
+          Vue.set(context, prop, value)
         }
       }
       if (op === 'replace') {

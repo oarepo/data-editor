@@ -22,7 +22,6 @@ export default {
   },
   methods: {
     submit ({ path, context, prop, value, op, pathValues }) {
-      console.log('submitting', context, prop, value, path, pathValues)
       if (op === 'add') {
         if (Array.isArray(context)) {
           context.push(value)

@@ -6,9 +6,15 @@ import DefaultValueArrayEdit from '../components/DefaultValueArrayEdit'
 import DefaultValueComplexArrayEdit from '../components/DefaultValueComplexArrayEdit'
 import TreeEdit from '../components/TreeEdit'
 import ObjectWithNoValuesEdit from '../components/ObjectWithNoValuesEdit'
-import SimpleDefaultValueEdit from '../components/SimpleDefaultValueEdit'
 import AdditionalPropsEdit from '../components/AdditionalPropsEdit'
-import DialogEdit from '../components/DialogEdit'
+import ComplexArrayDialogEdit from '../components/ComplexArrayDialogEdit'
+import ObjectWithChildrenEdit from '../components/ObjectWithChildrenEdit'
+import NonExistingDefaultValueArrayEdit from '../components/NonExistingDefaultValueArrayEdit'
+import NonExistingComplexArrayDialogEdit from '../components/NonExistingComplexArrayDialogEdit'
+import NonExistingObjectDialogEdit from '../components/NonExistingObjectDialogEdit'
+import NonExistingDefaultValueComplexArrayEdit from '../components/NonExistingDefaultValueComplexArrayEdit'
+import NonExistingObjectDefaultValueEdit from '../components/NonExistingObjectDefaultValueEdit'
+import ObjectDialogWithPropertyEdit from '../components/ObjectDialogWithPropertyEdit'
 
 Vue.use(VueRouter)
 
@@ -39,9 +45,19 @@ const routes = [
     component: DefaultValueComplexArrayEdit
   },
   {
+    path: '/complex-array-dialog-edit',
+    name: 'complex-array-dialog-edit',
+    component: ComplexArrayDialogEdit
+  },
+  {
     path: '/tree-edit',
     name: 'tree-edit',
     component: TreeEdit
+  },
+  {
+    path: '/object-with-children-edit',
+    name: 'object-with-children-edit',
+    component: ObjectWithChildrenEdit
   },
   {
     path: '/object-with-no-values-edit',
@@ -49,19 +65,39 @@ const routes = [
     component: ObjectWithNoValuesEdit
   },
   {
-    path: '/simple-default-value-edit',
-    name: 'simple-default-value-edit',
-    component: SimpleDefaultValueEdit
-  },
-  {
     path: '/additional-props-edit',
     name: 'additional-props-edit',
     component: AdditionalPropsEdit
   },
   {
-    path: '/dialog-edit',
-    name: 'dialog-edit',
-    component: DialogEdit
+    path: '/non-existing-default-value-array-edit',
+    name: 'non-existing-default-value-array-edit',
+    component: NonExistingDefaultValueArrayEdit
+  },
+  {
+    path: '/non-existing-default-value-complex-array-edit',
+    name: 'non-existing-default-value-complex-array-edit',
+    component: NonExistingDefaultValueComplexArrayEdit
+  },
+  {
+    path: '/non-existing-complex-array-edit',
+    name: 'non-existing-complex-array-edit',
+    component: NonExistingComplexArrayDialogEdit
+  },
+  {
+    path: '/non-existing-object-dialog-edit',
+    name: 'non-existing-object-dialog-edit',
+    component: NonExistingObjectDialogEdit
+  },
+  {
+    path: '/non-existing-object-default-value-edit',
+    name: 'non-existing-object-default-value-edit',
+    component: NonExistingObjectDefaultValueEdit
+  },
+  {
+    path: '/object-dialog-with-property-edit',
+    name: 'object-dialog-with-property-edit',
+    component: ObjectDialogWithPropertyEdit
   }
 ]
 

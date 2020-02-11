@@ -1,28 +1,38 @@
 <template lang="pug">
 div
-  oarepo-record-inplace-editor(:record="record" :options="options")
+  oarepo-record-inplace-editor(:record="record" :options="options" :layout="layout")
 </template>
 
 <script>
 export default {
-  name: 'tree-edit',
+  name: 'object-with-children-edit',
   data: function () {
     return {
-      record: {
-        tree: [{ a: [1, 2, 3] }, { b: [1, 2, 3] }, { c: [5] }, { d: { e: 1, f: 2 } }]
-      },
+      record: {},
       options: {
         schema: 'table',
         extraProps: {
           submit: this.submit,
           cancel: this.cancel
         },
-        pathLayouts: {
-          tree: {
-            defaultValue: () => ({ d: [1, 2, 3] })
-          }
-        }
-      }
+        showEmpty: true
+      },
+      layout: [
+        { 'path': 'a', 'label': 'a' },
+        { 'path': 'b', 'label': 'b' },
+        { 'path': 'c', 'label': 'c' },
+        {
+          children: [
+            { 'path': 'a', 'label': 'a' },
+            { 'path': 'b', 'label': 'b' },
+            {
+              children: [
+                { 'path': 'a', 'label': 'a' },
+                { 'path': 'b', 'label': 'b' }
+              ]
+            }
+          ]
+        }]
     }
   },
   methods: {
@@ -30,6 +40,8 @@ export default {
       if (op === 'add') {
         if (Array.isArray(context)) {
           context.push(value)
+        } else {
+          context[prop] = value
         }
       }
       if (op === 'replace') {

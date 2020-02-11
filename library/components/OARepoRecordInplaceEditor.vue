@@ -20,7 +20,6 @@ export default {
   mixins: [OARepoRecordMixin],
   methods: {
     layoutTranslator (layout, options) {
-      // console.log(layout, options)
       if (layout.inplaceEditorTranslated) {
         return layout
       }
@@ -56,6 +55,10 @@ export default {
       const opts = {
         ...this.options
       }
+      if (opts.extraProps === undefined) {
+        opts.extraProps = {}
+      }
+      opts.extraProps.dialogComponent = this.dialogComponent
       opts.layoutTranslator = (layout, options) => this.layoutTranslator(layout, {
         ...options,
         nextLayoutTranslator

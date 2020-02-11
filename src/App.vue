@@ -17,11 +17,6 @@
                     q-icon(name='list')
                   q-item-section
                     q-item-label Edit simple object
-                q-item(clickable='' :to="{name: 'simple-default-value-edit'}")
-                  q-item-section(avatar='')
-                    q-icon(name='list')
-                  q-item-section
-                    q-item-label Edit simple object with default value
       q-list
         q-expansion-item(header='' label="Array Editors")
           q-card
@@ -42,6 +37,26 @@
                     q-icon(name='list')
                   q-item-section
                     q-item-label Edit complex array with default value
+                q-item(clickable='' :to="{name: 'complex-array-dialog-edit'}")
+                  q-item-section(avatar='')
+                    q-icon(name='list')
+                  q-item-section
+                    q-item-label Edit complex array with dialog
+                q-item(clickable='' :to="{name: 'non-existing-default-value-array-edit'}")
+                  q-item-section(avatar='')
+                    q-icon(name='list')
+                  q-item-section
+                    q-item-label Edit non-existing array with default value
+                q-item(clickable='' :to="{name: 'non-existing-default-value-complex-array-edit'}")
+                  q-item-section(avatar='')
+                    q-icon(name='list')
+                  q-item-section
+                    q-item-label Edit non-existing complex array with default value
+                q-item(clickable='' :to="{name: 'non-existing-complex-array-edit'}")
+                  q-item-section(avatar='')
+                    q-icon(name='list')
+                  q-item-section
+                    q-item-label Edit non-existing complex array
         q-expansion-item(header='' label="Tree Editors")
           q-card
             q-card-section
@@ -60,16 +75,31 @@
                     q-icon(name='list')
                   q-item-section
                     q-item-label Edit object with no values
+                q-item(clickable='' :to="{name: 'object-with-children-edit'}")
+                  q-item-section(avatar='')
+                    q-icon(name='list')
+                  q-item-section
+                    q-item-label Edit object with children
                 q-item(clickable='' :to="{name: 'additional-props-edit'}")
                   q-item-section(avatar='')
                     q-icon(name='list')
                   q-item-section
                     q-item-label Edit object with additional props
-                q-item(clickable='' :to="{name: 'dialog-edit'}")
+                q-item(clickable='' :to="{name: 'non-existing-object-dialog-edit'}")
                   q-item-section(avatar='')
                     q-icon(name='list')
                   q-item-section
-                    q-item-label Edit object in dialog
+                    q-item-label Edit non-existing object in dialog
+                q-item(clickable='' :to="{name: 'non-existing-object-default-value-edit'}")
+                  q-item-section(avatar='')
+                    q-icon(name='list')
+                  q-item-section
+                    q-item-label Edit non-existing object with default value
+                q-item(clickable='' :to="{name: 'object-dialog-with-property-edit'}")
+                  q-item-section(avatar='')
+                    q-icon(name='list')
+                  q-item-section
+                    q-item-label Edit object in dialog with property
     q-page-container
       q-page.q-ma-lg
         router-view

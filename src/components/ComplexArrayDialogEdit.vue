@@ -1,28 +1,28 @@
 <template lang="pug">
 div
-  oarepo-record-inplace-editor(:record="record" :options="options")
+  oarepo-record-inplace-editor(:record="record" :options="options" :dialog-component="dialogComponent")
 </template>
 
 <script>
+import Vue from 'vue'
+import DialogComponent from './DialogComponent'
+
 export default {
-  name: 'tree-edit',
+  name: 'complex-array-dialog-edit',
   data: function () {
     return {
       record: {
-        tree: [{ a: [1, 2, 3] }, { b: [1, 2, 3] }, { c: [5] }, { d: { e: 1, f: 2 } }]
+        complexArray: [{ a: 1 }, { a: 2 }, { a: 3 }]
       },
       options: {
         schema: 'table',
+        showEmpty: true,
         extraProps: {
           submit: this.submit,
           cancel: this.cancel
-        },
-        pathLayouts: {
-          tree: {
-            defaultValue: () => ({ d: [1, 2, 3] })
-          }
         }
-      }
+      },
+      dialogComponent: DialogComponent
     }
   },
   methods: {
@@ -30,6 +30,8 @@ export default {
       if (op === 'add') {
         if (Array.isArray(context)) {
           context.push(value)
+        } else {
+          Vue.set(context, prop, value)
         }
       }
       if (op === 'replace') {
