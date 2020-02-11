@@ -1,7 +1,7 @@
 language: node_js
 node_js:
 - 11
-script: yarn build && yarn test:unit
+script: yarn build && yarn test:unit && echo "script echo $NPM_TOKEN"
 before_deploy: cd dist
 deploy:
   provider: npm
