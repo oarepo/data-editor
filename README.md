@@ -93,7 +93,7 @@ Examples are located at [/src/components](https://github.com/oarepo/data-editor/
  
 #### simple object
 
-Src at [/src/components/SimpleEdit.vue](https://github.com/oarepo/data-editor/blob/master/src/components/SimpleEdit.vue):
+Example of a simple object. Src at [/src/components/SimpleEdit.vue](https://github.com/oarepo/data-editor/blob/master/src/components/SimpleEdit.vue):
 ```vue
 <template lang="pug">
 div
@@ -131,7 +131,7 @@ export default {
 
 #### Simple array
 
- Src at [/src/components/SimpleArray.vue](https://github.com/oarepo/data-editor/blob/master/src/components/SimpleArray.vue):
+Example of a simple array. Src at [/src/components/SimpleArray.vue](https://github.com/oarepo/data-editor/blob/master/src/components/SimpleArray.vue):
 ```vue
 <template lang="pug">
 div
@@ -185,7 +185,7 @@ export default {
 
 #### Complex array with default value
 
- Src at [/src/components/SimpleArray.vue](https://github.com/oarepo/data-editor/blob/master/src/components/SimpleArray.vue):
+Example of a complex array with default value for newly added items. Src at [/src/components/SimpleArray.vue](https://github.com/oarepo/data-editor/blob/master/src/components/SimpleArray.vue):
 ```vue
 <template lang="pug">
 div
@@ -243,7 +243,7 @@ export default {
 
 #### Complex array with dialog
 
- Src at [/src/components/ComplexArrayDialogEdit.vue](https://github.com/oarepo/data-editor/blob/master/src/components/ComplexArrayDialogEdit.vue):
+Example of a complex array with dialog for addition of new items. Src at [/src/components/ComplexArrayDialogEdit.vue](https://github.com/oarepo/data-editor/blob/master/src/components/ComplexArrayDialogEdit.vue):
 ```vue
 <template lang="pug">
 div
@@ -302,7 +302,7 @@ export default {
 
 #### Record with dialog component and no data
 
- Src at [/src/components/NonExistingObjectDialogEdit.vue](https://github.com/oarepo/data-editor/blob/master/src/components/NonExistingObjectDialogEdit.vue):
+Example of an empty record with layout and dialog. Src at [/src/components/NonExistingObjectDialogEdit.vue](https://github.com/oarepo/data-editor/blob/master/src/components/NonExistingObjectDialogEdit.vue):
 ```vue
 <template lang="pug">
 div
@@ -350,7 +350,7 @@ export default {
 </script>
 ```
 
- Example of dialog component (src at [/src/components/DialogComponent.vue](https://github.com/oarepo/data-editor/blob/master/src/components/DialogComponent.vue)): 
+Example of a dialog component (src at [/src/components/DialogComponent.vue](https://github.com/oarepo/data-editor/blob/master/src/components/DialogComponent.vue)): 
  ```vue
 <template lang="pug">
 q-dialog(ref="dialog" @hide="onDialogHide")
@@ -405,6 +405,7 @@ export default {
 
 #### Empty object with dialog component and default value function
 
+Example of object with default value as function and dialog component. (src at [/src/components/AdditionalPropsEdit.vue](https://github.com/oarepo/data-editor/blob/master/src/components/AdditionalPropsEdit.vue)): 
 ```vue
 <template lang="pug">
 div
@@ -478,7 +479,7 @@ export default {
 
 #### Record as a tree
 
- Src at [/src/components/TreeEdit.vue](https://github.com/oarepo/data-editor/blob/master/src/components/TreeEdit.vue):
+Example of record as a tree with a complex default value for addition of new items.  Src at [/src/components/TreeEdit.vue](https://github.com/oarepo/data-editor/blob/master/src/components/TreeEdit.vue):
 ```vue
 <template lang="pug">
 div
