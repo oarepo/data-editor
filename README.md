@@ -85,15 +85,15 @@ To use data editor, add ``oarepo-record-inplace-editor`` to template. ``record``
 
 #### Dialog component
 
-``dialogComponent`` dialog component to be used with data editor, e.g. dialog to add object with default property to array, dialog to enter property and value to be added to object etc.
+Specifies dialog component to be used with data editor, e.g. dialog to add object with default property to array, dialog to enter property and value to be added to object etc.
 
 ## Examples
 
- Examples are located at [/src/components](https://github.com/oarepo/data-editor/blob/master/src/components.vue):
+Examples are located at [/src/components](https://github.com/oarepo/data-editor/blob/master/src/components.vue):
  
 #### simple object
 
- Src at [/src/components/SimpleEdit.vue](https://github.com/oarepo/data-editor/blob/master/src/components/SimpleEdit.vue):
+Src at [/src/components/SimpleEdit.vue](https://github.com/oarepo/data-editor/blob/master/src/components/SimpleEdit.vue):
 ```vue
 <template lang="pug">
 div
