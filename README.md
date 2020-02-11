@@ -32,7 +32,7 @@ A library for editing of rendered JSON data
 ## Installation
 
 ```
-yarn add @oarepo/data-editor vue-uid
+yarn add @oarepo/data-editor
 ```
 
 To register/configure the library, add a new boot file to quasar 
