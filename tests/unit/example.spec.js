@@ -1,13 +1,12 @@
 import { expect } from 'chai'
 import { shallowMount } from '@vue/test-utils'
-import HelloWorld from '@/components/HelloWorld.vue'
+import AddArrayItemComponent from '@/components/AddArrayItemComponent.vue'
 
-describe('HelloWorld.vue', () => {
+describe('AddArrayItemComponent.vue', () => {
   it('renders props.msg when passed', () => {
-    const msg = 'new message'
-    const wrapper = shallowMount(HelloWorld, {
-      propsData: { msg }
+    const wrapper = shallowMount(AddArrayItemComponent, {
+      propsData: {}
     })
-    expect(wrapper.text()).to.include(msg)
+    expect(wrapper.text()).to.equal('')
   })
 })
