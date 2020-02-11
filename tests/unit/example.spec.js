@@ -1,6 +1,6 @@
 import { expect } from 'chai'
 import { shallowMount } from '@vue/test-utils'
-import AddArrayItemComponent from '@/components/AddArrayItemComponent.vue'
+import { AddArrayItemComponent } from '@oarepo/data-editor'
 
 describe('AddArrayItemComponent.vue', () => {
   it('renders props.msg when passed', () => {
