@@ -40,10 +40,8 @@ To register/configure the library, add a new boot file to quasar
 
 ```javascript
 import DataEditor from '@oarepo/data-editor'
-import VueUid from 'vue-uid';
 
 export default async ({ Vue, store, router }) => {
-    Vue.use(VueUid);
     Vue.use(DataEditor, {})
  }
 ```
