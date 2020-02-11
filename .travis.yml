@@ -8,8 +8,7 @@ deploy:
   email: rumlo@vscht.cz
   access: public
   skip_cleanup: true
-  api_key:
-    secure: dtRABovg39feHYcrl12y5EqzdWx5HqjMFfQ6U0qLsQcG1OnCIx8ihrXKbAgqlB0hfvkyOkE3enll2he3CJW0SR9QkvzfABDyHmPMVNEJY8K6BorKLKnO6ghGA0qeVUkR+h9viAPys6tqnWP37NHzT7XAq6mr7R55KJzasdRouVPNsQagwHTZfWo29pby7tZWQb319oDwy+cecmqvxwkokZFQlo3ncAod4UnjzIUvGrSF3oiXAH7WHGTX1Wy2fYwp7FhxJSOP47agItD3GOF+32QC/k/DIKhywhLtFASnMJuxhAvPJtK9stxgw3b/Raybm7hUfjMD8i5JaQB2qRGrwRVsw4mLwta2IkHG5wCJD7OR7EnAKagYJ+4S7Eg7qpV8ZFvCwbJbLbZClFoBuot1mR/VMyjE7ZhEeWU92MCo1LbQ+GTPExsGLXHjE07wfgJo4Lc0YR/ZT5zOdnsG8nT72SeGWU2QfAwCHp74ZO5coRxNK7qjXBCBvNyOBH4OW+LRffN44hSEedN6JLnn9vi06QBciDjh3JZdnqB2iPcBwmjLQ4wPUQeICWt3H4FJKFihkRxwsUbxPppuk40wIB2Z51oq7++n6lI63EjaxDxWV11w5gGSBwEGR4XmICe/inwe++ZETt+2OhUSuGnZ52ScQOnkQwnKMjrOzSkHmllT8sI=
+  api_key: $NPM_TOKEN
   on:
     tags: true
 after_deploy: cd ..
