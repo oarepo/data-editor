@@ -9,9 +9,9 @@ component(:is="component")
 
 import OARepoEditorWrapperComponent from './OARepoEditorWrapperComponent.vue'
 import { SKIP_WRAPPER } from '@oarepo/data-renderer'
-import AddArrayItemComponent from './AddArrayItemComponent'
-import AddObjectPropertyComponent from './AddObjectPropertyComponent'
-import AddAdditionalPropertyComponent from './AddAdditionalPropertyComponent'
+import AddArrayItemComponent from './AddArrayItemComponent.vue'
+import AddObjectPropertyComponent from './AddObjectPropertyComponent.vue'
+import AddAdditionalPropertyComponent from './AddAdditionalPropertyComponent.vue'
 
 export default {
   props: {
