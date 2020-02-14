@@ -1,14 +1,22 @@
 language: node_js
 node_js:
 - 11
-script: yarn build && yarn test:unit && echo "script echo $NPM_TOKEN"
-before_deploy: cd dist
-deploy:
-  provider: npm
-  email: rumlo@vscht.cz
-  access: public
-  skip_cleanup: true
-  api_key: $NPM_TOKEN
-  on:
-    tags: true
-after_deploy: cd ..
+jobs:
+  include:
+    - stage: prepare
+      before_install:
+        - echo "//registry.npmjs.org/:_authToken=\${NPM_TOKEN}" > .npmrc
+      on:
+        tags: true
+    - stage: deploy
+      script: yarn build && yarn test:unit
+      before_deploy: cd dist
+      deploy:
+        provider: npm
+        email: rumlo@vscht.cz
+        access: public
+        skip_cleanup: true
+        api_key: $NPM_TOKEN
+        on:
+          tags: true
+      after_deploy: cd ..
