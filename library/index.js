@@ -3,7 +3,7 @@ import AddArrayItemComponent from './components/AddArrayItemComponent.vue'
 import AddObjectPropertyComponent from './components/AddObjectPropertyComponent.vue'
 import AddAdditionalPropertyComponent from './components/AddAdditionalPropertyComponent.vue'
 import AdditionMixin from './components/AdditionMixin.js'
-import OARepoEditorWrapperComponent from './components/OARepoEditorWrapperComponent'
+import OARepoEditorWrapperComponent from './components/OARepoEditorWrapperComponent.vue'
 
 export default {
   install (Vue, options) {
