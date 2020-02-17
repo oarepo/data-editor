@@ -1,14 +1,13 @@
 import { expect } from 'chai'
 import { shallowMount, createLocalVue } from '@vue/test-utils'
 // import { AddArrayItemComponent } from '@oarepo/data-editor'
-import { AddArrayItemComponent, AddObjectPropertyComponent, AddAdditionalPropertyComponent } from '@oarepo/data-editor'
+import { AddArrayItemComponent, AddObjectPropertyComponent, AddAdditionalPropertyComponent, AdditionMixin } from '@oarepo/data-editor'
 // import AdditionMixin from '../../library/components/AdditionMixin'
 // import { OARepoEditorWrapperComponent } from '../../library/components/OARepoEditorWrapperComponent'
 // eslint-disable-next-line camelcase
 import { html_beautify } from 'js-beautify'
 import DialogComponent from '../../src/components/DialogComponent'
 import DialogWithPropertyComponent from '../../src/components/DialogWithPropertyComponent'
-import AdditionMixin from '../../library/components/AdditionMixin'
 
 //  TODO: createLocalVue a install
 //   testy pro renderování AddArrayItemComponent, AddObjectPropertyComponent, AddAdditionalPropertyComponent,
@@ -45,7 +44,6 @@ describe('data editor components', () => {
 
     const wrapper = shallowMount(AddArrayItemComponent, {
       localVue,
-      mixins: [AdditionMixin],
       propsData: {
         layout: {},
         data: { array: [1, 2] }

@@ -2,6 +2,8 @@ import OARepoRecordInplaceEditor from './components/OARepoRecordInplaceEditor.vu
 import AddArrayItemComponent from './components/AddArrayItemComponent.vue'
 import AddObjectPropertyComponent from './components/AddObjectPropertyComponent.vue'
 import AddAdditionalPropertyComponent from './components/AddAdditionalPropertyComponent.vue'
+import AdditionMixin from './components/AdditionMixin.js'
+import OARepoEditorWrapperComponent from './components/OARepoEditorWrapperComponent'
 
 export default {
   install (Vue, options) {
@@ -15,5 +17,7 @@ export default {
 export {
   AddArrayItemComponent,
   AddObjectPropertyComponent,
-  AddAdditionalPropertyComponent
+  AddAdditionalPropertyComponent,
+  AdditionMixin,
+  OARepoEditorWrapperComponent
 }
