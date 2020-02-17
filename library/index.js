@@ -1,5 +1,7 @@
 import OARepoRecordInplaceEditor from './components/OARepoRecordInplaceEditor.vue'
 import AddArrayItemComponent from './components/AddArrayItemComponent.vue'
+import AddObjectPropertyComponent from './components/AddObjectPropertyComponent.vue'
+import AddAdditionalPropertyComponent from './components/AddAdditionalPropertyComponent.vue'
 
 export default {
   install (Vue, options) {
@@ -11,5 +13,7 @@ export default {
   }
 }
 export {
-  AddArrayItemComponent
+  AddArrayItemComponent,
+  AddObjectPropertyComponent,
+  AddAdditionalPropertyComponent
 }

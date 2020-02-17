@@ -31,8 +31,11 @@ A library for editing of rendered JSON data
 
 ## Installation
 
+``@oarepo/data-editor`` requires ``@oarepo/data-renderer`` to be installed as well.
+
 ```
 yarn add @oarepo/data-editor
+yarn add @oarepo/data-renderer
 ```
 
 To register/configure the library, add a new boot file to quasar 
@@ -40,15 +43,17 @@ To register/configure the library, add a new boot file to quasar
 
 ```javascript
 import DataEditor from '@oarepo/data-editor'
+import DataRenderer from '@oarepo/data-renderer'
 
 export default async ({ Vue, store, router }) => {
     Vue.use(DataEditor, {})
+    Vue.use(DataRenderer, {})
  }
 ```
 
 ## Usage
 
-To use data editor, add ``oarepo-record-inplace-editor`` to template. ``record``, ``options``, ``layout`` and ``dialogComponent`` can be passed to ``oarepo-record-inplace-editor``.
+To use data editor, add ``oarepo-record-inplace-editor`` to template. ``oarepo-record-inplace-editor`` component comes from data renderer, more info here: LINK``record``, ``options``, ``layout`` and ``dialogComponent`` can be passed to ``oarepo-record-inplace-editor``.
 
 #### Record
 
@@ -69,17 +74,17 @@ To use data editor, add ``oarepo-record-inplace-editor`` to template. ``record``
  * ``pathLayouts`` (to associate default value with arrays)
     * simple default value ```options: { pathLayouts: { simpleArray: defaultValue: () => 1 } }```
     * complex default value ```options: { pathLayouts: { complexArray: defaultValue: () => { a: 1 } } }```
- * ``showEmpty`` when set true, empty values are shown, defaults to false
+ * ``showEmpty`` must be set to true in order for empty records to be shown, default value is false, for example can be used in combination with combination with dialog component to show empty record with button to add new item 
     * show empty records ```options: { showEmpty: true }```
 
 #### Layout
 
 ``layout`` can be used to define layout of empty record, to associate dialog components or default values with paths, to define children.
+Layout is described in more detail here: LINK
  * basic layout: ```layout: [{ 'path': 'a', 'label': 'a' }]```
  * layout with dialog component: ```layout: [{ 'path': 'a', 'label': 'a', dialogComponent: DialogComponent, dynamic: true }]```
  * layout with default value: ```layout: [{ 'path': 'a', 'label': 'a', defaultValue: () => 1, dynamic: true }]```
  * layout with default value as a function: ```layout: [{ 'path': 'a', 'label': 'a', defaultValue: defaultValue, dynamic: true }]```
- * layout with children: ```layout: [{ 'path': 'a', 'label': 'a' }, { children: [{ 'path': 'b', 'label': 'b' }, { 'path': 'c', 'label': 'c' }] }]```
 
 #### Dialog component
 
