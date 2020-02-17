@@ -1,7 +1,7 @@
 import { expect } from 'chai'
 import { shallowMount, createLocalVue } from '@vue/test-utils'
 // import { AddArrayItemComponent } from '@oarepo/data-editor'
-import { AddArrayItemComponent, AddObjectPropertyComponent, AddAdditionalPropertyComponent, AdditionMixin } from '@oarepo/data-editor'
+import { AddArrayItemComponent, AddObjectPropertyComponent, AddAdditionalPropertyComponent } from '@oarepo/data-editor'
 // import AdditionMixin from '../../library/components/AdditionMixin'
 // import { OARepoEditorWrapperComponent } from '../../library/components/OARepoEditorWrapperComponent'
 // eslint-disable-next-line camelcase
@@ -38,23 +38,23 @@ describe('data editor components', () => {
     )
   })
 
-  it('clicks add button in AddArrayItemComponent', () => {
-    const localVue = createLocalVue()
-    localVue.use(AdditionMixin)
-
-    const wrapper = shallowMount(AddArrayItemComponent, {
-      localVue,
-      propsData: {
-        layout: {},
-        data: { array: [1, 2] }
-      }
-    })
-    console.log(html_beautify(wrapper.html()))
-    const button = wrapper.find('q-btn')
-    console.log(html_beautify(button.html()))
-    button.trigger('click')
-    console.log(html_beautify(wrapper.html()))
-  })
+  // it('clicks add button in AddArrayItemComponent', () => {
+  //   const localVue = createLocalVue()
+  //   localVue.use(AdditionMixin)
+  //
+  //   const wrapper = shallowMount(AddArrayItemComponent, {
+  //     localVue,
+  //     propsData: {
+  //       layout: {},
+  //       data: { array: [1, 2] }
+  //     }
+  //   })
+  //   // console.log(html_beautify(wrapper.html()))
+  //   const button = wrapper.find('q-btn')
+  //   console.log(html_beautify(button.html()))
+  //   button.trigger('click')
+  //   // console.log(html_beautify(wrapper.html()))
+  // })
 
   it('renders AddArrayItemComponent with dialog button', () => {
     const wrapper = shallowMount(AddArrayItemComponent, {
@@ -64,7 +64,7 @@ describe('data editor components', () => {
         dialogComponent: DialogComponent
       }
     })
-    console.log(html_beautify(wrapper.html()))
+    // console.log(html_beautify(wrapper.html()))
     expect(wrapper.text()).to.equal('')
     expect(wrapper.html()).to.include(
       '<q-btn icon="playlist_add" flat="" color="primary"></q-btn>'
@@ -83,7 +83,7 @@ describe('data editor components', () => {
         }
       }
     })
-    console.log(html_beautify(wrapper.html()))
+    // console.log(html_beautify(wrapper.html()))
     expect(wrapper.text()).to.equal('')
     expect(wrapper.html()).to.include(
       '<q-btn icon="playlist_add" flat="" color="primary"></q-btn>'
@@ -97,7 +97,7 @@ describe('data editor components', () => {
         data: {}
       }
     })
-    console.log(html_beautify(wrapper.html()))
+    // console.log(html_beautify(wrapper.html()))
     expect(wrapper.text()).to.equal('')
   })
 
@@ -108,7 +108,7 @@ describe('data editor components', () => {
         data: {}
       }
     })
-    console.log(html_beautify(wrapper.html()))
+    // console.log(html_beautify(wrapper.html()))
     expect(wrapper.text()).to.equal('')
   })
 
@@ -119,7 +119,7 @@ describe('data editor components', () => {
         data: {}
       }
     })
-    console.log(html_beautify(wrapper.html()))
+    // console.log(html_beautify(wrapper.html()))
     expect(wrapper.text()).to.equal('')
   })
 
@@ -149,7 +149,7 @@ describe('data editor components', () => {
         data: {}
       }
     })
-    console.log(html_beautify(wrapper.html()))
+    // console.log(html_beautify(wrapper.html()))
     expect(wrapper.text()).to.equal('')
   })
 })
