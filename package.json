@@ -1,6 +1,6 @@
 {
   "name": "@oarepo/data-editor",
-  "version": "1.0.1",
+  "version": "1.0.10",
   "private": false,
   "scripts": {
     "serve": "vue-cli-service serve",
