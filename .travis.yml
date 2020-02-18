@@ -8,9 +8,6 @@ stages:
 jobs:
   include:
     - stage: prepare
-      before_install:
-        - echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > .npmrc
-        - cut -b 1- .npmrc
       script: yarn build && yarn test:unit
     - stage: deploy
       before_install:
