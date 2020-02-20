@@ -1,10 +1,10 @@
 {
   "name": "@oarepo/data-editor",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "private": false,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "./build.sh",
+    "build": "/bin/bash build.sh",
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint"
   },
