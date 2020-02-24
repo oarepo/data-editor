@@ -41,6 +41,9 @@ const ViewRenderer = {
             return [JSON.stringify(value)]
           }
         }
+        if (Boolean(value) === value) {
+          return [JSON.stringify(value)]
+        }
         return [value]
       })
     return els[0]
@@ -166,6 +169,10 @@ export default {
     isObject () {
       const value = this.context[this.layout.path]
       return Object(value) === value
+    },
+    isBool () {
+      const value = this.context[this.layout.path]
+      return Boolean(value) === value
     }
   },
   data: function () {
@@ -192,7 +199,6 @@ export default {
         prop: this.layout.path,
         pathValues: this.pathValues
       }
-      console.log('submit', submitData)
       this.editing = false
       this.$emit('stop-editing')
       this.submit(submitData)
@@ -205,7 +211,6 @@ export default {
         prop: this.layout.path,
         valueIndex: this.valueIndex
       }
-      console.log('remove', removeData)
       this.editing = false
       this.$emit('stop-editing')
       this.submit(removeData)
