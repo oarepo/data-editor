@@ -33,6 +33,11 @@ export default {
           component: 'q-input'
         }
       }
+      if (layout['boolean-value-editor'] === undefined) {
+        layout['boolean-value-editor'] = {
+          component: 'q-checkbox'
+        }
+      }
       layout.value = {
         ...layout['value-viewer'],
         'component': options.editorWrapperComponent || OARepoEditorWrapperComponent,

@@ -3,18 +3,17 @@ div
   div.row(v-if="!editing")
     view-renderer.col(:def="layout" :props="this.$props" code="value-viewer" @dblclick.native="startEditing" ref="viewer")
     q-btn(icon="remove" color="primary" size="x-small" dense flat v-if="isArray" @click="onRemove")
-    q-btn(icon="edit" color="primary" size="x-small" dense flat v-if="layout && !layout.disabled && !isObject && !isBool" @click="startEditing")
-    q-checkbox(color="primary" size="x-small" dense flat v-if="isBool" :value="value" @input="startEditing")
+    q-btn(icon="edit" color="primary" size="x-small" dense flat v-if="layout && !layout.disabled && !isObject" @click="startEditing")
+    // q-checkbox(color="primary" size="x-small" dense flat v-if="isBool" :value="value" @input="startEditing")
   div.row(v-else)
-    edit-renderer(:def="layout" :props="this.$props" code="value-editor" ref="editor")
-    div.q-mt-sm
+    edit-renderer(:def="layout" :props="this.$props" :code="isBool ? 'boolean-value-editor' : 'value-editor'" ref="editor" @change="editChange")
+    div.q-mt-sm(v-if="!isBool")
       q-btn(icon="done" color="primary" @click="save" outline) Uložit
       q-btn.q-ml-sm(icon="clear" color="grey" @click="onCancel" outline) Storno
 </template>
 <script>
 
 import { RendererMixin } from '@oarepo/data-renderer'
-import Vue from 'vue'
 
 const ViewRenderer = {
   mixins: [
@@ -44,7 +43,8 @@ const ViewRenderer = {
           }
         }
         if (Boolean(value) === value) {
-          return [Vue.prototype.$oarepo.dataRenderer.booleanTranslator(value)]
+          console.log(this.def)
+          return [this.currentBooleanTranslator(value)]
         }
         return [value]
       })
@@ -53,6 +53,9 @@ const ViewRenderer = {
   computed: {
     currentSchemaCode () {
       return this.props.schema
+    },
+    currentBooleanTranslator () {
+      return this.def.booleanTranslator || this.$oarepo.dataRenderer.booleanTranslator
     }
   }
 }
@@ -98,6 +101,7 @@ const EditRenderer = {
       ...this.props,
       value: this.editedValue
     }
+    console.log('ssfdsf', this.code)
     const els = this.renderElement(collected, h, this.def, this.code,
       props, () => {
         return []
@@ -119,6 +123,7 @@ const EditRenderer = {
   methods: {
     valueInput (value) {
       this.editedValue = value
+      this.$emit('change', value)
     }
   }
 }
@@ -185,10 +190,6 @@ export default {
   },
   methods: {
     startEditing () {
-      const value = this.context[this.layout.path]
-      if (Boolean(value) === value) {
-        return this.save()
-      }
       this.editing = true
     },
     onCancel () {
@@ -199,19 +200,14 @@ export default {
     async save () {
       const submitData = {
         path: this.currentJsonPointer,
-        // value: this.$refs.editor.editedValue,
+        value: this.$refs.editor.editedValue,
         op: this.patchOperation,
         context: this.context,
         prop: this.layout.path,
         pathValues: this.pathValues
       }
-      if (this.$refs.editor) {
-        submitData['value'] = this.$refs.editor.editedValue
-        this.editing = false
-        this.$emit('stop-editing')
-      } else {
-        submitData['value'] = !this.context[this.layout.path]
-      }
+      this.editing = false
+      this.$emit('stop-editing')
       this.submit(submitData)
     },
     async onRemove () {
@@ -225,6 +221,11 @@ export default {
       this.editing = false
       this.$emit('stop-editing')
       this.submit(removeData)
+    },
+    async editChange (value) {
+      if (this.isBool) {
+        await this.save()
+      }
     }
   }
 }
