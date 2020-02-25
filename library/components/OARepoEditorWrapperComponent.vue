@@ -43,7 +43,6 @@ const ViewRenderer = {
           }
         }
         if (Boolean(value) === value) {
-          console.log(this.def)
           return [this.currentBooleanTranslator(value)]
         }
         return [value]
@@ -101,7 +100,6 @@ const EditRenderer = {
       ...this.props,
       value: this.editedValue
     }
-    console.log('ssfdsf', this.code)
     const els = this.renderElement(collected, h, this.def, this.code,
       props, () => {
         return []
