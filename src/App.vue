@@ -3,9 +3,8 @@
     q-header.glossy(elevated='')
       q-toolbar
         q-btn(flat='', dense='', round='', @click='leftDrawerOpen = !leftDrawerOpen', aria-label='Menu', icon='menu')
-          q-toolbar-title
-            | @oarepo/invenio-quasar
-          div Quasar v{{ $q.version }}
+        q-toolbar-title
+          | @oarepo/data-editor
     q-drawer(v-model='leftDrawerOpen', show-if-above='', bordered='', content-class='bg-grey-2')
       q-list
         q-expansion-item(header='' label="Basic Editors")
@@ -100,6 +99,11 @@
                     q-icon(name='list')
                   q-item-section
                     q-item-label Edit object in dialog with property
+                q-item(clickable='' :to="{name: 'boolean-edit'}")
+                  q-item-section(avatar='')
+                    q-icon(name='list')
+                  q-item-section
+                    q-item-label Edit object with boolean value
     q-page-container
       q-page.q-ma-lg
         router-view

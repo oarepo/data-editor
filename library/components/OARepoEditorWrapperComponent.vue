@@ -3,7 +3,8 @@ div
   div.row(v-if="!editing")
     view-renderer.col(:def="layout" :props="this.$props" code="value-viewer" @dblclick.native="startEditing" ref="viewer")
     q-btn(icon="remove" color="primary" size="x-small" dense flat v-if="isArray" @click="onRemove")
-    q-btn(icon="edit" color="primary" size="x-small" dense flat v-if="layout && !layout.disabled && !isObject" @click="startEditing")
+    q-btn(icon="edit" color="primary" size="x-small" dense flat v-if="layout && !layout.disabled && !isObject && !isBool" @click="startEditing")
+    q-checkbox(color="primary" size="x-small" dense flat v-if="isBool" :value="value" @input="startEditing")
   div.row(v-else)
     edit-renderer(:def="layout" :props="this.$props" code="value-editor" ref="editor")
     div.q-mt-sm
@@ -13,6 +14,7 @@ div
 <script>
 
 import { RendererMixin } from '@oarepo/data-renderer'
+import Vue from 'vue'
 
 const ViewRenderer = {
   mixins: [
@@ -42,7 +44,7 @@ const ViewRenderer = {
           }
         }
         if (Boolean(value) === value) {
-          return [JSON.stringify(value)]
+          return [Vue.prototype.$oarepo.dataRenderer.booleanTranslator(value)]
         }
         return [value]
       })
@@ -183,6 +185,10 @@ export default {
   },
   methods: {
     startEditing () {
+      const value = this.context[this.layout.path]
+      if (Boolean(value) === value) {
+        return this.save()
+      }
       this.editing = true
     },
     onCancel () {
@@ -193,14 +199,19 @@ export default {
     async save () {
       const submitData = {
         path: this.currentJsonPointer,
-        value: this.$refs.editor.editedValue,
+        // value: this.$refs.editor.editedValue,
         op: this.patchOperation,
         context: this.context,
         prop: this.layout.path,
         pathValues: this.pathValues
       }
-      this.editing = false
-      this.$emit('stop-editing')
+      if (this.$refs.editor) {
+        submitData['value'] = this.$refs.editor.editedValue
+        this.editing = false
+        this.$emit('stop-editing')
+      } else {
+        submitData['value'] = !this.context[this.layout.path]
+      }
       this.submit(submitData)
     },
     async onRemove () {
