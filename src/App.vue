@@ -56,6 +56,11 @@
                     q-icon(name='list')
                   q-item-section
                     q-item-label Edit non-existing complex array
+                q-item(clickable='' :to="{name: 'complex-array-with-layout-edit'}")
+                  q-item-section(avatar='')
+                    q-icon(name='list')
+                  q-item-section
+                    q-item-label Edit complex array with layout
         q-expansion-item(header='' label="Tree Editors")
           q-card
             q-card-section
