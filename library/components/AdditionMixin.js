@@ -25,7 +25,7 @@ export default {
       return !!this.defaultValue
     },
     currentValue () {
-      return this.context[this.layout.path]
+      return this.context[this.prop]
     },
     defaultValue () {
       const dv = this.layout.defaultValue
@@ -42,7 +42,8 @@ export default {
       return `${this.parentJSONPointer}/${this.layout.path}`
     },
     currentDialogComponent () {
-      return this.layout.dialogComponent || this.dialogComponent
+      // console.log(this.extraProps)
+      return this.layout.dialogComponent || this.extraProps.dialogComponent
     }
   },
   data: function () {

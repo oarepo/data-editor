@@ -4,8 +4,9 @@ export default {
     component: [Object, Promise],
     componentFactory: Function,
     layout: {
-      type: [Array, Function, Object]
+      type: [Function, Object]
     },
+    rendererComponents: Object,
     options: {
       type: Object,
       default: () => ({})
