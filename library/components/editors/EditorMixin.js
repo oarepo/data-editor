@@ -26,28 +26,38 @@ export default {
     dialogComponent: Object
   },
   computed: {
-    currentJsonPointer () {
-      if (this.jsonPointer) {
-        return this.jsonPointer
+    hasDialog () {
+      return !!this.currentDialogComponent
+    },
+    hasDefaultValue () {
+      return !!this.defaultValue
+    },
+    currentValue () {
+      return this.context[this.prop]
+    },
+    defaultValue () {
+      const dv = this.layout.additionalProps.defaultValue
+      if (dv === null || dv === undefined) {
+        return dv
       }
-      if (this.valueIndex) {
-        return this.pathValues[this.valueIndex]
+      if (dv instanceof Function) {
+        return dv(this.$props)
+      } else {
+        return dv
       }
-      return `${this.parentJSONPointer}/${this.layout.path}`
     },
-    isArray () {
-      return Array.isArray(this.context)
-    },
-    isUndefinedObjectOrValue () {
-      return !this.isArray && this.pathValues === undefined
-    },
-    isObject () {
-      const value = this.context[this.layout.path]
-      return Object(value) === value
-    },
-    isBool () {
-      const value = this.context[this.layout.path]
-      return Boolean(value) === value
+    currentDialogComponent () {
+      console.log(this.extraProps, this.layout)
+      const layout = this.layout
+      if (layout.additionalProps && layout.additionalProps.dialogComponent) {
+        return layout.additionalProps.dialogComponent
+      }
+      if (this.extraProps.dialogComponent) {
+        return this.extraProps.dialogComponent
+      }
+      if (layout.dialogComponent) {
+        return layout.dialogComponent
+      }
     }
   },
   data: function () {
@@ -57,10 +67,16 @@ export default {
     }
   },
   methods: {
-    startEditing () {
-      console.log(this.options)
-      console.log('fdsdf')
-      this.editing = true
+    async startEditing () {
+      const dv = await this.defaultValue
+      if (dv) {
+        this.addDefaultValue(dv)
+      } else {
+        this.editing = true
+        this.$nextTick(() => {
+          this.$refs.edit.startEditing()
+        })
+      }
     },
     onCancel () {
       console.log('aaa')
@@ -94,10 +110,31 @@ export default {
       this.$emit('stop-editing')
       this.extraProps.submit(removeData)
     },
+    openDialog (initialValue = null, errorMessage = null) {
+      this.$q.dialog({
+        component: this.currentDialogComponent,
+        parent: this,
+        initialValue: initialValue,
+        errorMessage: errorMessage
+      }).onOk((value) => {
+        try {
+          this.validate(value)
+          this.submitData(value)
+        } catch (e) {
+          this.openDialog(value, e.message)
+        }
+      })
+    },
     async editChange (value) {
       if (this.isBool) {
         await this.save()
       }
+    },
+    addDefaultValue (dv) {
+      this.validate(dv)
+      this.submitData(dv)
+    },
+    validate (value) {
     }
   }
 }

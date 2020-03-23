@@ -9,11 +9,11 @@ div
 <script>
 import EditorMixin from './EditorMixin'
 import { RendererMixin, ObjectComponent } from '@oarepo/data-renderer'
-import { AdditionMixin } from '../../index'
+// import { AdditionMixin } from '../../index'
 
 export default {
   name: 'data-editor-object-component',
-  mixins: [RendererMixin, EditorMixin, AdditionMixin],
+  mixins: [RendererMixin, EditorMixin],
   components: {
     'data-renderer-object-component': ObjectComponent
   },
@@ -55,7 +55,7 @@ export default {
       }
       console.log('fdsfds', this.hasAdditionalProps, this.layout)
       if (this.hasAdditionalProps) {
-        console.log('fdsfds', this.hasAdditionalProps, this.layout)
+        console.log('fdsfds', this.hasAdditionalProps, this.layout, value, this.currentValue, this.context, this.prop, this.context[this.prop])
         submittedData.context = this.currentValue
         submittedData.value = value.value
         submittedData.prop = value.prop

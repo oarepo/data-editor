@@ -1,6 +1,6 @@
 <template lang="pug">
 div
-  data-editor-component(:record="record" :options="options" :layout="layout" :dialog-component="dialogComponent")
+  data-editor-component(:record="record" :options="options" :layout="layout")
   // data-renderer(:renderer-components="currentRendererComponents")
 </template>
 
@@ -19,10 +19,6 @@ export default {
         object: {
           firstname: 'John',
           lastname: 'Doe'
-        },
-        secondObject: {
-          a: 'b',
-          b: 1
         }
       },
       options: {
@@ -33,18 +29,18 @@ export default {
         }
       },
       layout: {
+        showEmpty: true,
         children: [
           {
             prop: 'object',
-            additionalProps: true
+            additionalProps: { dialogComponent: DialogWithPropertyComponent }
           },
           {
-            prop: 'secondObject'
-            // additionalProps: true
+            prop: 'secondObject',
+            additionalProps: { defaultValue: { a: 1 } }
           }
         ]
-      },
-      dialogComponent: DialogWithPropertyComponent
+      }
     }
   },
   methods: {

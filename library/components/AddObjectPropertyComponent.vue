@@ -29,9 +29,9 @@ export default {
   methods: {
     submitData (value) {
       const submittedData = {
-        op: 'add',
-        pathValues: [],
-        values: [value]
+        op: 'add'
+        // pathValues: [],
+        // values: [value]
       }
       if (this.currentValue === undefined) {
         submittedData.context = this.context
@@ -41,6 +41,7 @@ export default {
       }
       console.log('submit', submittedData)
       this.editing = false
+      console.log(this.editing)
       this.$emit('stop-editing')
       this.submit(submittedData)
     }
