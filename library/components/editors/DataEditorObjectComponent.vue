@@ -2,7 +2,7 @@
 div
   data-renderer-object-component(:value="value" :layout="layout" :paths="paths" :schema="schema" :renderer-components="rendererComponents" :extraProps="extraProps")
   div
-    q-btn(icon="playlist_add" flat color="primary" @click="beforeStart()" v-if="hasDefaultValue") r
+    q-btn(icon="playlist_add" flat color="primary" @click="beforeStart()" v-if="hasDefaultValue")
     q-btn(icon="playlist_add" flat color="primary" @click="openDialog()" v-if="hasDialog")
 </template>
 

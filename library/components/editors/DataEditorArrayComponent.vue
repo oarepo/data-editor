@@ -1,22 +1,19 @@
 <template lang="pug">
 div
-  div.row(v-if="!editing")
-    data-renderer-object-component(:value="value" :layout="layout" :paths="paths" :schema="schema")
-    q-btn(icon="edit" color="primary" size="x-small" dense flat @click="startEditing")
-  div.row(v-else)
-    q-input(@input="valueInput" ref="editor")
-    div.q-mt-sm
-      q-btn(icon="done" color="primary" @click="save" outline) Uložit
-      q-btn.q-ml-sm(icon="clear" color="grey" @click="onCancel" outline) Storno
+  data-renderer-array-component(:value="value" :layout="layout" :paths="paths" :schema="schema" :renderer-components="rendererComponents" :extraProps="extraProps")
+  div
+    q-btn(icon="playlist_add" flat color="primary" @click="beforeStart()" v-if="hasDefaultValue")
+    q-btn(icon="playlist_add" flat color="primary" @click="openDialog()" v-if="hasDialog")
 </template>
 
 <script>
 import EditorMixin from './EditorMixin'
 import { RendererMixin, ArrayComponent } from '@oarepo/data-renderer'
+import { AdditionMixin } from '../../index'
 
 export default {
   name: 'data-editor-array-component',
-  mixins: [RendererMixin, EditorMixin],
+  mixins: [RendererMixin, EditorMixin, AdditionMixin],
   components: {
     'data-renderer-array-component': ArrayComponent
   },

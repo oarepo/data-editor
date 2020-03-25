@@ -1,11 +1,13 @@
 <template lang="pug">
 div
-  oarepo-record-inplace-editor(:record="record" :options="options")
+  data-editor-component(:record="record" :options="options" :layout="{}")
 </template>
 
 <script>
+import DataEditorComponent from '../../library/components/DataEditorComponent'
 export default {
   name: 'array-edit',
+  components: { DataEditorComponent },
   data: function () {
     return {
       record: {
@@ -22,6 +24,7 @@ export default {
   },
   methods: {
     submit ({ path, context, prop, value, op, pathValues }) {
+      console.log(context, prop, value, op, context[prop])
       if (op === 'add') {
         if (Array.isArray(context)) {
           context.push(value)
@@ -31,6 +34,7 @@ export default {
       }
       if (op === 'replace') {
         context[prop] = value
+        console.log(context[prop])
       }
       if (op === 'remove') {
         if (Array.isArray(context)) {
