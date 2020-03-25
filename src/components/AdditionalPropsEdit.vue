@@ -1,20 +1,24 @@
 <template lang="pug">
 div
-  oarepo-record-inplace-editor(:record="record" :options="options" :layout="layout")
+  data-editor-component(:record="record" :options="options" :layout="layout")
 </template>
 
 <script>
 import DialogWithPropertyComponent from './DialogWithPropertyComponent'
 import Vue from 'vue'
+import DataEditorComponent from '../../library/components/DataEditorComponent'
+
 function defaultValue ({ context, layout }) {
   for (const prop of 'abcdefghijklmnopqrstuvwxyz'.split('')) {
-    if (context[layout.path][prop] === undefined) {
+    if (context[layout.prop][prop] === undefined) {
       return { prop: prop, value: 1 }
     }
   }
 }
+
 export default {
   name: 'additional-props-edit',
+  components: { DataEditorComponent },
   data: function () {
     return {
       record: {
@@ -24,12 +28,14 @@ export default {
         d: {},
         e: {}
       },
-      layout: [
-        { 'path': 'a', 'label': 'a', dynamic: true, additionalProps: { dialogComponent: DialogWithPropertyComponent } },
-        { 'path': 'b', 'label': 'b', dynamic: true, additionalProps: { dialogComponent: DialogWithPropertyComponent } },
-        { 'path': 'c', 'label': 'c', dynamic: true, additionalProps: { dialogComponent: DialogWithPropertyComponent } },
-        { 'path': 'd', 'label': 'd', dynamic: true, additionalProps: { dialogComponent: DialogWithPropertyComponent } },
-        { 'path': 'e', 'label': 'e', dynamic: true, additionalProps: { defaultValue: defaultValue } }],
+      layout: {
+        children: [
+          { prop: 'a', additionalProps: { dialogComponent: DialogWithPropertyComponent } },
+          { prop: 'b', additionalProps: { dialogComponent: DialogWithPropertyComponent } },
+          { prop: 'c', additionalProps: { dialogComponent: DialogWithPropertyComponent } },
+          { prop: 'd', additionalProps: { dialogComponent: DialogWithPropertyComponent } },
+          { prop: 'e', additionalProps: { defaultValue: defaultValue } }]
+      },
       options: {
         schema: 'table',
         extraProps: {

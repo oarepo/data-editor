@@ -11,41 +11,47 @@ export default {
     url: String,
     values: Array,
     pathValues: Array,
-    parentJSONPointer: String,
+    // parentJSONPointer: String,
     schema: String,
     currentSchema: Object,
-    valueIndex: Number,
+    // valueIndex: Number,
     patchOperation: {
       type: String,
       default: 'replace'
     },
-    jsonPointer: String,
-    patchTransformer: Function,
-    submit: Function,
-    cancel: Function,
+    // jsonPointer: String,
+    // patchTransformer: Function,
+    // submit: Function,
+    // cancel: Function,
     dialogComponent: Object
   },
   computed: {
     hasDialog () {
       return !!this.currentDialogComponent
     },
-    hasDefaultValue () {
-      return !!this.defaultValue
-    },
+    // hasDefaultValue () {
+    //   return !!this.defaultValue
+    // },
     currentValue () {
       return this.context[this.prop]
     },
-    defaultValue () {
-      const dv = this.layout.additionalProps.defaultValue
-      if (dv === null || dv === undefined) {
-        return dv
-      }
-      if (dv instanceof Function) {
-        return dv(this.$props)
-      } else {
-        return dv
-      }
-    },
+    // defaultValue () {
+    //   // console.log('this.layout.additionalProps.defaultValue', this.layout.additionalProps.defaultValue)
+    //   let dv
+    //   if (this.layout.additionalProps && this.layout.additionalProps.defaultValue) {
+    //     dv = this.layout.additionalProps.defaultValue
+    //   } else if (this.layout.defaultValue) {
+    //     dv = this.layout.defaultValue
+    //   }
+    //   if (dv === null || dv === undefined) {
+    //     return dv
+    //   }
+    //   if (dv instanceof Function) {
+    //     return dv(this.$props)
+    //   } else {
+    //     return dv
+    //   }
+    // },
     currentDialogComponent () {
       console.log(this.extraProps, this.layout)
       const layout = this.layout
@@ -67,17 +73,21 @@ export default {
     }
   },
   methods: {
-    async startEditing () {
-      const dv = await this.defaultValue
-      if (dv) {
-        this.addDefaultValue(dv)
-      } else {
-        this.editing = true
-        this.$nextTick(() => {
-          this.$refs.edit.startEditing()
-        })
-      }
+    startEditing () {
+      this.editing = true
     },
+    // async startEditing () {
+    //   const dv = await this.defaultValue
+    //   if (dv) {
+    //     this.addDefaultValue(dv)
+    //   } else {
+    //     this.editing = true
+    //     this.$nextTick(() => {
+    //       console.log(this.$refs)
+    //       this.$refs.edit.startEditing()
+    //     })
+    //   }
+    // },
     onCancel () {
       console.log('aaa')
       this.editing = false
@@ -93,7 +103,7 @@ export default {
         context: this.context,
         prop: this.prop
       }
-      console.log(submitData)
+      console.log('submitData')
       this.editing = false
       this.$emit('stop-editing')
       this.extraProps.submit(submitData)
@@ -110,31 +120,31 @@ export default {
       this.$emit('stop-editing')
       this.extraProps.submit(removeData)
     },
-    openDialog (initialValue = null, errorMessage = null) {
-      this.$q.dialog({
-        component: this.currentDialogComponent,
-        parent: this,
-        initialValue: initialValue,
-        errorMessage: errorMessage
-      }).onOk((value) => {
-        try {
-          this.validate(value)
-          this.submitData(value)
-        } catch (e) {
-          this.openDialog(value, e.message)
-        }
-      })
-    },
+    // openDialog (initialValue = null, errorMessage = null) {
+    //   this.$q.dialog({
+    //     component: this.currentDialogComponent,
+    //     parent: this,
+    //     initialValue: initialValue,
+    //     errorMessage: errorMessage
+    //   }).onOk((value) => {
+    //     try {
+    //       this.validate(value)
+    //       this.submitData(value)
+    //     } catch (e) {
+    //       this.openDialog(value, e.message)
+    //     }
+    //   })
+    // },
     async editChange (value) {
       if (this.isBool) {
         await this.save()
       }
-    },
-    addDefaultValue (dv) {
-      this.validate(dv)
-      this.submitData(dv)
-    },
-    validate (value) {
     }
+    // addDefaultValue (dv) {
+    //   this.validate(dv)
+    //   this.submitData(dv)
+    // },
+    // validate (value) {
+    // }
   }
 }

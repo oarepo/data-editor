@@ -8,11 +8,13 @@ div
 
 <script>
 
-import OARepoRecordMixin from './OARepoRecordMixin'
-
 export default {
+  props: {
+    layout: Object,
+    record: Object,
+    options: Object
+  },
   name: 'data-editor-component',
-  mixins: [OARepoRecordMixin],
   computed: {
     currentOptions () {
       const opts = {

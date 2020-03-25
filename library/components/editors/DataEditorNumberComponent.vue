@@ -1,6 +1,5 @@
 <template lang="pug">
 div
-  pre b {{options}}
   div.row(v-if="!editing")
     data-renderer-number-component(:value="value" :layout="layout" :paths="paths" :schema="schema")
     q-btn(icon="edit" color="primary" size="x-small" dense flat @click="startEditing")

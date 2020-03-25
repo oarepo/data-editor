@@ -18,9 +18,67 @@ export default {
     dialogComponent: Object
   },
   computed: {
+    hasDefaultValue () {
+      return !!this.defaultValue
+    },
+    defaultValue () {
+      let dv
+      if (this.layout.additionalProps && this.layout.additionalProps.defaultValue) {
+        dv = this.layout.additionalProps.defaultValue
+      } else if (this.layout.defaultValue) {
+        dv = this.layout.defaultValue
+      }
+      console.log('ppp', dv)
+      if (dv === null || dv === undefined) {
+        return dv
+      }
+      if (dv instanceof Function) {
+        return dv(this.$props)
+      } else {
+        return dv
+      }
+    }
   },
   data: function () {
-    return {}
+    return {
+      editing: false
+    }
   },
-  methods: {}
+  methods: {
+    async beforeStart () {
+      const dv = await this.defaultValue
+      if (dv) {
+        this.addDefaultValue(dv)
+      } else {
+        this.editing = true
+        this.$nextTick(() => {
+          this.startEditing()
+        })
+      }
+    },
+    stopEditing () {
+      this.editing = false
+    },
+    openDialog (initialValue = null, errorMessage = null) {
+      this.$q.dialog({
+        component: this.currentDialogComponent,
+        parent: this,
+        initialValue: initialValue,
+        errorMessage: errorMessage
+      }).onOk((value) => {
+        try {
+          this.validate(value)
+          this.submitData(value)
+        } catch (e) {
+          this.openDialog(value, e.message)
+        }
+      })
+    },
+    addDefaultValue (dv) {
+      this.validate(dv)
+      this.submitData(dv)
+    },
+    validate (value) {
+    }
+  }
 }

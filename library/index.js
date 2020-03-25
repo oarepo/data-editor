@@ -1,7 +1,4 @@
 import DataEditorComponent from './components/DataEditorComponent.vue'
-import AddArrayItemComponent from './components/AddArrayItemComponent.vue'
-import AddObjectPropertyComponent from './components/AddObjectPropertyComponent.vue'
-import AddAdditionalPropertyComponent from './components/AddAdditionalPropertyComponent.vue'
 import AdditionMixin from './components/AdditionMixin.js'
 import DataEditorStringComponent from './components/editors/DataEditorStringComponent.vue'
 import DataEditorNumberComponent from './components/editors/DataEditorNumberComponent.vue'
@@ -35,9 +32,6 @@ export default {
   }
 }
 export {
-  AddArrayItemComponent,
-  AddObjectPropertyComponent,
-  AddAdditionalPropertyComponent,
   AdditionMixin,
   DataEditorComponent
 }

@@ -2,18 +2,18 @@
 div
   data-renderer-object-component(:value="value" :layout="layout" :paths="paths" :schema="schema" :renderer-components="rendererComponents" :extraProps="extraProps")
   div
-    q-btn(icon="playlist_add" flat color="primary" @click="startEditing" v-if="hasDefaultValue")
+    q-btn(icon="playlist_add" flat color="primary" @click="beforeStart()" v-if="hasDefaultValue") r
     q-btn(icon="playlist_add" flat color="primary" @click="openDialog()" v-if="hasDialog")
 </template>
 
 <script>
 import EditorMixin from './EditorMixin'
 import { RendererMixin, ObjectComponent } from '@oarepo/data-renderer'
-// import { AdditionMixin } from '../../index'
+import { AdditionMixin } from '../../index'
 
 export default {
   name: 'data-editor-object-component',
-  mixins: [RendererMixin, EditorMixin],
+  mixins: [RendererMixin, EditorMixin, AdditionMixin],
   components: {
     'data-renderer-object-component': ObjectComponent
   },
@@ -31,6 +31,7 @@ export default {
   },
   data: function () {
     return {
+      editing: false,
       editedValue: null
     }
   },
@@ -38,24 +39,18 @@ export default {
     hasAdditionalProps () {
       return !!this.layout.additionalProps
     }
-    // currentDialogComponent () {
-    //   console.log(this.dialogComponent)
-    //   return this.layout.dialogComponent || this.extraProps.dialogComponent
-    // },
-    // hasDialog () {
-    //   return !!this.currentDialogComponent
-    // }
   },
   methods: {
+    startEditing () {
+      this.editing = true
+    },
     submitData (value) {
       const submittedData = {
         op: 'add'
         // pathValues: [],
         // values: [value.value],
       }
-      console.log('fdsfds', this.hasAdditionalProps, this.layout)
-      if (this.hasAdditionalProps) {
-        console.log('fdsfds', this.hasAdditionalProps, this.layout, value, this.currentValue, this.context, this.prop, this.context[this.prop])
+      if (value.prop) {
         submittedData.context = this.currentValue
         submittedData.value = value.value
         submittedData.prop = value.prop
@@ -64,6 +59,7 @@ export default {
         submittedData.value = value
         submittedData.prop = this.prop
       }
+      console.log(submittedData)
       this.editing = false
       this.$emit('stop-editing')
       this.extraProps.submit(submittedData)
