@@ -51,6 +51,12 @@ export default {
         // pathValues: [],
         // values: [value.value],
       }
+      if (this.currentValue === undefined) {
+        submittedData.context = this.context
+        submittedData.value = {}
+        submittedData.prop = this.prop
+        this.extraProps.submit(submittedData)
+      }
       if (value.prop) {
         submittedData.context = this.currentValue
         submittedData.value = value.value

@@ -6,6 +6,7 @@ div
 <script>
 import Vue from 'vue'
 import DataEditorComponent from '../../library/components/DataEditorComponent'
+import DialogWithPropertyComponent from './DialogWithPropertyComponent'
 // import DialogComponent from './DialogComponent'
 
 export default {
@@ -22,7 +23,19 @@ export default {
           cancel: this.cancel
         }
       },
-      layout: {}
+      layout: {
+        showEmpty: true,
+        children: [
+          {
+            prop: 'object',
+            additionalProps: { dialogComponent: DialogWithPropertyComponent },
+            children: [
+              { prop: 'a' },
+              { prop: 'b' }
+            ]
+          }
+        ]
+      }
       // layout: [{ 'path': 'a', 'label': 'a', dialogComponent: DialogComponent, dynamic: true }]
     }
   },
