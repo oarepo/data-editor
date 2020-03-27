@@ -24,7 +24,7 @@ export default {
     currentValue () {
       return this.context[this.prop]
     },
-    isArray () {
+    isArrayItem () {
       return Array.isArray(this.context)
     }
   },

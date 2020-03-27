@@ -4,6 +4,7 @@ div
   div
     q-btn(icon="playlist_add" flat color="primary" @click="beforeStart()" v-if="hasDefaultValue")
     q-btn(icon="playlist_add" flat color="primary" @click="openDialog()" v-if="hasDialog")
+    q-btn(icon="remove" color="primary" size="x-small" dense flat v-if="isArrayItem" @click="onRemove")
 </template>
 
 <script>

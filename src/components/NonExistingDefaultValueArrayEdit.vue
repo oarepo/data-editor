@@ -45,7 +45,7 @@ export default {
     submit ({ path, context, prop, value, op, pathValues }) {
       console.log(context, prop, value, context[prop])
       if (op === 'add') {
-        if (Array.isArray(context)) {
+        if (Array.isArray(context[prop])) {
           context[prop].push(value)
         } else {
           Vue.set(context, prop, value)
