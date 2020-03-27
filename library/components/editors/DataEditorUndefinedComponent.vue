@@ -1,24 +1,18 @@
 <template lang="pug">
 div
-  div.row(v-if="!editing")
-    data-renderer-undefined-component(:value="value" :layout="layout" :paths="paths" :schema="schema")
-    q-btn(icon="edit" color="primary" size="x-small" dense flat @click="startEditing")
-  div.row(v-else)
-    q-input(@input="valueInput" ref="editor")
-    div.q-mt-sm
-      q-btn(icon="done" color="primary" @click="save" outline) Uložit
-      q-btn.q-ml-sm(icon="clear" color="grey" @click="onCancel" outline) Storno
+  data-editor-generic-component(v-bind="$props" :view="view" :edit="edit")
 </template>
 
 <script>
 import EditorMixin from './EditorMixin'
-import { RendererMixin, UndefinedComponent } from '@oarepo/data-renderer'
+import { RendererMixin } from '@oarepo/data-renderer'
+import DataEditorGenericComponent from './DataEditorGenericComponent'
 
 export default {
   name: 'data-editor-undefined-component',
   mixins: [RendererMixin, EditorMixin],
   components: {
-    'data-renderer-undefined-component': UndefinedComponent
+    DataEditorGenericComponent
   },
   props: {
     options: Object,
@@ -34,14 +28,8 @@ export default {
   },
   data: function () {
     return {
-      editedValue: null
-    }
-  },
-  methods: {
-    valueInput (value) {
-      this.editedValue = value
-      console.log(value, this.editedValue)
-      this.$emit('change', value)
+      view: this.$oarepo.dataRenderer.rendererComponents.undefined,
+      edit: this.$oarepo.dataEditor.editorInputComponents.undefined
     }
   }
 }

@@ -1,25 +1,36 @@
 <template lang="pug">
 div
-  oarepo-record-inplace-editor(:record="record" :options="options" :layout="layout")
+  data-editor-component(:record="record" :options="options" :layout="layout")
 </template>
 
 <script>
 import Vue from 'vue'
+import DataEditorComponent from '../../library/components/DataEditorComponent'
 
 export default {
   name: 'non-existing-object-default-value-edit',
+  components: { DataEditorComponent },
   data: function () {
     return {
       record: {},
       options: {
         schema: 'table',
-        showEmpty: true,
         extraProps: {
           submit: this.submit,
           cancel: this.cancel
         }
       },
-      layout: [{ 'path': 'a', 'label': 'a', defaultValue: () => ({ a: '1' }), dynamic: true }]
+      layout: {
+        showEmpty: true,
+        children: [
+          {
+            prop: 'a',
+            additionalProps: { defaultValue: { a: 1 } },
+            children: [
+              { prop: 'a' }
+            ]
+          }]
+      }
     }
   },
   methods: {

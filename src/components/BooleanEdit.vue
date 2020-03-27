@@ -1,13 +1,15 @@
 <template lang="pug">
 div
-  oarepo-record-inplace-editor(:record="record" :options="options" :layout="layout")
+  data-editor-component(:record="record" :options="options" :layout="layout")
 </template>
 
 <script>
 import Vue from 'vue'
+import DataEditorComponent from '../../library/components/DataEditorComponent'
 
 export default {
   name: 'boolean-edit',
+  components: { DataEditorComponent },
   data: function () {
     return {
       record: {
@@ -40,15 +42,16 @@ export default {
           }
         }
       },
-      layout: [
-        { 'path': 'a', 'label': 'a' },
-        { 'path': 'b', 'label': 'b' },
-        { 'path': 'c', 'label': 'c' },
-        { 'path': 'd', 'label': 'd' },
-        { 'path': 'e', 'label': 'e', array: true, dynamic: true },
-        { 'path': 'f', 'label': 'f' },
-        { 'path': 'g', 'label': 'g' }
-      ]
+      layout: {}
+      // layout: [
+      //   { 'path': 'a', 'label': 'a' },
+      //   { 'path': 'b', 'label': 'b' },
+      //   { 'path': 'c', 'label': 'c' },
+      //   { 'path': 'd', 'label': 'd' },
+      //   { 'path': 'e', 'label': 'e', array: true, dynamic: true },
+      //   { 'path': 'f', 'label': 'f' },
+      //   { 'path': 'g', 'label': 'g' }
+      // ]
     }
   },
   methods: {

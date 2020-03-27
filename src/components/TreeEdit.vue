@@ -1,11 +1,13 @@
 <template lang="pug">
 div
-  oarepo-record-inplace-editor(:record="record" :options="options")
+  data-editor-component(:record="record" :options="options")
 </template>
 
 <script>
+import DataEditorComponent from '../../library/components/DataEditorComponent'
 export default {
   name: 'tree-edit',
+  components: { DataEditorComponent },
   data: function () {
     return {
       record: {

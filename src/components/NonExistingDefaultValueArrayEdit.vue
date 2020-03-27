@@ -1,13 +1,15 @@
 <template lang="pug">
 div
-  oarepo-record-inplace-editor(:record="record" :options="options" :layout="layout")
+  data-editor-component(:record="record" :options="options" :layout="layout")
 </template>
 
 <script>
 import Vue from 'vue'
+import DataEditorComponent from '../../library/components/DataEditorComponent'
 
 export default {
   name: 'non-existing-default-value-array-edit',
+  components: { DataEditorComponent },
   data: function () {
     return {
       record: {},
@@ -19,14 +21,32 @@ export default {
           cancel: this.cancel
         }
       },
-      layout: [{ 'path': 'a', 'label': 'a', defaultValue: () => 8, array: true }]
+      layout: {
+        showEmpty: true,
+        children: [
+          {
+            prop: 'array',
+            additionalProps: { defaultValue: () => 8 },
+            label: {
+              label: 'Array label'
+            },
+            item: {
+              label: {
+                label: 'Item label'
+              }
+            }
+          }
+        ]
+      }
+      // layout: [{ 'path': 'a', 'label': 'a', defaultValue: () => 8, array: true }]
     }
   },
   methods: {
     submit ({ path, context, prop, value, op, pathValues }) {
+      console.log(context, prop, value, context[prop])
       if (op === 'add') {
         if (Array.isArray(context)) {
-          context.push(value)
+          context[prop].push(value)
         } else {
           Vue.set(context, prop, value)
         }

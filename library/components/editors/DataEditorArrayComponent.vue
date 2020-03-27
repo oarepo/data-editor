@@ -1,9 +1,14 @@
 <template lang="pug">
 div
   data-renderer-array-component(:value="value" :layout="layout" :paths="paths" :schema="schema" :renderer-components="rendererComponents" :extraProps="extraProps")
-  div
-    q-btn(icon="playlist_add" flat color="primary" @click="beforeStart()" v-if="hasDefaultValue")
+  div(v-if="!editing")
     q-btn(icon="playlist_add" flat color="primary" @click="openDialog()" v-if="hasDialog")
+    q-btn(icon="playlist_add" flat color="primary" @click="beforeStart()" v-if="!hasDialog")
+  div.row(v-else)
+    q-input(@input="valueInput" ref="editor")
+    div.q-mt-sm
+      q-btn(icon="done" color="primary" @click="addItem" outline) Uložit
+      q-btn.q-ml-sm(icon="clear" color="grey" @click="onCancel" outline) Storno
 </template>
 
 <script>
@@ -37,8 +42,29 @@ export default {
   methods: {
     valueInput (value) {
       this.editedValue = value
-      console.log(value, this.editedValue)
       this.$emit('change', value)
+    },
+    submitData (value) {
+      const submittedData = {
+        op: 'add'
+        // pathValues: [],
+        // values: [value.value],
+      }
+      if (value.prop) {
+        submittedData.context = this.currentValue
+        submittedData.value = value.value
+        submittedData.prop = value.prop
+      } else {
+        submittedData.context = this.context
+        submittedData.value = value
+        submittedData.prop = this.prop
+      }
+      this.editing = false
+      this.$emit('stop-editing')
+      this.extraProps.submit(submittedData)
+    },
+    addItem () {
+      this.submitData(this.editedValue)
     }
   }
 }

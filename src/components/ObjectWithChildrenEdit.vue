@@ -1,11 +1,14 @@
 <template lang="pug">
 div
-  oarepo-record-inplace-editor(:record="record" :options="options" :layout="layout")
+  data-editor-component(:record="record" :options="options" :layout="layout")
 </template>
 
 <script>
+import DataEditorComponent from '../../library/components/DataEditorComponent'
+
 export default {
   name: 'object-with-children-edit',
+  components: { DataEditorComponent },
   data: function () {
     return {
       record: {},
@@ -17,22 +20,23 @@ export default {
         },
         showEmpty: true
       },
-      layout: [
-        { 'path': 'a', 'label': 'a' },
-        { 'path': 'b', 'label': 'b' },
-        { 'path': 'c', 'label': 'c' },
-        {
-          children: [
-            { 'path': 'a', 'label': 'a' },
-            { 'path': 'b', 'label': 'b' },
-            {
-              children: [
-                { 'path': 'a', 'label': 'a' },
-                { 'path': 'b', 'label': 'b' }
-              ]
-            }
-          ]
-        }]
+      layout: {
+        showEmpty: true,
+        children: [
+          {
+            prop: 'object',
+            children: [
+              { prop: 'a' },
+              { prop: 'b' },
+              {
+                prop: 'c',
+                children: [
+                  { prop: 'a' },
+                  { prop: 'b' },
+                  { prop: 'c' }]
+              }]
+          }]
+      }
     }
   },
   methods: {

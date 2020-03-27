@@ -1,14 +1,16 @@
 <template lang="pug">
 div
-  oarepo-record-inplace-editor(:record="record" :options="options" :layout="layout")
+  data-editor-component(:record="record" :options="options" :layout="layout")
 </template>
 
 <script>
 import Vue from 'vue'
+import DataEditorComponent from '../../library/components/DataEditorComponent'
 import DialogWithPropertyComponent from './DialogWithPropertyComponent'
 
 export default {
   name: 'object-dialog-with-property-edit',
+  components: { DataEditorComponent },
   data: function () {
     return {
       record: { a: {} },
@@ -20,12 +22,14 @@ export default {
           cancel: this.cancel
         }
       },
-      layout: [{
-        'path': 'a',
-        'label': 'a',
-        dynamic: true,
-        additionalProps: { dialogComponent: DialogWithPropertyComponent }
-      }]
+      layout: {
+        children: [
+          {
+            prop: 'a',
+            additionalProps: { dialogComponent: DialogWithPropertyComponent }
+          }
+        ]
+      }
     }
   },
   methods: {

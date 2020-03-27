@@ -1,10 +1,11 @@
 <template lang="pug">
 div
-  data-editor-component(:record="record" :options="options" :layout="{}")
+  data-editor-component(:record="record" :options="options" :layout="layout")
 </template>
 
 <script>
 import DataEditorComponent from '../../library/components/DataEditorComponent'
+import Vue from 'vue'
 export default {
   name: 'array-edit',
   components: { DataEditorComponent },
@@ -19,6 +20,21 @@ export default {
           submit: this.submit,
           cancel: this.cancel
         }
+      },
+      layout: {
+        children: [
+          {
+            prop: 'array',
+            label: {
+              label: 'Array label'
+            },
+            item: {
+              label: {
+                label: 'Item label'
+              }
+            }
+          }
+        ]
       }
     }
   },
@@ -26,15 +42,14 @@ export default {
     submit ({ path, context, prop, value, op, pathValues }) {
       console.log(context, prop, value, op, context[prop])
       if (op === 'add') {
-        if (Array.isArray(context)) {
-          context.push(value)
+        if (Array.isArray(context[prop])) {
+          context[prop].push(value)
         } else {
           context[prop] = value
         }
       }
       if (op === 'replace') {
-        context[prop] = value
-        console.log(context[prop])
+        Vue.set(context, prop, value)
       }
       if (op === 'remove') {
         if (Array.isArray(context)) {

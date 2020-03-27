@@ -6,17 +6,7 @@ div
 
 <script>
 import DataEditorComponent from '../../library/components/DataEditorComponent'
-// import DialogComponent from './DialogComponent'
 import Vue from 'vue'
-import DialogWithPropertyComponent from './DialogWithPropertyComponent'
-
-function defaultValue ({ context, layout }) {
-  for (const prop of 'abcdefghijklmnopqrstuvwxyz'.split('')) {
-    if (context[layout.prop][prop] === undefined) {
-      return { prop: prop, value: 1 }
-    }
-  }
-}
 
 export default {
   name: 'simple-edit',
@@ -27,15 +17,7 @@ export default {
         a: {
           firstname: 'John',
           lastname: 'Doe'
-        },
-        b: {
-          a: null
-        },
-        c: {},
-        e: {
-          a: null
-        },
-        f: {}
+        }
       },
       options: {
         schema: 'table',
@@ -45,37 +27,7 @@ export default {
         }
       },
       layout: {
-        showEmpty: true,
-        children: [
-          {
-            prop: 'a',
-            label: { label: 'a' },
-            additionalProps: { dialogComponent: DialogWithPropertyComponent }
-          },
-          {
-            prop: 'b',
-            label: { label: 'b' },
-            additionalProps: { defaultValue: defaultValue }
-          },
-          {
-            prop: 'c',
-            label: { label: 'c' },
-            additionalProps: { defaultValue: { a: 1 } }
-          },
-          {
-            prop: 'd',
-            label: { label: 'd' },
-            additionalProps: { defaultValue: { value: 1, prop: 'a' } },
-            children: [
-              { prop: 'a' }
-            ]
-          },
-          {
-            prop: 'e',
-            label: { label: 'e' },
-            children: []
-          }
-        ]
+        showEmpty: true
       }
     }
   },

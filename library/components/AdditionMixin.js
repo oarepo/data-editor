@@ -18,6 +18,21 @@ export default {
     dialogComponent: Object
   },
   computed: {
+    hasDialog () {
+      return !!this.currentDialogComponent
+    },
+    currentDialogComponent () {
+      const layout = this.layout
+      if (layout.additionalProps && layout.additionalProps.dialogComponent) {
+        return layout.additionalProps.dialogComponent
+      }
+      if (this.extraProps.dialogComponent) {
+        return this.extraProps.dialogComponent
+      }
+      if (layout.dialogComponent) {
+        return layout.dialogComponent
+      }
+    },
     hasDefaultValue () {
       return !!this.defaultValue
     },
@@ -28,7 +43,6 @@ export default {
       } else if (this.layout.defaultValue) {
         dv = this.layout.defaultValue
       }
-      console.log('ppp', dv)
       if (dv === null || dv === undefined) {
         return dv
       }

@@ -1,6 +1,6 @@
 <template lang="pug">
 div
-  data-renderer.col(:data="record" :layout="layout" :renderer-components="currentEditorComponents" v-bind="currentOptions")
+  data-renderer.col(:data="record" :layout="layout" :schema="options.schema" :renderer-components="currentEditorComponents" v-bind="currentOptions")
 </template>
 
 <style>

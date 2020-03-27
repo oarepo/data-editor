@@ -1,14 +1,16 @@
 <template lang="pug">
 div
-  oarepo-record-inplace-editor(:record="record" :options="options" :layout="layout")
+  data-editor-component(:record="record" :options="options" :layout="layout")
 </template>
 
 <script>
 import Vue from 'vue'
-import DialogComponent from './DialogComponent'
+import DataEditorComponent from '../../library/components/DataEditorComponent'
+// import DialogComponent from './DialogComponent'
 
 export default {
   name: 'non-existing-complex-array-dialog-edit',
+  components: { DataEditorComponent },
   data: function () {
     return {
       record: {},
@@ -20,7 +22,8 @@ export default {
           cancel: this.cancel
         }
       },
-      layout: [{ 'path': 'a', 'label': 'a', dialogComponent: DialogComponent, array: true, dynamic: true }]
+      layout: {}
+      // layout: [{ 'path': 'a', 'label': 'a', dialogComponent: DialogComponent, array: true, dynamic: true }]
     }
   },
   methods: {
