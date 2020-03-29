@@ -13,12 +13,12 @@ div
 
 <script>
 import EditorMixin from './EditorMixin'
-import { RendererMixin, ArrayComponent } from '@oarepo/data-renderer'
+import { ArrayComponent } from '@oarepo/data-renderer'
 import { AdditionMixin } from '../../index'
 
 export default {
   name: 'data-editor-array-component',
-  mixins: [RendererMixin, EditorMixin, AdditionMixin],
+  mixins: [EditorMixin, AdditionMixin],
   components: {
     'data-renderer-array-component': ArrayComponent
   },
@@ -57,9 +57,10 @@ export default {
         this.extraProps.submit(submittedData)
       }
       if (value.prop) {
+        let complexValue = {}
+        complexValue[value.prop] = value.value
         submittedData.context = this.currentValue
-        submittedData.value = value.value
-        submittedData.prop = value.prop
+        submittedData.value = complexValue
       } else {
         submittedData.context = this.currentValue
         submittedData.value = value

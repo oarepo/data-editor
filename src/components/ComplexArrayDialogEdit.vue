@@ -1,6 +1,6 @@
 <template lang="pug">
 div
-  data-editor-component(:record="record" :options="options")
+  data-editor-component(:record="record" :options="options" :layout="layout")
 </template>
 
 <script>
@@ -24,6 +24,14 @@ export default {
           cancel: this.cancel,
           dialogComponent: DialogComponent
         }
+      },
+      layout: {
+        children: [
+          {
+            prop: 'complexArray',
+            additionalProps: { dialogComponent: DialogComponent }
+          }
+        ]
       }
     }
   },
