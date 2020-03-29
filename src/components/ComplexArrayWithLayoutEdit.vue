@@ -5,6 +5,7 @@ div
 
 <script>
 import DataEditorComponent from '../../library/components/DataEditorComponent'
+import Vue from 'vue'
 
 export default {
   name: 'complex-array-with-layout-edit',
@@ -42,29 +43,15 @@ export default {
           }
         ]
       }
-      // layout: [{
-      //   path: 'complexArray',
-      //   label: 'ComplexArray',
-      //   array: true,
-      //   dynamic: true,
-      //   children: [{ path: 'a', label: 'A' }]
-      // }]
-      // layout: [{
-      //   path: 'complexArray',
-      //   label: 'ComplexArray',
-      //   array: true,
-      //   dynamic: true,
-      //   children: [{ path: '', children: [{ path: 'a', label: 'A' }] }]
-      // }]
     }
   },
   methods: {
     submit ({ path, context, prop, value, op, pathValues }) {
       if (op === 'add') {
-        if (Array.isArray(context[prop])) {
-          context[prop].push({ a: value })
+        if (Array.isArray(context)) {
+          context.push(value)
         } else {
-          context[prop] = { a: value }
+          Vue.set(context, prop, value)
         }
       }
       if (op === 'replace') {

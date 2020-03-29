@@ -14,8 +14,7 @@ export default {
     return {
       record: {
         a: true,
-        b: false,
-        e: []
+        b: false
       },
       options: {
         schema: 'table',
@@ -23,35 +22,9 @@ export default {
           submit: this.submit,
           cancel: this.cancel
         },
-        showEmpty: true,
-        pathLayouts: {
-          c: {
-            defaultValue: () => true
-          },
-          d: {
-            defaultValue: true
-          },
-          e: {
-            defaultValue: () => ({ a: false })
-          },
-          f: {
-            defaultValue: () => false
-          },
-          g: {
-            defaultValue: false
-          }
-        }
+        showEmpty: true
       },
       layout: {}
-      // layout: [
-      //   { 'path': 'a', 'label': 'a' },
-      //   { 'path': 'b', 'label': 'b' },
-      //   { 'path': 'c', 'label': 'c' },
-      //   { 'path': 'd', 'label': 'd' },
-      //   { 'path': 'e', 'label': 'e', array: true, dynamic: true },
-      //   { 'path': 'f', 'label': 'f' },
-      //   { 'path': 'g', 'label': 'g' }
-      // ]
     }
   },
   methods: {

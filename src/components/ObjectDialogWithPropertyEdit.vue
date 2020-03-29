@@ -13,7 +13,11 @@ export default {
   components: { DataEditorComponent },
   data: function () {
     return {
-      record: { a: {} },
+      record: {
+        object: {
+          a: '1'
+        }
+      },
       options: {
         schema: 'table',
         showEmpty: true,
@@ -25,8 +29,9 @@ export default {
       layout: {
         children: [
           {
-            prop: 'a',
-            additionalProps: { dialogComponent: DialogWithPropertyComponent }
+            prop: 'object',
+            additionalProps: { dialogComponent: DialogWithPropertyComponent },
+            children: [{ prop: 'a' }]
           }
         ]
       }

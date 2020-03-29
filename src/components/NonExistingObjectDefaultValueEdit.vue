@@ -24,10 +24,10 @@ export default {
         showEmpty: true,
         children: [
           {
-            prop: 'a',
+            prop: 'object',
             additionalProps: { defaultValue: { a: 1 } },
             children: [
-              { prop: 'a' }
+              // { prop: 'a' }
             ]
           }]
       }

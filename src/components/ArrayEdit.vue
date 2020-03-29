@@ -40,10 +40,9 @@ export default {
   },
   methods: {
     submit ({ path, context, prop, value, op, pathValues }) {
-      console.log(context, prop, value, op, context[prop])
       if (op === 'add') {
-        if (Array.isArray(context[prop])) {
-          context[prop].push(value)
+        if (Array.isArray(context)) {
+          context.push(value)
         } else {
           context[prop] = value
         }

@@ -1,10 +1,11 @@
 <template lang="pug">
 div
-  data-editor-component(:record="record" :options="options")
+  data-editor-component(:record="record" :options="options" :layout="layout")
 </template>
 
 <script>
 import DataEditorComponent from '../../library/components/DataEditorComponent'
+
 export default {
   name: 'tree-edit',
   components: { DataEditorComponent },
@@ -18,12 +19,15 @@ export default {
         extraProps: {
           submit: this.submit,
           cancel: this.cancel
-        },
-        pathLayouts: {
-          tree: {
-            defaultValue: () => ({ d: [1, 2, 3] })
-          }
         }
+      },
+      layout: {
+        children: [
+          {
+            prop: 'tree',
+            additionalProps: { defaultValue: () => ({ d: [1, 2, 3] }) }
+          }
+        ]
       }
     }
   },

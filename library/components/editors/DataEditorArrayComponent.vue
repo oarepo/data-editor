@@ -61,7 +61,7 @@ export default {
         submittedData.value = value.value
         submittedData.prop = value.prop
       } else {
-        submittedData.context = this.context
+        submittedData.context = this.currentValue
         submittedData.value = value
         submittedData.prop = this.prop
       }

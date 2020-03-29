@@ -21,15 +21,25 @@ export default {
           cancel: this.cancel
         }
       },
-      layout: {}
-      // layout: [{ 'path': 'a', 'label': 'a', defaultValue: () => ({ a: 8 }), array: true, dynamic: true }]
+      layout: {
+        showEmpty: true,
+        children: [
+          {
+            prop: 'complexArray',
+            additionalProps: { defaultValue: { a: 1 } },
+            item: {
+              prop: 'a'
+            }
+          }
+        ]
+      }
     }
   },
   methods: {
     submit ({ path, context, prop, value, op, pathValues }) {
       if (op === 'add') {
-        if (Array.isArray(context[prop])) {
-          context[prop].push(value)
+        if (Array.isArray(context)) {
+          context.push(value)
         } else {
           Vue.set(context, prop, value)
         }

@@ -1,6 +1,6 @@
 <template lang="pug">
 div
-  q-input(@input="valueInput" ref="editor")
+  q-input(v-model="editedValue" @input="valueInput" ref="editor")
   div.q-mt-sm
     q-btn(icon="done" color="primary" @click="save" outline) Uložit
     q-btn.q-ml-sm(icon="clear" color="grey" @click="onCancel" outline) Storno
@@ -19,6 +19,26 @@ export default {
   data: function () {
     return {
       editedValue: null
+    }
+  },
+  mounted () {
+    this.editedValue = this.value
+    if (this.editedValue === undefined) {
+      if (this.def.default !== undefined) {
+        if (this.def.default instanceof Function) {
+          this.editedValue = this.def.default(this.props)
+        } else {
+          this.editedValue = this.def.default
+        }
+      }
+    }
+    if (this.$children[0]) {
+      if (this.$children[0].focus) {
+        this.$children[0].focus()
+      }
+      if (this.$children[0].select) {
+        this.$children[0].select()
+      }
     }
   },
   methods: {

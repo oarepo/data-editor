@@ -30,8 +30,8 @@ export default {
             prop: 'object',
             additionalProps: { dialogComponent: DialogWithPropertyComponent },
             children: [
-              { prop: 'a' },
-              { prop: 'b' }
+              // { prop: 'a' },
+              // { prop: 'b' }
             ]
           }
         ]

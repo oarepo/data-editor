@@ -9,12 +9,12 @@ div
 
 <script>
 import EditorMixin from './EditorMixin'
-import { RendererMixin, ObjectComponent } from '@oarepo/data-renderer'
+import { ObjectComponent } from '@oarepo/data-renderer'
 import { AdditionMixin } from '../../index'
 
 export default {
   name: 'data-editor-object-component',
-  mixins: [RendererMixin, EditorMixin, AdditionMixin],
+  mixins: [EditorMixin, AdditionMixin],
   components: {
     'data-renderer-object-component': ObjectComponent
   },
@@ -66,14 +66,12 @@ export default {
         submittedData.value = value
         submittedData.prop = this.prop
       }
-      console.log(submittedData)
       this.editing = false
       this.$emit('stop-editing')
       this.extraProps.submit(submittedData)
     },
     valueInput (value) {
       this.editedValue = value
-      console.log(value, this.editedValue)
       this.$emit('change', value)
     }
   }

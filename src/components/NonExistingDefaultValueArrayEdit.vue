@@ -38,15 +38,13 @@ export default {
           }
         ]
       }
-      // layout: [{ 'path': 'a', 'label': 'a', defaultValue: () => 8, array: true }]
     }
   },
   methods: {
     submit ({ path, context, prop, value, op, pathValues }) {
-      console.log(context, prop, value, context[prop])
       if (op === 'add') {
-        if (Array.isArray(context[prop])) {
-          context[prop].push(value)
+        if (Array.isArray(context)) {
+          context.push(value)
         } else {
           Vue.set(context, prop, value)
         }

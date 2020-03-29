@@ -28,12 +28,10 @@ export default {
           { prop: 'b' }
         ]
       }
-      // layout: [{ 'path': 'a', 'label': 'a' }, { 'path': 'b', 'label': 'b' }]
     }
   },
   methods: {
     submit ({ path, context, prop, value, op, pathValues }) {
-      console.log(context, prop, value, op, context[prop])
       if (op === 'add') {
         if (Array.isArray(context)) {
           context.push(value)
@@ -42,7 +40,6 @@ export default {
         }
       }
       if (context[prop] === undefined) {
-        console.log('ttt')
         Vue.set(context, prop, value)
       } else {
         context[prop] = value

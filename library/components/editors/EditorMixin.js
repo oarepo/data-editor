@@ -3,20 +3,20 @@
 export default {
   name: 'editor-mixin',
   props: {
+    pathLayouts: Object,
+    rendererComponents: Object,
+    extraProps: Object,
+    prop: [String, Number],
     context: [Object, Array],
     layout: Object,
-    data: Object,
-    paths: Array,
     value: {},
-    url: String,
-    values: Array,
-    pathValues: Array,
-    schema: String,
-    currentSchema: Object,
-    // valueIndex: Number,
     patchOperation: {
       type: String,
       default: 'replace'
+    },
+    schema: {
+      type: String,
+      default: 'inline'
     },
     dialogComponent: Object
   },
@@ -54,9 +54,7 @@ export default {
         context: this.context,
         prop: this.prop
       }
-      console.log('submitData', submitData, this.$root.editing)
       this.$parent.editing = false
-      console.log(this.editing, this)
       this.$emit('stop-editing')
       this.extraProps.submit(submitData)
     },
@@ -65,7 +63,7 @@ export default {
         path: this.currentJsonPointer,
         op: 'remove',
         context: this.context,
-        prop: this.layout.path,
+        prop: this.prop,
         valueIndex: this.valueIndex
       }
       this.$parent.editing = false

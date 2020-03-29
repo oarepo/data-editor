@@ -33,14 +33,11 @@ export default {
   },
   methods: {
     submit ({ context, prop, value, op }) {
-      console.log(context, prop, value, context[prop])
       if (op === 'add') {
-        console.log('aaa', context[prop])
         Vue.set(context, prop, value)
       }
       if (op === 'replace') {
         if (context[prop] === undefined) {
-          console.log('ttt')
           Vue.set(context, prop, value)
         } else {
           context[prop] = value

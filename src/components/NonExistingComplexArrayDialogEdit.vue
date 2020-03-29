@@ -6,6 +6,7 @@ div
 <script>
 import Vue from 'vue'
 import DataEditorComponent from '../../library/components/DataEditorComponent'
+import DialogWithPropertyComponent from './DialogWithPropertyComponent'
 // import DialogComponent from './DialogComponent'
 
 export default {
@@ -22,15 +23,25 @@ export default {
           cancel: this.cancel
         }
       },
-      layout: {}
-      // layout: [{ 'path': 'a', 'label': 'a', dialogComponent: DialogComponent, array: true, dynamic: true }]
+      layout: {
+        showEmpty: true,
+        children: [
+          {
+            prop: 'complexArray',
+            additionalProps: { dialogComponent: DialogWithPropertyComponent },
+            item: {
+              // prop: 'a'
+            }
+          }
+        ]
+      }
     }
   },
   methods: {
     submit ({ path, context, prop, value, op, pathValues }) {
       if (op === 'add') {
-        if (Array.isArray(context[prop])) {
-          context[prop].push(value)
+        if (Array.isArray(context)) {
+          context.push(value)
         } else {
           Vue.set(context, prop, value)
         }

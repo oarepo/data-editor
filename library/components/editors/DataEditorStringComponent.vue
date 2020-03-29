@@ -5,12 +5,11 @@ div
 
 <script>
 import EditorMixin from './EditorMixin'
-import { RendererMixin } from '@oarepo/data-renderer'
 import DataEditorGenericComponent from './DataEditorGenericComponent'
 
 export default {
   name: 'data-editor-string-component',
-  mixins: [RendererMixin, EditorMixin],
+  mixins: [EditorMixin],
   components: {
     DataEditorGenericComponent
   },

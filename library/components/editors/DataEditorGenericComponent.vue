@@ -9,12 +9,11 @@ div
 </template>
 
 <script>
-import { RendererMixin } from '@oarepo/data-renderer'
 import EditorMixin from './EditorMixin'
 
 export default {
   name: 'data-editor-generic-component',
-  mixins: [RendererMixin, EditorMixin],
+  mixins: [EditorMixin],
   props: {
     options: Object,
     value: [String, Number, Boolean, undefined],
