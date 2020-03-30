@@ -17,7 +17,6 @@ export default {
       record: {},
       options: {
         schema: 'table',
-        showEmpty: true,
         extraProps: {
           submit: this.submit,
           cancel: this.cancel
@@ -29,14 +28,10 @@ export default {
           {
             prop: 'object',
             additionalProps: { dialogComponent: DialogWithPropertyComponent },
-            children: [
-              // { prop: 'a' },
-              // { prop: 'b' }
-            ]
+            children: []
           }
         ]
       }
-      // layout: [{ 'path': 'a', 'label': 'a', dialogComponent: DialogComponent, dynamic: true }]
     }
   },
   methods: {

@@ -18,14 +18,13 @@ export default {
         extraProps: {
           submit: this.submit,
           cancel: this.cancel
-        },
-        showEmpty: true
+        }
       },
       layout: {
         showEmpty: true,
         children: [
-          { prop: 'a' },
-          { prop: 'b' }
+          { prop: 'phone' },
+          { prop: 'email' }
         ]
       }
     }

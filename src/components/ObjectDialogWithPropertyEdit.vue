@@ -15,12 +15,11 @@ export default {
     return {
       record: {
         object: {
-          a: '1'
+          creator: 'Mary Black'
         }
       },
       options: {
         schema: 'table',
-        showEmpty: true,
         extraProps: {
           submit: this.submit,
           cancel: this.cancel
@@ -31,7 +30,7 @@ export default {
           {
             prop: 'object',
             additionalProps: { dialogComponent: DialogWithPropertyComponent },
-            children: [{ prop: 'a' }]
+            children: [{ prop: 'creator' }]
           }
         ]
       }

@@ -17,7 +17,6 @@ export default {
       record: {},
       options: {
         schema: 'table',
-        showEmpty: true,
         extraProps: {
           submit: this.submit,
           cancel: this.cancel
@@ -27,11 +26,9 @@ export default {
         showEmpty: true,
         children: [
           {
-            prop: 'complexArray',
+            prop: 'contact',
             additionalProps: { dialogComponent: DialogWithPropertyComponent },
-            item: {
-              // prop: 'a'
-            }
+            item: {}
           }
         ]
       }

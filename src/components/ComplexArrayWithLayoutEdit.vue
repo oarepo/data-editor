@@ -13,32 +13,30 @@ export default {
   data: function () {
     return {
       record: {
-        complexArray: [
-          { a: 1 },
-          { a: 2 },
-          { a: 3 },
-          { a: 4 }]
+        contact: [
+          { phone: '+420123123124' },
+          { phone: '+420123123125' },
+          { phone: '+4201231231246' }]
       },
       options: {
         schema: 'table',
         extraProps: {
           submit: this.submit,
           cancel: this.cancel
-        },
-        showEmpty: true
+        }
       },
       layout: {
         children: [
           {
-            prop: 'complexArray',
+            prop: 'contact',
             label: {
-              label: 'Array label'
+              label: 'listOfContacts'
             },
             item: {
               label: {
-                label: 'Item label'
+                label: 'phoneNumber'
               },
-              prop: 'a'
+              prop: 'phone'
             }
           }
         ]

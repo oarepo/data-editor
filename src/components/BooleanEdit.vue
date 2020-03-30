@@ -13,16 +13,16 @@ export default {
   data: function () {
     return {
       record: {
-        a: true,
-        b: false
+        creator: 'Mary Black',
+        finished: true,
+        published: false
       },
       options: {
         schema: 'table',
         extraProps: {
           submit: this.submit,
           cancel: this.cancel
-        },
-        showEmpty: true
+        }
       },
       layout: {}
     }

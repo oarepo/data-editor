@@ -15,7 +15,6 @@ export default {
       record: {},
       options: {
         schema: 'table',
-        showEmpty: true,
         extraProps: {
           submit: this.submit,
           cancel: this.cancel
@@ -25,16 +24,9 @@ export default {
         showEmpty: true,
         children: [
           {
-            prop: 'array',
-            additionalProps: { defaultValue: () => 8 },
-            label: {
-              label: 'Array label'
-            },
-            item: {
-              label: {
-                label: 'Item label'
-              }
-            }
+            prop: 'keywords',
+            additionalProps: { defaultValue: () => 'keyword' },
+            item: {}
           }
         ]
       }

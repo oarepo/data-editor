@@ -12,7 +12,7 @@ export default {
   data: function () {
     return {
       record: {
-        defaultValueArray: [1, 2]
+        keywords: ['first keyword', 'second keyword']
       },
       options: {
         schema: 'table',
@@ -24,7 +24,7 @@ export default {
       layout: {
         children: [{
           prop: 'defaultValueArray',
-          additionalProps: { defaultValue: () => 8 }
+          additionalProps: { defaultValue: () => 'third keyword' }
         }]
       }
     }

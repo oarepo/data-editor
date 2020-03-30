@@ -14,9 +14,9 @@ export default {
   data: function () {
     return {
       record: {
-        a: {
-          firstname: 'John',
-          lastname: 'Doe'
+        Contact: {
+          Phone: '+420123123123',
+          Email: 'mary.black@gmail.com'
         }
       },
       options: {
@@ -33,6 +33,7 @@ export default {
   },
   methods: {
     submit ({ context, prop, value, op }) {
+      isNaN(value)
       if (op === 'add') {
         Vue.set(context, prop, value)
       }

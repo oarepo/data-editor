@@ -5,17 +5,17 @@ div
 
 <script>
 import DataEditorComponent from '../../library/components/DataEditorComponent'
+
 export default {
   name: 'default-value-complex-array-edit',
   components: { DataEditorComponent },
   data: function () {
     return {
       record: {
-        complexArray: [{ a: 1 }, { b: 2 }, { c: 3 }]
+        contact: [{ email: 1 }, { phone: '+420123123123' }]
       },
       options: {
         schema: 'table',
-        showEmpty: true,
         extraProps: {
           submit: this.submit,
           cancel: this.cancel
@@ -23,8 +23,8 @@ export default {
       },
       layout: {
         children: [{
-          prop: 'complexArray',
-          additionalProps: { defaultValue: () => ({ a: '1' }) }
+          prop: 'contact',
+          additionalProps: { defaultValue: () => ({ phone: '+420123123124' }) }
         }]
       }
     }

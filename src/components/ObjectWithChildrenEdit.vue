@@ -17,8 +17,7 @@ export default {
         extraProps: {
           submit: this.submit,
           cancel: this.cancel
-        },
-        showEmpty: true
+        }
       },
       layout: {
         showEmpty: true,
@@ -26,14 +25,12 @@ export default {
           {
             prop: 'object',
             children: [
-              { prop: 'a' },
-              { prop: 'b' },
+              { prop: 'creator' },
               {
-                prop: 'c',
+                prop: 'contact',
                 children: [
-                  { prop: 'a' },
-                  { prop: 'b' },
-                  { prop: 'c' }]
+                  { prop: 'phone' },
+                  { prop: 'email' }]
               }]
           }]
       }

@@ -12,7 +12,13 @@ export default {
   data: function () {
     return {
       record: {
-        tree: [{ a: [1, 2, 3] }, { b: [1, 2, 3] }, { c: [5] }, { d: { e: 1, f: 2 } }]
+        object: [
+          { creator: 'Mary Black' },
+          {
+            contact: [
+              { phone: '+420123123123' },
+              { email: ['mary.black@gmail.com'] }]
+          }]
       },
       options: {
         schema: 'table',
@@ -24,8 +30,8 @@ export default {
       layout: {
         children: [
           {
-            prop: 'tree',
-            additionalProps: { defaultValue: () => ({ d: [1, 2, 3] }) }
+            prop: 'object',
+            additionalProps: { defaultValue: () => ({ keywords: ['first keyword', 'second keyword'] }) }
           }
         ]
       }

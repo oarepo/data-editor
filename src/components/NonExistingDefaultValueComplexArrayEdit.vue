@@ -15,7 +15,6 @@ export default {
       record: {},
       options: {
         schema: 'table',
-        showEmpty: true,
         extraProps: {
           submit: this.submit,
           cancel: this.cancel
@@ -25,10 +24,10 @@ export default {
         showEmpty: true,
         children: [
           {
-            prop: 'complexArray',
-            additionalProps: { defaultValue: { a: 1 } },
+            prop: 'contact',
+            additionalProps: { defaultValue: { Phone: '+420123123123' } },
             item: {
-              prop: 'a'
+              prop: 'email'
             }
           }
         ]

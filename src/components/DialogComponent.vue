@@ -37,7 +37,7 @@ export default {
     },
     async onOKClick () {
       if (await this.$refs.form.validate()) {
-        this.$emit('ok', { a: this.value })
+        this.$emit('ok', { phone: this.value })
         this.hide()
       }
     },

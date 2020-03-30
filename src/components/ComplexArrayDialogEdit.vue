@@ -14,11 +14,10 @@ export default {
   data: function () {
     return {
       record: {
-        complexArray: [{ a: 1 }, { a: 2 }, { a: 3 }]
+        contact: [{ phone: '+420123123124' }, { email: 'mary.black@gmail.com' }]
       },
       options: {
         schema: 'table',
-        showEmpty: true,
         extraProps: {
           submit: this.submit,
           cancel: this.cancel,
@@ -28,7 +27,7 @@ export default {
       layout: {
         children: [
           {
-            prop: 'complexArray',
+            prop: 'contact',
             additionalProps: { dialogComponent: DialogComponent }
           }
         ]

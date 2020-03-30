@@ -11,7 +11,7 @@ import DataEditorComponent from '../../library/components/DataEditorComponent'
 function defaultValue ({ context, layout }) {
   for (const prop of 'abcdefghijklmnopqrstuvwxyz'.split('')) {
     if (context[layout.prop][prop] === undefined) {
-      return { prop: prop, value: 1 }
+      return { prop: prop, value: 'keyword' }
     }
   }
 }
@@ -22,27 +22,22 @@ export default {
   data: function () {
     return {
       record: {
-        a: { a: 1 },
-        b: { b: 2 },
-        c: { c: 3 },
-        d: {},
-        e: {}
+        creator: { name: 'Mary Black' },
+        contact: { phone: '+420123123124' },
+        keywords: {}
       },
       layout: {
         children: [
-          { prop: 'a', additionalProps: { dialogComponent: DialogWithPropertyComponent } },
-          { prop: 'b', additionalProps: { dialogComponent: DialogWithPropertyComponent } },
-          { prop: 'c', additionalProps: { dialogComponent: DialogWithPropertyComponent } },
-          { prop: 'd', additionalProps: { dialogComponent: DialogWithPropertyComponent } },
-          { prop: 'e', additionalProps: { defaultValue: defaultValue } }]
+          { prop: 'creator', additionalProps: { dialogComponent: DialogWithPropertyComponent } },
+          { prop: 'contact', additionalProps: { dialogComponent: DialogWithPropertyComponent } },
+          { prop: 'keywords', additionalProps: { defaultValue: defaultValue } }]
       },
       options: {
         schema: 'table',
         extraProps: {
           submit: this.submit,
           cancel: this.cancel
-        },
-        showEmpty: true
+        }
       }
     }
   },

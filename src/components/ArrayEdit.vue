@@ -12,7 +12,7 @@ export default {
   data: function () {
     return {
       record: {
-        array: [1, 2]
+        keywords: ['first keyword', 'second keyword']
       },
       options: {
         schema: 'table',
@@ -24,13 +24,13 @@ export default {
       layout: {
         children: [
           {
-            prop: 'array',
+            prop: 'keywords',
             label: {
-              label: 'Array label'
+              label: 'keywordArray'
             },
             item: {
               label: {
-                label: 'Item label'
+                label: 'keyword'
               }
             }
           }

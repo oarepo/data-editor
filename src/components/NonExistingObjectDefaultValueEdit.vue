@@ -25,10 +25,8 @@ export default {
         children: [
           {
             prop: 'object',
-            additionalProps: { defaultValue: { a: 1 } },
-            children: [
-              // { prop: 'a' }
-            ]
+            additionalProps: { defaultValue: { creator: 'Mary Black' } },
+            children: []
           }]
       }
     }
