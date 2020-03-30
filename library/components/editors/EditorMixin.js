@@ -26,6 +26,9 @@ export default {
     },
     isArrayItem () {
       return Array.isArray(this.context)
+    },
+    rootComponent () {
+      return this.layout.value.element
     }
   },
   data: function () {

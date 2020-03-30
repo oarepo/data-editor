@@ -1,5 +1,5 @@
 <template lang="pug">
-div
+component(:is="rootComponent")
   data-renderer-array-component(:value="value" :layout="layout" :paths="paths" :schema="schema" :renderer-components="rendererComponents" :extraProps="extraProps")
   div(v-if="!editing")
     q-btn(icon="playlist_add" flat color="primary" @click="openDialog()" v-if="hasDialog")

@@ -1,6 +1,5 @@
 <template lang="pug">
-div
-  q-checkbox(:val="editedValue" :value="value" @input="valueInput")
+q-checkbox(:val="editedValue" :value="value" @input="valueInput")
 </template>
 
 <script>

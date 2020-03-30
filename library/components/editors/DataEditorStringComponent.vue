@@ -1,6 +1,5 @@
 <template lang="pug">
-div
-  data-editor-generic-component(v-bind="$props" :view="view" :edit="edit")
+data-editor-generic-component(v-bind="$props" :view="view" :edit="edit")
 </template>
 
 <script>

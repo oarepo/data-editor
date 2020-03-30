@@ -1,5 +1,5 @@
 <template lang="pug">
-div
+component(:is="rootComponent")
   div.row(v-if="!editing")
     component(v-bind="$props" :is="view")
     q-btn(icon="edit" color="primary" size="x-small" dense flat @click="startEditing")
