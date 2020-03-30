@@ -23,7 +23,7 @@ export default {
       },
       layout: {
         children: [{
-          prop: 'defaultValueArray',
+          prop: 'keywords',
           additionalProps: { defaultValue: () => 'third keyword' }
         }]
       }
