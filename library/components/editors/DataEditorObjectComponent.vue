@@ -2,9 +2,9 @@
 component(:is="rootComponent")
   data-renderer-object-component(:value="value" :layout="layout" :paths="paths" :schema="schema" :renderer-components="rendererComponents" :extraProps="extraProps")
   div
-    q-btn(icon="playlist_add" flat color="primary" @click="beforeStart()" v-if="hasDefaultValue")
-    q-btn(icon="playlist_add" flat color="primary" @click="openDialog()" v-if="hasDialog")
-    q-btn(icon="remove" color="primary" size="x-small" dense flat v-if="isArrayItem" @click="onRemove")
+    q-btn(icon="playlist_add" dense flat color="primary" @click="beforeStart()" v-if="hasDefaultValue")
+    q-btn(icon="playlist_add" dense flat color="primary" @click="openDialog()" v-if="hasDialog")
+    q-btn(icon="remove" dense flat color="primary" size="x-small" v-if="isArrayItem" @click="onRemove")
 </template>
 
 <script>
