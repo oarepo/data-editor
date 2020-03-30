@@ -23,15 +23,6 @@ export default {
   },
   mounted () {
     this.editedValue = this.value
-    if (this.editedValue === undefined) {
-      if (this.def.default !== undefined) {
-        if (this.def.default instanceof Function) {
-          this.editedValue = this.def.default(this.props)
-        } else {
-          this.editedValue = this.def.default
-        }
-      }
-    }
     if (this.$children[0]) {
       if (this.$children[0].focus) {
         this.$children[0].focus()

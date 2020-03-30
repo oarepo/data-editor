@@ -5,13 +5,10 @@ div
 
 <script>
 import Vue from 'vue'
-import DataEditorComponent from '../../library/components/DataEditorComponent'
 import DialogWithPropertyComponent from './DialogWithPropertyComponent'
-// import DialogComponent from './DialogComponent'
 
 export default {
   name: 'non-existing-complex-array-dialog-edit',
-  components: { DataEditorComponent },
   data: function () {
     return {
       record: {},

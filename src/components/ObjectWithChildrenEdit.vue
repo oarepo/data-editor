@@ -4,11 +4,10 @@ div
 </template>
 
 <script>
-import DataEditorComponent from '../../library/components/DataEditorComponent'
+import Vue from 'vue'
 
 export default {
   name: 'object-with-children-edit',
-  components: { DataEditorComponent },
   data: function () {
     return {
       record: {},
@@ -46,7 +45,11 @@ export default {
         }
       }
       if (op === 'replace') {
-        context[prop] = value
+        if (context[prop] === undefined) {
+          Vue.set(context, prop, value)
+        } else {
+          context[prop] = value
+        }
       }
       if (op === 'remove') {
         if (Array.isArray(context)) {

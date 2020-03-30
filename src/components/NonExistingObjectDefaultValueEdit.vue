@@ -5,11 +5,9 @@ div
 
 <script>
 import Vue from 'vue'
-import DataEditorComponent from '../../library/components/DataEditorComponent'
 
 export default {
   name: 'non-existing-object-default-value-edit',
-  components: { DataEditorComponent },
   data: function () {
     return {
       record: {},

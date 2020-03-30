@@ -4,11 +4,10 @@ div
 </template>
 
 <script>
-import DataEditorComponent from '../../library/components/DataEditorComponent'
+import Vue from 'vue'
 
 export default {
   name: 'tree-edit',
-  components: { DataEditorComponent },
   data: function () {
     return {
       record: {
@@ -42,6 +41,8 @@ export default {
       if (op === 'add') {
         if (Array.isArray(context)) {
           context.push(value)
+        } else {
+          Vue.set(context, prop, value)
         }
       }
       if (op === 'replace') {

@@ -6,7 +6,6 @@ div
 <script>
 import DialogWithPropertyComponent from './DialogWithPropertyComponent'
 import Vue from 'vue'
-import DataEditorComponent from '../../library/components/DataEditorComponent'
 
 function defaultValue ({ context, layout }) {
   for (const prop of 'abcdefghijklmnopqrstuvwxyz'.split('')) {
@@ -18,7 +17,6 @@ function defaultValue ({ context, layout }) {
 
 export default {
   name: 'additional-props-edit',
-  components: { DataEditorComponent },
   data: function () {
     return {
       record: {

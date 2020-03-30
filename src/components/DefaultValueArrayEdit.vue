@@ -4,11 +4,9 @@ div
 </template>
 
 <script>
-import DataEditorComponent from '../../library/components/DataEditorComponent'
 
 export default {
   name: 'default-value-array-edit',
-  components: { DataEditorComponent },
   data: function () {
     return {
       record: {

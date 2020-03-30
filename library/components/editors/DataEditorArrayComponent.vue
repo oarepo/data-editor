@@ -1,6 +1,6 @@
 <template lang="pug">
 component(:is="rootComponent")
-  data-renderer-array-component(:value="value" :layout="layout" :paths="paths" :schema="schema" :renderer-components="rendererComponents" :extraProps="extraProps")
+  data-renderer-array-component(:value="value" :layout="layout" :paths="paths" :schema="schema" :path-layouts="pathLayouts" :renderer-components="rendererComponents" :extraProps="extraProps")
   div(v-if="!editing")
     q-btn(icon="playlist_add" dense flat color="primary" @click="openDialog()" v-if="hasDialog")
     q-btn(icon="playlist_add" dense flat color="primary" @click="beforeStart()" v-if="!hasDialog")

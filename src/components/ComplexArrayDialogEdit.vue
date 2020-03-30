@@ -6,11 +6,9 @@ div
 <script>
 import Vue from 'vue'
 import DialogComponent from './DialogComponent'
-import DataEditorComponent from '../../library/components/DataEditorComponent'
 
 export default {
   name: 'complex-array-dialog-edit',
-  components: { DataEditorComponent },
   data: function () {
     return {
       record: {
@@ -27,8 +25,7 @@ export default {
       layout: {
         children: [
           {
-            prop: 'contact',
-            additionalProps: { dialogComponent: DialogComponent }
+            prop: 'contact'
           }
         ]
       }

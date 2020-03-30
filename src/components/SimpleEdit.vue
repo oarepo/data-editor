@@ -1,7 +1,6 @@
 <template lang="pug">
 div
   data-editor-component(:record="record" :options="options" :layout="layout")
-  // data-renderer(:renderer-components="currentRendererComponents")
 </template>
 
 <script>
@@ -38,11 +37,7 @@ export default {
         Vue.set(context, prop, value)
       }
       if (op === 'replace') {
-        if (context[prop] === undefined) {
-          Vue.set(context, prop, value)
-        } else {
-          context[prop] = value
-        }
+        context[prop] = value
       }
     },
     cancel (props) {

@@ -4,12 +4,10 @@ div
 </template>
 
 <script>
-import DataEditorComponent from '../../library/components/DataEditorComponent'
 import Vue from 'vue'
 
 export default {
   name: 'complex-array-with-layout-edit',
-  components: { DataEditorComponent },
   data: function () {
     return {
       record: {

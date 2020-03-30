@@ -1,6 +1,6 @@
 <template lang="pug">
 div
-  data-renderer.col(:data="record" :layout="layout" :schema="options.schema" :renderer-components="currentEditorComponents" v-bind="currentOptions")
+  data-renderer.col(:data="record" :layout="layout" :schema="options.schema" :path-layouts="pathLayouts" :renderer-components="currentEditorComponents" v-bind="currentOptions")
 </template>
 
 <style>
@@ -12,7 +12,8 @@ export default {
   props: {
     layout: Object,
     record: Object,
-    options: Object
+    options: Object,
+    pathLayouts: Object
   },
   name: 'data-editor-component',
   computed: {
@@ -23,7 +24,6 @@ export default {
       if (opts.extraProps === undefined) {
         opts.extraProps = {}
       }
-      opts.extraProps.dialogComponent = this.dialogComponent
       return opts
     },
     currentEditorComponents () {

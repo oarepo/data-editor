@@ -5,11 +5,9 @@ div
 
 <script>
 import Vue from 'vue'
-import DataEditorComponent from '../../library/components/DataEditorComponent'
 
 export default {
   name: 'object-with-no-values-edit',
-  components: { DataEditorComponent },
   data: function () {
     return {
       record: {},
@@ -38,10 +36,12 @@ export default {
           Vue.set(context, prop, value)
         }
       }
-      if (context[prop] === undefined) {
-        Vue.set(context, prop, value)
-      } else {
-        context[prop] = value
+      if (op === 'replace') {
+        if (context[prop] === undefined) {
+          Vue.set(context, prop, value)
+        } else {
+          context[prop] = value
+        }
       }
       if (op === 'remove') {
         if (Array.isArray(context)) {

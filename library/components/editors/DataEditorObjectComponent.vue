@@ -1,6 +1,6 @@
 <template lang="pug">
 component(:is="rootComponent")
-  data-renderer-object-component(:value="value" :layout="layout" :paths="paths" :schema="schema" :renderer-components="rendererComponents" :extraProps="extraProps")
+  data-renderer-object-component(:value="value" :layout="layout" :paths="paths" :schema="schema" :path-layouts="pathLayouts" :renderer-components="rendererComponents" :extraProps="extraProps")
   div
     q-btn(icon="playlist_add" dense flat color="primary" @click="beforeStart()" v-if="hasDefaultValue")
     q-btn(icon="playlist_add" dense flat color="primary" @click="openDialog()" v-if="hasDialog")

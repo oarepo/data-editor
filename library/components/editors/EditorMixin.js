@@ -28,6 +28,9 @@ export default {
       return Array.isArray(this.context)
     },
     rootComponent () {
+      if (this.layout === undefined) {
+        return 'div'
+      }
       return this.layout.value.element
     }
   },
