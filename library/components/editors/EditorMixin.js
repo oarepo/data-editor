@@ -1,5 +1,3 @@
-// import { RendererMixin } from '@oarepo/data-renderer'
-
 export default {
   name: 'editor-mixin',
   props: {

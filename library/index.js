@@ -6,8 +6,8 @@ import DataEditorBooleanComponent from './components/editors/DataEditorBooleanCo
 import DataEditorUndefinedComponent from './components/editors/DataEditorUndefinedComponent.vue'
 import DataEditorArrayComponent from './components/editors/DataEditorArrayComponent.vue'
 import DataEditorObjectComponent from './components/editors/DataEditorObjectComponent.vue'
-import DataEditorInputComponent from './components/editors/DataEditorInputComponent'
-import DataEditorCheckboxComponent from './components/editors/DataEditorCheckboxComponent'
+import DataEditorInputComponent from './components/editors/DataEditorInputComponent.vue'
+import DataEditorCheckboxComponent from './components/editors/DataEditorCheckboxComponent.vue'
 
 export default {
   install (Vue, options) {
