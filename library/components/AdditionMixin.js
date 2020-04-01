@@ -1,3 +1,5 @@
+import Vue from 'vue'
+
 export default {
   computed: {
     hasDialog () {
@@ -47,9 +49,16 @@ export default {
         this.addDefaultValue(dv)
       } else {
         this.editing = true
-        this.$nextTick(() => {
-          this.startEditing()
-        })
+        await Vue.nextTick()
+        if (this.$refs.editor) {
+          const input = this.$refs.editor.$refs.input
+          if (input.focus) {
+            input.focus()
+          }
+          if (input.select) {
+            input.select()
+          }
+        }
       }
     },
     stopEditing () {
