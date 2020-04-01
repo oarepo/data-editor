@@ -13,9 +13,9 @@ export default {
   data: function () {
     return {
       record: {
-        Contact: {
-          Phone: '+420123123123',
-          Email: 'mary.black@gmail.com'
+        contact: {
+          phone: '+420123123123',
+          pmail: 'mary.black@gmail.com'
         }
       },
       options: {
