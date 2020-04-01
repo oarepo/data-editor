@@ -17,7 +17,6 @@ import SimpleEdit from '../../src/components/SimpleEdit'
 import NonExistingObjectDefaultValueEdit from '../../src/components/NonExistingObjectDefaultValueEdit'
 import DefaultValueArrayEdit from '../../src/components/DefaultValueArrayEdit'
 import ArrayEdit from '../../src/components/ArrayEdit'
-import NonExistingObjectDialogEdit from '../../src/components/NonExistingObjectDialogEdit'
 
 describe('data editor components', () => {
   it('renders DataEditorStringComponent', () => {
