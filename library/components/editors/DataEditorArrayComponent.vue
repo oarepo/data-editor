@@ -5,7 +5,7 @@ component(:is="rootComponent")
     q-btn(icon="playlist_add" dense flat color="primary" @click="openDialog()" v-if="hasDialog")
     q-btn(icon="playlist_add" dense flat color="primary" @click="beforeStart()" v-if="!hasDialog")
   div.row(v-else)
-    q-input(@input="valueInput" ref="editor")
+    q-input(@input="valueInput" ref="editor" autofocus)
     div.q-mt-sm
       q-btn(icon="done" color="primary" @click="addItem" outline) Uložit
       q-btn.q-ml-sm(icon="clear" color="grey" @click="onCancel" outline) Storno
