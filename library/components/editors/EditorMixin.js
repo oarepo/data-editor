@@ -16,7 +16,8 @@ export default {
       type: String,
       default: 'inline'
     },
-    dialogComponent: Object
+    dialogComponent: Object,
+    level: Number
   },
   computed: {
     currentValue () {
