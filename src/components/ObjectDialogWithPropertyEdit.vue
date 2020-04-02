@@ -1,6 +1,6 @@
 <template lang="pug">
 div
-  oarepo-record-inplace-editor(:record="record" :options="options" :layout="layout")
+  data-editor-component(:record="record" :options="options" :layout="layout")
 </template>
 
 <script>
@@ -11,21 +11,27 @@ export default {
   name: 'object-dialog-with-property-edit',
   data: function () {
     return {
-      record: { a: {} },
+      record: {
+        object: {
+          creator: 'Mary Black'
+        }
+      },
       options: {
         schema: 'table',
-        showEmpty: true,
         extraProps: {
           submit: this.submit,
           cancel: this.cancel
         }
       },
-      layout: [{
-        'path': 'a',
-        'label': 'a',
-        dynamic: true,
-        additionalProps: { dialogComponent: DialogWithPropertyComponent }
-      }]
+      layout: {
+        children: [
+          {
+            prop: 'object',
+            additionalProps: { dialogComponent: DialogWithPropertyComponent },
+            children: [{ prop: 'creator' }]
+          }
+        ]
+      }
     }
   },
   methods: {

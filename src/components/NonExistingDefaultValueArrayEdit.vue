@@ -1,6 +1,6 @@
 <template lang="pug">
 div
-  oarepo-record-inplace-editor(:record="record" :options="options" :layout="layout")
+  data-editor-component(:record="record" :options="options" :layout="layout")
 </template>
 
 <script>
@@ -13,13 +13,21 @@ export default {
       record: {},
       options: {
         schema: 'table',
-        showEmpty: true,
         extraProps: {
           submit: this.submit,
           cancel: this.cancel
         }
       },
-      layout: [{ 'path': 'a', 'label': 'a', defaultValue: () => 8, array: true }]
+      layout: {
+        showEmpty: true,
+        children: [
+          {
+            prop: 'keywords',
+            additionalProps: { defaultValue: () => 'keyword' },
+            item: {}
+          }
+        ]
+      }
     }
   },
   methods: {

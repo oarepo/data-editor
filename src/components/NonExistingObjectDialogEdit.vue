@@ -1,11 +1,11 @@
 <template lang="pug">
 div
-  oarepo-record-inplace-editor(:record="record" :options="options" :layout="layout")
+  data-editor-component(:record="record" :options="options" :layout="layout")
 </template>
 
 <script>
 import Vue from 'vue'
-import DialogComponent from './DialogComponent'
+import DialogWithPropertyComponent from './DialogWithPropertyComponent'
 
 export default {
   name: 'non-existing-object-dialog-edit',
@@ -14,13 +14,21 @@ export default {
       record: {},
       options: {
         schema: 'table',
-        showEmpty: true,
         extraProps: {
           submit: this.submit,
           cancel: this.cancel
         }
       },
-      layout: [{ 'path': 'a', 'label': 'a', dialogComponent: DialogComponent, dynamic: true }]
+      layout: {
+        showEmpty: true,
+        children: [
+          {
+            prop: 'object',
+            additionalProps: { dialogComponent: DialogWithPropertyComponent },
+            children: []
+          }
+        ]
+      }
     }
   },
   methods: {

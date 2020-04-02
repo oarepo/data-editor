@@ -1,34 +1,32 @@
+import Vue from 'vue'
+
 export default {
-  props: {
-    context: [Object, Array],
-    layout: Object,
-    data: Object,
-    paths: Array,
-    value: {},
-    url: String,
-    values: Array,
-    pathValues: Array,
-    pathLayouts: [Object, Array],
-    schema: String,
-    currentSchema: Object,
-    valueIndex: Number,
-    parentJSONPointer: String,
-    submit: Function,
-    cancel: Function,
-    dialogComponent: Object
-  },
   computed: {
     hasDialog () {
       return !!this.currentDialogComponent
     },
+    currentDialogComponent () {
+      const layout = this.layout
+      if (layout.additionalProps && layout.additionalProps.dialogComponent) {
+        return layout.additionalProps.dialogComponent
+      }
+      if (this.extraProps.dialogComponent) {
+        return this.extraProps.dialogComponent
+      }
+      if (layout.dialogComponent) {
+        return layout.dialogComponent
+      }
+    },
     hasDefaultValue () {
       return !!this.defaultValue
     },
-    currentValue () {
-      return this.context[this.layout.path]
-    },
     defaultValue () {
-      const dv = this.layout.defaultValue
+      let dv
+      if (this.layout.additionalProps && this.layout.additionalProps.defaultValue) {
+        dv = this.layout.additionalProps.defaultValue
+      } else if (this.layout.defaultValue) {
+        dv = this.layout.defaultValue
+      }
       if (dv === null || dv === undefined) {
         return dv
       }
@@ -37,12 +35,6 @@ export default {
       } else {
         return dv
       }
-    },
-    currentJSONPointer () {
-      return `${this.parentJSONPointer}/${this.layout.path}`
-    },
-    currentDialogComponent () {
-      return this.layout.dialogComponent || this.dialogComponent
     }
   },
   data: function () {
@@ -51,15 +43,22 @@ export default {
     }
   },
   methods: {
-    async startEditing () {
+    async beforeStart () {
       const dv = await this.defaultValue
       if (dv) {
         this.addDefaultValue(dv)
       } else {
         this.editing = true
-        this.$nextTick(() => {
-          this.$refs.edit.startEditing()
-        })
+        await Vue.nextTick()
+        if (this.$refs.editor) {
+          const input = this.$refs.editor.$refs.input
+          if (input.focus) {
+            input.focus()
+          }
+          if (input.select) {
+            input.select()
+          }
+        }
       }
     },
     stopEditing () {

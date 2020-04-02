@@ -1,27 +1,29 @@
 <template lang="pug">
 div
-  oarepo-record-inplace-editor(:record="record" :options="options")
+  data-editor-component(:record="record" :options="options" :layout="layout")
 </template>
 
 <script>
+
 export default {
   name: 'default-value-array-edit',
   data: function () {
     return {
       record: {
-        defaultValueArray: [1, 2]
+        keywords: ['first keyword', 'second keyword']
       },
       options: {
         schema: 'table',
         extraProps: {
           submit: this.submit,
           cancel: this.cancel
-        },
-        pathLayouts: {
-          defaultValueArray: {
-            defaultValue: () => 8
-          }
         }
+      },
+      layout: {
+        children: [{
+          prop: 'keywords',
+          additionalProps: { defaultValue: () => 'third keyword' }
+        }]
       }
     }
   },

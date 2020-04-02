@@ -16,6 +16,7 @@ import NonExistingDefaultValueComplexArrayEdit from '../components/NonExistingDe
 import NonExistingObjectDefaultValueEdit from '../components/NonExistingObjectDefaultValueEdit'
 import ObjectDialogWithPropertyEdit from '../components/ObjectDialogWithPropertyEdit'
 import BooleanEdit from '../components/BooleanEdit'
+import ComplexArrayWithLayoutEdit from '../components/ComplexArrayWithLayoutEdit'
 
 Vue.use(VueRouter)
 
@@ -104,6 +105,11 @@ const routes = [
     path: '/boolean-edit',
     name: 'boolean-edit',
     component: BooleanEdit
+  },
+  {
+    path: '/complex-array-with-layout-edit',
+    name: 'complex-array-with-layout-edit',
+    component: ComplexArrayWithLayoutEdit
   }
 ]
 

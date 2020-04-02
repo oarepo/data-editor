@@ -1,15 +1,16 @@
 <template lang="pug">
 div
-  oarepo-record-inplace-editor(:record="record" :options="options")
+  data-editor-component(:record="record" :options="options" :layout="layout")
 </template>
 
 <script>
+import Vue from 'vue'
 export default {
   name: 'array-edit',
   data: function () {
     return {
       record: {
-        array: [1, 2]
+        keywords: ['first keyword', 'second keyword']
       },
       options: {
         schema: 'table',
@@ -17,6 +18,21 @@ export default {
           submit: this.submit,
           cancel: this.cancel
         }
+      },
+      layout: {
+        children: [
+          {
+            prop: 'keywords',
+            label: {
+              label: 'keywordArray'
+            },
+            item: {
+              label: {
+                label: 'keyword'
+              }
+            }
+          }
+        ]
       }
     }
   },
@@ -30,7 +46,7 @@ export default {
         }
       }
       if (op === 'replace') {
-        context[prop] = value
+        Vue.set(context, prop, value)
       }
       if (op === 'remove') {
         if (Array.isArray(context)) {

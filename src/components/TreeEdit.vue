@@ -1,27 +1,38 @@
 <template lang="pug">
 div
-  oarepo-record-inplace-editor(:record="record" :options="options")
+  data-editor-component(:record="record" :options="options" :layout="layout")
 </template>
 
 <script>
+import Vue from 'vue'
+
 export default {
   name: 'tree-edit',
   data: function () {
     return {
       record: {
-        tree: [{ a: [1, 2, 3] }, { b: [1, 2, 3] }, { c: [5] }, { d: { e: 1, f: 2 } }]
+        object: [
+          { creator: 'Mary Black' },
+          {
+            contact: [
+              { phone: '+420123123123' },
+              { email: ['mary.black@gmail.com'] }]
+          }]
       },
       options: {
         schema: 'table',
         extraProps: {
           submit: this.submit,
           cancel: this.cancel
-        },
-        pathLayouts: {
-          tree: {
-            defaultValue: () => ({ d: [1, 2, 3] })
-          }
         }
+      },
+      layout: {
+        children: [
+          {
+            prop: 'object',
+            additionalProps: { defaultValue: () => ({ keywords: ['first keyword', 'second keyword'] }) }
+          }
+        ]
       }
     }
   },
@@ -30,6 +41,8 @@ export default {
       if (op === 'add') {
         if (Array.isArray(context)) {
           context.push(value)
+        } else {
+          Vue.set(context, prop, value)
         }
       }
       if (op === 'replace') {

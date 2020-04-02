@@ -1,9 +1,11 @@
 <template lang="pug">
 div
-  oarepo-record-inplace-editor(:record="record" :options="options" :layout="layout")
+  data-editor-component(:record="record" :options="options" :layout="layout")
 </template>
 
 <script>
+import Vue from 'vue'
+
 export default {
   name: 'object-with-children-edit',
   data: function () {
@@ -14,25 +16,23 @@ export default {
         extraProps: {
           submit: this.submit,
           cancel: this.cancel
-        },
-        showEmpty: true
+        }
       },
-      layout: [
-        { 'path': 'a', 'label': 'a' },
-        { 'path': 'b', 'label': 'b' },
-        { 'path': 'c', 'label': 'c' },
-        {
-          children: [
-            { 'path': 'a', 'label': 'a' },
-            { 'path': 'b', 'label': 'b' },
-            {
-              children: [
-                { 'path': 'a', 'label': 'a' },
-                { 'path': 'b', 'label': 'b' }
-              ]
-            }
-          ]
-        }]
+      layout: {
+        showEmpty: true,
+        children: [
+          {
+            prop: 'object',
+            children: [
+              { prop: 'creator' },
+              {
+                prop: 'contact',
+                children: [
+                  { prop: 'phone' },
+                  { prop: 'email' }]
+              }]
+          }]
+      }
     }
   },
   methods: {
@@ -45,7 +45,11 @@ export default {
         }
       }
       if (op === 'replace') {
-        context[prop] = value
+        if (context[prop] === undefined) {
+          Vue.set(context, prop, value)
+        } else {
+          context[prop] = value
+        }
       }
       if (op === 'remove') {
         if (Array.isArray(context)) {

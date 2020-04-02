@@ -5,27 +5,37 @@ div
 
 <script>
 import Vue from 'vue'
-import DialogComponent from './DialogComponent'
 
 export default {
-  name: 'complex-array-dialog-edit',
+  name: 'complex-array-with-layout-edit',
   data: function () {
     return {
       record: {
-        contact: [{ phone: '+420123123124' }, { email: 'mary.black@gmail.com' }]
+        contact: [
+          { phone: '+420123123124' },
+          { phone: '+420123123125' },
+          { phone: '+4201231231246' }]
       },
       options: {
         schema: 'table',
         extraProps: {
           submit: this.submit,
-          cancel: this.cancel,
-          dialogComponent: DialogComponent
+          cancel: this.cancel
         }
       },
       layout: {
         children: [
           {
-            prop: 'contact'
+            prop: 'contact',
+            label: {
+              label: 'listOfContacts'
+            },
+            item: {
+              label: {
+                label: 'phoneNumber'
+              },
+              prop: 'phone'
+            }
           }
         ]
       }

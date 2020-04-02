@@ -53,38 +53,39 @@ export default async ({ Vue, store, router }) => {
 
 ## Usage
 
-To use data editor, add ``oarepo-record-inplace-editor`` to template. ``oarepo-record-inplace-editor`` component comes from data renderer, more info here: LINK``record``, ``options``, ``layout`` and ``dialogComponent`` can be passed to ``oarepo-record-inplace-editor``.
+To use data editor, add ``data-editor-component`` to template. ``data-editor-component`` accepts``record``, ``options``, ``layout`` and ``pathLayouts`` and renders interface to edit received data with buttons to edit, add and remove buttons based on data type.
+Dialog components and default values can be passed to ``data-editor``
 
 #### Record
 
  ``record`` contains json data to be passed to data-editor.
- * simple object: ```record: {a: 1}```
- * simple array: ```record: [1, 2]```
- * complex array: ```record: [{ a: 1 }}, { b: 2 }]```
+ * simple object: ```record: { object: { a: 1 } }```
+ * simple array: ```record: { array: [1, 2] }```
+ * complex array: ```record: { array: [{ a: 1 }}, { b: 2 }] }```
  * empty record: ```record: {}```
 
 #### Options
 
-``options`` may consist of schema, extraProps, pathLayouts, showEmpty.
+``options`` may consist of schema, extraProps.
  * ``schema`` of rendered data (inline, block, table, flex), defaults to table
     * table ```options: { schema: table }```
     * inline ```options: { schema: inline }```
  * ``extraProps`` (submit, cancel method for data editor)
     * ```options: { extraProps: { submit: { submit: this.submit, cancel: this.cancel } } }```
- * ``pathLayouts`` (to associate default value with arrays)
-    * simple default value ```options: { pathLayouts: { simpleArray: defaultValue: () => 1 } }```
-    * complex default value ```options: { pathLayouts: { complexArray: defaultValue: () => { a: 1 } } }```
- * ``showEmpty`` must be set to true in order for empty records to be shown, default value is false, for example can be used in combination with combination with dialog component to show empty record with button to add new item 
-    * show empty records ```options: { showEmpty: true }```
 
 #### Layout
 
-``layout`` can be used to define layout of empty record, to associate dialog components or default values with paths, to define children.
-Layout is described in more detail here: LINK
+``layout`` can be used to define layout of empty record, to associate dialog components or default values with props, to define children.
  * basic layout: ```layout: [{ 'path': 'a', 'label': 'a' }]```
  * layout with dialog component: ```layout: [{ 'path': 'a', 'label': 'a', dialogComponent: DialogComponent, dynamic: true }]```
  * layout with default value: ```layout: [{ 'path': 'a', 'label': 'a', defaultValue: () => 1, dynamic: true }]```
  * layout with default value as a function: ```layout: [{ 'path': 'a', 'label': 'a', defaultValue: defaultValue, dynamic: true }]```
+ 
+``pathLayouts`` can be used to associate dialog components or default values with objects or arrays regardless of their position within layout.
+    * simple default value ```options: { pathLayouts: { simpleArray: defaultValue: () => 1 } }```
+    * complex default value ```options: { pathLayouts: { complexArray: defaultValue: () => { a: 1 } } }```
+    
+Layout and pathLayouts are described in more detail here: LINK
 
 #### Dialog component
 
@@ -100,16 +101,21 @@ Example of a simple object. Src at [/src/components/SimpleEdit.vue](https://gith
 ```vue
 <template lang="pug">
 div
-  oarepo-record-inplace-editor(:record="record" :options="options")
+  data-editor-component(:record="record" :options="options" :layout="layout")
 </template>
+
 <script>
+import Vue from 'vue'
+
 export default {
   name: 'simple-edit',
   data: function () {
     return {
       record: {
-        firstname: 'John', 
-        lastname: 'Doe'
+        Contact: {
+          Phone: '+420123123123',
+          Email: 'mary.black@gmail.com'
+        }
       },
       options: {
         schema: 'table',
@@ -117,12 +123,25 @@ export default {
           submit: this.submit,
           cancel: this.cancel
         }
+      },
+      layout: {
+        showEmpty: true
       }
     }
   },
   methods: {
-    submit ({ context, prop, value }) {
-      context[prop] = value
+    submit ({ context, prop, value, op }) {
+      isNaN(value)
+      if (op === 'add') {
+        Vue.set(context, prop, value)
+      }
+      if (op === 'replace') {
+        if (context[prop] === undefined) {
+          Vue.set(context, prop, value)
+        } else {
+          context[prop] = value
+        }
+      }
     },
     cancel (props) {
       console.log('cancelling')
@@ -138,15 +157,17 @@ Example of a simple array. Src at [/src/components/SimpleArray.vue](https://gith
 ```vue
 <template lang="pug">
 div
-  oarepo-record-inplace-editor(:record="record" :options="options")
+  data-editor-component(:record="record" :options="options" :layout="layout")
 </template>
+
 <script>
+import Vue from 'vue'
 export default {
   name: 'array-edit',
   data: function () {
     return {
       record: {
-        array: [1, 2]
+        keywords: ['first keyword', 'second keyword']
       },
       options: {
         schema: 'table',
@@ -154,6 +175,21 @@ export default {
           submit: this.submit,
           cancel: this.cancel
         }
+      },
+      layout: {
+        children: [
+          {
+            prop: 'keywords',
+            label: {
+              label: 'keywordArray'
+            },
+            item: {
+              label: {
+                label: 'keyword'
+              }
+            }
+          }
+        ]
       }
     }
   },
@@ -167,7 +203,7 @@ export default {
         }
       }
       if (op === 'replace') {
-        context[prop] = value
+        Vue.set(context, prop, value)
       }
       if (op === 'remove') {
         if (Array.isArray(context)) {
@@ -192,27 +228,30 @@ Example of a complex array with default value for newly added items. Src at [/sr
 ```vue
 <template lang="pug">
 div
-  oarepo-record-inplace-editor(:record="record" :options="options")
+  data-editor-component(:record="record" :options="options" :layout="layout")
 </template>
+
 <script>
+
 export default {
   name: 'default-value-complex-array-edit',
   data: function () {
     return {
       record: {
-        complexArray: [{ a: 1 }, { b: 2 }, { c: 3 }]
+        contact: [{ email: 1 }, { phone: '+420123123123' }]
       },
       options: {
         schema: 'table',
         extraProps: {
           submit: this.submit,
           cancel: this.cancel
-        },
-        pathLayouts: {
-          complexArray: {
-            defaultValue: () => ({ a: '1' })
-          }
         }
+      },
+      layout: {
+        children: [{
+          prop: 'contact',
+          additionalProps: { defaultValue: () => ({ phone: '+420123123124' }) }
+        }]
       }
     }
   },
@@ -250,7 +289,7 @@ Example of a complex array with dialog for addition of new items. Src at [/src/c
 ```vue
 <template lang="pug">
 div
-  oarepo-record-inplace-editor(:record="record" :options="options" :dialog-component="dialogComponent")
+  data-editor-component(:record="record" :options="options" :layout="layout")
 </template>
 
 <script>
@@ -262,17 +301,23 @@ export default {
   data: function () {
     return {
       record: {
-        complexArray: [{ a: 1 }, { a: 2 }, { a: 3 }]
+        contact: [{ phone: '+420123123124' }, { email: 'mary.black@gmail.com' }]
       },
       options: {
         schema: 'table',
-        showEmpty: true,
         extraProps: {
           submit: this.submit,
-          cancel: this.cancel
+          cancel: this.cancel,
+          dialogComponent: DialogComponent
         }
       },
-      dialogComponent: DialogComponent
+      layout: {
+        children: [
+          {
+            prop: 'contact'
+          }
+        ]
+      }
     }
   },
   methods: {
@@ -309,12 +354,12 @@ Example of an empty record with layout and dialog. Src at [/src/components/NonEx
 ```vue
 <template lang="pug">
 div
-  oarepo-record-inplace-editor(:record="record" :options="options" :layout="layout")
+  data-editor-component(:record="record" :options="options" :layout="layout")
 </template>
 
 <script>
 import Vue from 'vue'
-import DialogComponent from './DialogComponent'
+import DialogWithPropertyComponent from './DialogWithPropertyComponent'
 
 export default {
   name: 'non-existing-object-dialog-edit',
@@ -323,13 +368,21 @@ export default {
       record: {},
       options: {
         schema: 'table',
-        showEmpty: true,
         extraProps: {
           submit: this.submit,
           cancel: this.cancel
         }
       },
-      layout: [{ 'path': 'a', 'label': 'a', dialogComponent: DialogComponent, dynamic: true }]
+      layout: {
+        showEmpty: true,
+        children: [
+          {
+            prop: 'object',
+            additionalProps: { dialogComponent: DialogWithPropertyComponent },
+            children: []
+          }
+        ]
+      }
     }
   },
   methods: {
@@ -360,7 +413,7 @@ q-dialog(ref="dialog" @hide="onDialogHide")
   q-card
     q-card-section
       q-form(ref="form")
-        q-input(label="a" v-model="a")
+        q-input(label="value" v-model="value")
     q-card-actions(align="right")
       q-btn(color="primary" type="submit" label="OK" @click="onOKClick")
       q-btn(color="primary" label="Cancel" @click="onCancelClick")
@@ -371,7 +424,7 @@ export default {
   name: 'dialog-component',
   data: function () {
     return {
-      a: null
+      value: null
     }
   },
   props: {
@@ -394,7 +447,7 @@ export default {
     },
     async onOKClick () {
       if (await this.$refs.form.validate()) {
-        this.$emit('ok', { a: this.a })
+        this.$emit('ok', { phone: this.value })
         this.hide()
       }
     },
@@ -408,47 +461,46 @@ export default {
 
 #### Empty object with dialog component and default value function
 
-Example of object with default value as function and dialog component. (src at [/src/components/AdditionalPropsEdit.vue](https://github.com/oarepo/data-editor/blob/master/src/components/AdditionalPropsEdit.vue)): 
+Example of object with default value as a function and dialog component. (src at [/src/components/AdditionalPropsEdit.vue](https://github.com/oarepo/data-editor/blob/master/src/components/AdditionalPropsEdit.vue)): 
 ```vue
 <template lang="pug">
 div
-  oarepo-record-inplace-editor(:record="record" :options="options" :layout="layout")
+  data-editor-component(:record="record" :options="options" :layout="layout")
 </template>
 
 <script>
 import DialogWithPropertyComponent from './DialogWithPropertyComponent'
 import Vue from 'vue'
+
 function defaultValue ({ context, layout }) {
   for (const prop of 'abcdefghijklmnopqrstuvwxyz'.split('')) {
-    if (context[layout.path][prop] === undefined) {
-      return { prop: prop, value: 1 }
+    if (context[layout.prop][prop] === undefined) {
+      return { prop: prop, value: 'keyword' }
     }
   }
 }
+
 export default {
   name: 'additional-props-edit',
   data: function () {
     return {
       record: {
-        a: { a: 1 },
-        b: { b: 2 },
-        c: { c: 3 },
-        d: {},
-        e: {}
+        creator: { name: 'Mary Black' },
+        contact: { phone: '+420123123124' },
+        keywords: {}
       },
-      layout: [
-        { 'path': 'a', 'label': 'a', dynamic: true, additionalProps: { dialogComponent: DialogWithPropertyComponent } },
-        { 'path': 'b', 'label': 'b', dynamic: true, additionalProps: { dialogComponent: DialogWithPropertyComponent } },
-        { 'path': 'c', 'label': 'c', dynamic: true, additionalProps: { dialogComponent: DialogWithPropertyComponent } },
-        { 'path': 'd', 'label': 'd', dynamic: true, additionalProps: { dialogComponent: DialogWithPropertyComponent } },
-        { 'path': 'e', 'label': 'e', dynamic: true, additionalProps: { defaultValue: defaultValue } }],
+      layout: {
+        children: [
+          { prop: 'creator', additionalProps: { dialogComponent: DialogWithPropertyComponent } },
+          { prop: 'contact', additionalProps: { dialogComponent: DialogWithPropertyComponent } },
+          { prop: 'keywords', additionalProps: { defaultValue: defaultValue } }]
+      },
       options: {
         schema: 'table',
         extraProps: {
           submit: this.submit,
           cancel: this.cancel
-        },
-        showEmpty: true
+        }
       }
     }
   },
@@ -486,28 +538,39 @@ Example of record as a tree with a complex default value for addition of new ite
 ```vue
 <template lang="pug">
 div
-  oarepo-record-inplace-editor(:record="record" :options="options")
+  data-editor-component(:record="record" :options="options" :layout="layout" :path-layouts="pathLayouts")
 </template>
 
 <script>
+import Vue from 'vue'
+
 export default {
   name: 'tree-edit',
   data: function () {
     return {
       record: {
-        tree: [{ a: [1, 2, 3] }, { b: [1, 2, 3] }, { c: [5] }, { d: { e: 1, f: 2 } }]
+        object: [
+          { creator: 'Mary Black' },
+          {
+            contact: [
+              { phone: '+420123123123' },
+              { email: ['mary.black@gmail.com'] }]
+          }]
       },
       options: {
         schema: 'table',
         extraProps: {
           submit: this.submit,
           cancel: this.cancel
-        },
-        pathLayouts: {
-          tree: {
-            defaultValue: () => ({ d: [1, 2, 3] })
-          }
         }
+      },
+      layout: {
+        children: [
+          {
+            prop: 'object',
+            additionalProps: { defaultValue: () => ({ keywords: ['first keyword', 'second keyword'] }) }
+          }
+        ]
       }
     }
   },
@@ -516,6 +579,8 @@ export default {
       if (op === 'add') {
         if (Array.isArray(context)) {
           context.push(value)
+        } else {
+          Vue.set(context, prop, value)
         }
       }
       if (op === 'replace') {

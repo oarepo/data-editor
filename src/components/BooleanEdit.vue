@@ -1,6 +1,6 @@
 <template lang="pug">
 div
-  oarepo-record-inplace-editor(:record="record" :options="options" :layout="layout")
+  data-editor-component(:record="record" :options="options" :layout="layout")
 </template>
 
 <script>
@@ -11,44 +11,18 @@ export default {
   data: function () {
     return {
       record: {
-        a: true,
-        b: false,
-        e: []
+        creator: 'Mary Black',
+        finished: true,
+        published: false
       },
       options: {
         schema: 'table',
         extraProps: {
           submit: this.submit,
           cancel: this.cancel
-        },
-        showEmpty: true,
-        pathLayouts: {
-          c: {
-            defaultValue: () => true
-          },
-          d: {
-            defaultValue: true
-          },
-          e: {
-            defaultValue: () => ({ a: false })
-          },
-          f: {
-            defaultValue: () => false
-          },
-          g: {
-            defaultValue: false
-          }
         }
       },
-      layout: [
-        { 'path': 'a', 'label': 'a' },
-        { 'path': 'b', 'label': 'b' },
-        { 'path': 'c', 'label': 'c' },
-        { 'path': 'd', 'label': 'd' },
-        { 'path': 'e', 'label': 'e', array: true, dynamic: true },
-        { 'path': 'f', 'label': 'f' },
-        { 'path': 'g', 'label': 'g' }
-      ]
+      layout: {}
     }
   },
   methods: {

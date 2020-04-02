@@ -1,42 +1,41 @@
 <template lang="pug">
 div
-  oarepo-record-inplace-editor(:record="record" :options="options" :layout="layout")
+  data-editor-component(:record="record" :options="options" :layout="layout")
 </template>
 
 <script>
 import DialogWithPropertyComponent from './DialogWithPropertyComponent'
 import Vue from 'vue'
+
 function defaultValue ({ context, layout }) {
   for (const prop of 'abcdefghijklmnopqrstuvwxyz'.split('')) {
-    if (context[layout.path][prop] === undefined) {
-      return { prop: prop, value: 1 }
+    if (context[layout.prop][prop] === undefined) {
+      return { prop: prop, value: 'keyword' }
     }
   }
 }
+
 export default {
   name: 'additional-props-edit',
   data: function () {
     return {
       record: {
-        a: { a: 1 },
-        b: { b: 2 },
-        c: { c: 3 },
-        d: {},
-        e: {}
+        creator: { name: 'Mary Black' },
+        contact: { phone: '+420123123124' },
+        keywords: {}
       },
-      layout: [
-        { 'path': 'a', 'label': 'a', dynamic: true, additionalProps: { dialogComponent: DialogWithPropertyComponent } },
-        { 'path': 'b', 'label': 'b', dynamic: true, additionalProps: { dialogComponent: DialogWithPropertyComponent } },
-        { 'path': 'c', 'label': 'c', dynamic: true, additionalProps: { dialogComponent: DialogWithPropertyComponent } },
-        { 'path': 'd', 'label': 'd', dynamic: true, additionalProps: { dialogComponent: DialogWithPropertyComponent } },
-        { 'path': 'e', 'label': 'e', dynamic: true, additionalProps: { defaultValue: defaultValue } }],
+      layout: {
+        children: [
+          { prop: 'creator', additionalProps: { dialogComponent: DialogWithPropertyComponent } },
+          { prop: 'contact', additionalProps: { dialogComponent: DialogWithPropertyComponent } },
+          { prop: 'keywords', additionalProps: { defaultValue: defaultValue } }]
+      },
       options: {
         schema: 'table',
         extraProps: {
           submit: this.submit,
           cancel: this.cancel
-        },
-        showEmpty: true
+        }
       }
     }
   },

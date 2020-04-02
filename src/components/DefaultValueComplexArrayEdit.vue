@@ -1,28 +1,29 @@
 <template lang="pug">
 div
-  oarepo-record-inplace-editor(:record="record" :options="options")
+  data-editor-component(:record="record" :options="options" :layout="layout")
 </template>
 
 <script>
+
 export default {
   name: 'default-value-complex-array-edit',
   data: function () {
     return {
       record: {
-        complexArray: [{ a: 1 }, { b: 2 }, { c: 3 }]
+        contact: [{ email: 1 }, { phone: '+420123123123' }]
       },
       options: {
         schema: 'table',
-        showEmpty: true,
         extraProps: {
           submit: this.submit,
           cancel: this.cancel
-        },
-        pathLayouts: {
-          complexArray: {
-            defaultValue: () => ({ a: '1' })
-          }
         }
+      },
+      layout: {
+        children: [{
+          prop: 'contact',
+          additionalProps: { defaultValue: () => ({ phone: '+420123123124' }) }
+        }]
       }
     }
   },

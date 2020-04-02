@@ -1,6 +1,6 @@
 <template lang="pug">
 div
-  oarepo-record-inplace-editor(:record="record" :options="options" :layout="layout")
+  data-editor-component(:record="record" :options="options" :layout="layout")
 </template>
 
 <script>
@@ -13,20 +13,27 @@ export default {
       record: {},
       options: {
         schema: 'table',
-        showEmpty: true,
         extraProps: {
           submit: this.submit,
           cancel: this.cancel
         }
       },
-      layout: [{ 'path': 'a', 'label': 'a', defaultValue: () => ({ a: '1' }), dynamic: true }]
+      layout: {
+        showEmpty: true,
+        children: [
+          {
+            prop: 'object',
+            additionalProps: { defaultValue: { creator: 'Mary Black' } },
+            children: []
+          }]
+      }
     }
   },
   methods: {
     submit ({ path, context, prop, value, op, pathValues }) {
       if (op === 'add') {
-        if (Array.isArray(context)) {
-          context.push(value)
+        if (Array.isArray(context[prop])) {
+          context[prop].push(value)
         } else {
           Vue.set(context, prop, value)
         }

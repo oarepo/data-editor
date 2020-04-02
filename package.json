@@ -1,7 +1,16 @@
 {
   "name": "@oarepo/data-editor",
-  "version": "1.0.13",
+  "version": "2.0.0",
   "private": false,
+  "keywords": [
+    "ui",
+    "rendering",
+    "editing",
+    "data",
+    "json",
+    "quasar",
+    "components"
+  ],
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "/bin/bash build.sh",
@@ -10,7 +19,7 @@
   },
   "main": "oarepo-data-editor.esm.js",
   "dependencies": {
-    "@oarepo/data-renderer": "^1.15.1",
+    "@oarepo/data-renderer": "^2.3.0",
     "@quasar/extras": "^1.0.0",
     "core-js": "^3.4.4",
     "jsonpath-plus": "^2.0.0",
