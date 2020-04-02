@@ -59,11 +59,11 @@ export default {
       }
       if (value.prop) {
         submittedData.context = this.currentValue
-        submittedData.value = value.value
+        submittedData.value = typeof value.value === 'number' ? parseFloat(value.value) : value.value
         submittedData.prop = value.prop
       } else {
         submittedData.context = this.context
-        submittedData.value = value
+        submittedData.value = typeof value === 'number' ? parseFloat(value) : value
         submittedData.prop = this.prop
       }
       this.editing = false

@@ -58,12 +58,12 @@ export default {
       }
       if (value.prop) {
         let complexValue = {}
-        complexValue[value.prop] = value.value
+        complexValue[value.prop] = typeof value.value === 'number' ? parseFloat(value.value) : value.value
         submittedData.context = this.currentValue
         submittedData.value = complexValue
       } else {
         submittedData.context = this.currentValue
-        submittedData.value = value
+        submittedData.value = typeof value === 'number' ? parseFloat(value) : value
         submittedData.prop = this.prop
       }
       this.editing = false

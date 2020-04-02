@@ -54,7 +54,7 @@ export default {
     async save () {
       const submitData = {
         // path: this.path,
-        value: this.editedValue,
+        value: typeof this.editedValue === 'number' ? parseFloat(this.editedValue) : this.editedValue,
         op: this.patchOperation,
         context: this.context,
         prop: this.prop
