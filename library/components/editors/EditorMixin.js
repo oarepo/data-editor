@@ -65,7 +65,7 @@ export default {
     },
     async onRemove () {
       const removeData = {
-        path: this.currentJsonPointer,
+        // path: this.path,
         op: 'remove',
         context: this.context,
         prop: this.prop,
@@ -74,11 +74,6 @@ export default {
       this.$parent.editing = false
       this.$emit('stop-editing')
       this.extraProps.submit(removeData)
-    },
-    async changeBool (value) {
-      if (this.isBool) {
-        await this.save()
-      }
     }
   }
 }
