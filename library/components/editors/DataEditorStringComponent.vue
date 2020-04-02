@@ -4,7 +4,7 @@ data-editor-generic-component(v-bind="$props" :view="view" :edit="edit")
 
 <script>
 import EditorMixin from './EditorMixin'
-import DataEditorGenericComponent from './DataEditorGenericComponent'
+import DataEditorGenericComponent from './DataEditorGenericComponent.vue'
 
 export default {
   name: 'data-editor-string-component',
