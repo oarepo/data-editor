@@ -3,7 +3,7 @@ q-dialog(ref="dialog" @hide="onDialogHide")
   q-card
     q-card-section
       q-form(ref="form")
-        q-input(label="Property" v-model="prop")
+        q-input(label="Property" v-model="prop" autofocus)
         q-input(label="Value" v-model="value")
       div.text-warning(v-if="errorMessage") {{errorMessage}}
     q-card-actions(align="right")

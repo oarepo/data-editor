@@ -3,7 +3,7 @@ q-dialog(ref="dialog" @hide="onDialogHide")
   q-card
     q-card-section
       q-form(ref="form")
-        q-input(label="value" v-model="value")
+        q-input(label="value" v-model="value" autofocus)
     q-card-actions(align="right")
       q-btn(color="primary" type="submit" label="OK" @click="onOKClick")
       q-btn(color="primary" label="Cancel" @click="onCancelClick")
