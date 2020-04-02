@@ -15,7 +15,7 @@ export default {
       record: {
         contact: {
           phone: '+420123123123',
-          pmail: 'mary.black@gmail.com'
+          email: 'mary.black@gmail.com'
         }
       },
       options: {
