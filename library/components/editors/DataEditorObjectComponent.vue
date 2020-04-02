@@ -9,8 +9,8 @@ component(:is="rootComponent")
 
 <script>
 import EditorMixin from './EditorMixin'
+import AdditionMixin from '../AdditionMixin'
 import { ObjectComponent } from '@oarepo/data-renderer'
-import { AdditionMixin } from '../../index'
 
 export default {
   name: 'data-editor-object-component',

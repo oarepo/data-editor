@@ -13,8 +13,8 @@ component(:is="rootComponent")
 
 <script>
 import EditorMixin from './EditorMixin'
+import AdditionMixin from '../AdditionMixin'
 import { ArrayComponent } from '@oarepo/data-renderer'
-import { AdditionMixin } from '../../index'
 
 export default {
   name: 'data-editor-array-component',
