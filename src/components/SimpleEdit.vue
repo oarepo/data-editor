@@ -32,7 +32,6 @@ export default {
   },
   methods: {
     submit ({ context, prop, value, op }) {
-      isNaN(value)
       if (op === 'add') {
         Vue.set(context, prop, value)
       }

@@ -35,6 +35,9 @@ export default {
       } else {
         return dv
       }
+    },
+    hasValue () {
+      return !!this.value
     }
   },
   data: function () {
@@ -84,6 +87,15 @@ export default {
       this.submitData(dv)
     },
     validate (value) {
+    },
+    createComplexValue () {
+      const submittedData = {
+        op: 'add',
+        context: this.context,
+        value: this.layout.children ? {} : [],
+        prop: this.prop
+      }
+      this.extraProps.submit(submittedData)
     }
   }
 }

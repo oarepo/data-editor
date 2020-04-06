@@ -31,10 +31,14 @@ export default {
               label: 'listOfContacts'
             },
             item: {
-              label: {
-                label: 'phoneNumber'
-              },
-              prop: 'phone'
+              children: [
+                {
+                  prop: 'phone',
+                  label: {
+                    label: 'phoneNumber'
+                  }
+                }
+              ]
             }
           }
         ]

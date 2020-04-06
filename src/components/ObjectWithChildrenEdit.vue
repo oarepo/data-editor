@@ -41,15 +41,11 @@ export default {
         if (Array.isArray(context)) {
           context.push(value)
         } else {
-          context[prop] = value
+          Vue.set(context, prop, value)
         }
       }
       if (op === 'replace') {
-        if (context[prop] === undefined) {
-          Vue.set(context, prop, value)
-        } else {
-          context[prop] = value
-        }
+        context[prop] = value
       }
       if (op === 'remove') {
         if (Array.isArray(context)) {

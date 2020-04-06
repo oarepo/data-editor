@@ -1,10 +1,12 @@
 <template lang="pug">
 component(:is="rootComponent")
-  data-renderer-object-component(:value="value" :layout="layout" :paths="paths" :schema="schema" :path-layouts="pathLayouts" :renderer-components="rendererComponents" :extraProps="extraProps" :level="level")
-  div
+  div(v-if="hasValue")
+    data-renderer-object-component(:value="value" :prop="prop" :layout="layout" :paths="paths" :schema="schema" :path-layouts="pathLayouts" :renderer-components="rendererComponents" :extraProps="extraProps" :level="level")
     q-btn(icon="playlist_add" dense flat color="primary" @click="beforeStart()" v-if="hasDefaultValue")
     q-btn(icon="playlist_add" dense flat color="primary" @click="openDialog()" v-if="hasDialog")
     q-btn(icon="remove" dense flat color="primary" size="x-small" v-if="isArrayItem" @click="onRemove")
+  div(v-else)
+    q-btn(icon="playlist_add" dense flat color="primary" @click="createComplexValue()")
 </template>
 
 <script>
@@ -51,20 +53,15 @@ export default {
         // pathValues: [],
         // values: [value.value],
       }
-      if (this.currentValue === undefined) {
-        submittedData.context = this.context
-        submittedData.value = {}
-        submittedData.prop = this.prop
-        this.extraProps.submit(submittedData)
-      }
       if (value.prop) {
         submittedData.context = this.currentValue
-        submittedData.value = typeof value.value === 'number' ? parseFloat(value.value) : value.value
+        submittedData.value = value.value
         submittedData.prop = value.prop
       } else {
-        submittedData.context = this.context
-        submittedData.value = typeof value === 'number' ? parseFloat(value) : value
-        submittedData.prop = this.prop
+        const prop = Object.keys(value)
+        submittedData.context = this.currentValue
+        submittedData.value = value[prop]
+        submittedData.prop = prop
       }
       this.editing = false
       this.$emit('stop-editing')
