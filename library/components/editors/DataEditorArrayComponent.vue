@@ -48,7 +48,6 @@ export default {
       this.$emit('change', value)
     },
     submitData (value) {
-      console.log('aaaa')
       const submittedData = {
         op: 'add'
         // pathValues: [],
@@ -56,12 +55,12 @@ export default {
       }
       if (value.prop) {
         let complexValue = {}
-        complexValue[value.prop] = isNaN(value.value) ? value.value : parseFloat(value.value)
+        complexValue[value.prop] = value.value
         submittedData.context = this.currentValue
         submittedData.value = complexValue
       } else {
         submittedData.context = this.currentValue
-        submittedData.value = isNaN(value) ? value : parseFloat(value)
+        submittedData.value = value
       }
       this.editing = false
       this.$emit('stop-editing')

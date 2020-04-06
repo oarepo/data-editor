@@ -17,6 +17,9 @@ import SimpleEdit from '../../src/components/SimpleEdit'
 import NonExistingObjectDefaultValueEdit from '../../src/components/NonExistingObjectDefaultValueEdit'
 import DefaultValueArrayEdit from '../../src/components/DefaultValueArrayEdit'
 import ArrayEdit from '../../src/components/ArrayEdit'
+// // eslint-disable-next-line camelcase
+// import { html_beautify } from 'js-beautify'
+import NonExistingDefaultValueArrayEdit from '../../src/components/NonExistingDefaultValueArrayEdit'
 
 describe('data editor components', () => {
   it('renders DataEditorStringComponent', () => {
@@ -137,6 +140,25 @@ describe('data editor components', () => {
     )
   })
 
+  it('renders DataEditorObjectComponent', () => {
+    const localVue = createLocalVue()
+    localVue.use(install)
+
+    const wrapper = shallowMount(DataEditorObjectComponent, {
+      localVue,
+      propsData: {
+        layout: {
+          value: { element: 'div' }
+        },
+        context: { object: { a: 'a' } },
+        extraProps: {}
+      }
+    })
+    expect(wrapper.html()).to.include(
+      '<q-btn-stub data-v-6c6b2da7="" ripple="true" align="center" icon="playlist_add" flat="true" color="primary" dense="true"></q-btn-stub>'
+    )
+  })
+
   it('renders DataEditorComponent', () => {
     const localVue = createLocalVue()
     localVue.use(install)
@@ -159,34 +181,6 @@ describe('data editor components', () => {
       '<div value="[object Object]" extraprops="[object Object]">' +
       '<data-renderer-stub schema="table" layout="[object Object]" renderercomponents="[object Object]" extraprops="[object Object]" class="col"></data-renderer-stub>' +
       '</div>'
-    )
-  })
-
-  it('renders input field for addition in DataEditorArrayComponent', async () => {
-    const localVue = createLocalVue()
-    localVue.use(install)
-
-    const wrapper = mount(DataEditorArrayComponent, {
-      localVue,
-      propsData: {
-        layout: {
-          value: { element: 'div' }
-        },
-        context: { array: [1, 2] },
-        extraProps: {}
-      },
-      stubs: {
-        DataRendererArrayComponent: true
-      }
-    })
-    expect(wrapper.html()).to.include(
-      '<button data-v-4d2fe0ea="" tabindex="0" type="button" role="button" class="q-btn q-btn-item non-selectable no-outline q-btn--flat q-btn--rectangle text-primary q-btn--actionable q-focusable q-hoverable q-btn--wrap q-btn--dense">'
-    )
-    const button = wrapper.find('button')
-    button.trigger('click')
-    await Vue.nextTick()
-    expect(wrapper.html()).to.include(
-      '<div class="q-btn__content text-center col items-center q-anchor--skip justify-center row"><i aria-hidden="true" role="img" class="material-icons q-icon notranslate">done</i>Uložit</div>'
     )
   })
 
@@ -255,7 +249,25 @@ describe('data editor components', () => {
     )
   })
 
-  it('displays input field for edit in string DataEditorStringComponent', async () => {
+  it('renders input field for addition in DataEditorArrayComponent', async () => {
+    const localVue = createLocalVue()
+    localVue.use(install)
+    localVue.use(DataRenderer)
+
+    const wrapper = mount(ArrayEdit, {
+      localVue
+    })
+    expect(wrapper.html()).to.include(
+      '<button data-v-4d2fe0ea="" tabindex="0" type="button" role="button" class="q-btn q-btn-item non-selectable no-outline q-btn--flat q-btn--rectangle text-primary q-btn--actionable q-focusable q-hoverable q-btn--wrap q-btn--dense">'
+    )
+    wrapper.find('button').trigger('click')
+    await Vue.nextTick()
+    expect(wrapper.html()).to.include(
+      '<div class="q-btn__content text-center col items-center q-anchor--skip justify-center row"><i aria-hidden="true" role="img" class="material-icons q-icon notranslate">done</i>Uložit</div>'
+    )
+  })
+
+  it('displays input field for edit in DataEditorStringComponent', async () => {
     const localVue = createLocalVue()
     localVue.use(install)
     localVue.use(DataRenderer)
@@ -329,7 +341,7 @@ describe('data editor components', () => {
     expect(wrapper.vm.$data.record.contact.phone).to.equal('+420123123123')
   })
 
-  it('adds default value to nonexisting object', async () => {
+  it('adds default value to nonexisting object after initializing the object', async () => {
     const localVue = createLocalVue()
     localVue.use(install)
     localVue.use(DataRenderer)
@@ -341,9 +353,30 @@ describe('data editor components', () => {
     expect(wrapper.html()).to.not.include('<div class="q-btn__content text-center col items-center q-anchor--skip justify-center row"><i aria-hidden="true" role="img" class="material-icons q-icon notranslate">edit</i></div>')
     wrapper.find('button').trigger('click')
     await Vue.nextTick()
+    wrapper.find('button').trigger('click')
+    await Vue.nextTick()
     expect(wrapper.html()).to.include('<div data-v-d5d185e6="" class="iqdr-value iqdr-path-object-creator iqdr-path-creator iqdr-level-2" context="[object Object]" patchoperation="replace" view="[object Object]" edit="[object Object]">Mary Black</div>')
     expect(wrapper.html()).to.include('<div class="q-btn__content text-center col items-center q-anchor--skip justify-center row"><i aria-hidden="true" role="img" class="material-icons q-icon notranslate">edit</i></div>')
     expect(wrapper.vm.$data.record.object.creator).to.equal('Mary Black')
+  })
+
+  it('adds default value to nonexisting array after initializing the array', async () => {
+    const localVue = createLocalVue()
+    localVue.use(install)
+    localVue.use(DataRenderer)
+
+    const wrapper = mount(NonExistingDefaultValueArrayEdit, { localVue })
+
+    expect(wrapper.vm.$data.record.keywords).to.equal(undefined)
+    expect(wrapper.html()).to.include('<div class="q-btn__content text-center col items-center q-anchor--skip justify-center row"><i aria-hidden="true" role="img" class="material-icons q-icon notranslate">playlist_add</i></div>')
+    expect(wrapper.html()).to.not.include('<div class="q-btn__content text-center col items-center q-anchor--skip justify-center row"><i aria-hidden="true" role="img" class="material-icons q-icon notranslate">edit</i></div>')
+    wrapper.find('button').trigger('click')
+    await Vue.nextTick()
+    wrapper.find('button').trigger('click')
+    await Vue.nextTick()
+    expect(wrapper.html()).to.include('<div data-v-d5d185e6="" class="iqdr-value iqdr-path-keywords-0 iqdr-path-0 iqdr-level-2" context="keyword" patchoperation="replace" view="[object Object]" edit="[object Object]">keyword</div>')
+    expect(wrapper.html()).to.include('<div class="q-btn__content text-center col items-center q-anchor--skip justify-center row"><i aria-hidden="true" role="img" class="material-icons q-icon notranslate">edit</i></div>')
+    expect(wrapper.vm.$data.record.keywords[0]).to.equal('keyword')
   })
 
   it('clicks add button, enters new value into input field and saves it ', async () => {

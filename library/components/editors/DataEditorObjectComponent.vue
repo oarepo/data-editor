@@ -2,8 +2,8 @@
 component(:is="rootComponent")
   div(v-if="hasValue")
     data-renderer-object-component(:value="value" :prop="prop" :layout="layout" :paths="paths" :schema="schema" :path-layouts="pathLayouts" :renderer-components="rendererComponents" :extraProps="extraProps" :level="level")
-    q-btn(icon="playlist_add" dense flat color="primary" @click="beforeStart()" v-if="hasDefaultValue") a
-    q-btn(icon="playlist_add" dense flat color="primary" @click="openDialog()" v-if="hasDialog") b
+    q-btn(icon="playlist_add" dense flat color="primary" @click="beforeStart()" v-if="hasDefaultValue")
+    q-btn(icon="playlist_add" dense flat color="primary" @click="openDialog()" v-if="hasDialog")
     q-btn(icon="remove" dense flat color="primary" size="x-small" v-if="isArrayItem" @click="onRemove")
   div(v-else)
     q-btn(icon="playlist_add" dense flat color="primary" @click="createComplexValue()")
@@ -55,12 +55,12 @@ export default {
       }
       if (value.prop) {
         submittedData.context = this.currentValue
-        submittedData.value = isNaN(value.value) ? value.value : parseFloat(value.value)
+        submittedData.value = value.value
         submittedData.prop = value.prop
       } else {
         const prop = Object.keys(value)
         submittedData.context = this.currentValue
-        submittedData.value = isNaN(value[prop]) ? value[prop] : parseFloat(value[prop])
+        submittedData.value = value[prop]
         submittedData.prop = prop
       }
       this.editing = false
