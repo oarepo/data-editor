@@ -6,7 +6,7 @@ component(:is="rootComponent")
     q-btn(icon="playlist_add" dense flat color="primary" @click="openDialog()" v-if="hasDialog")
     q-btn(icon="remove" dense flat color="primary" size="x-small" v-if="isArrayItem" @click="onRemove")
   div(v-else)
-    q-btn(icon="playlist_add" dense flat color="primary" @click="createComplexValue()")
+    q-btn(icon="playlist_add" dense flat color="primary" @click="createComplexValue()") Vytvořit
 </template>
 
 <script>
