@@ -85,7 +85,9 @@ Dialog components and default values can be passed to ``data-editor``
     * simple default value ```options: { pathLayouts: { simpleArray: defaultValue: () => 1 } }```
     * complex default value ```options: { pathLayouts: { complexArray: defaultValue: () => { a: 1 } } }```
     
-Layout and pathLayouts are described in more detail here: LINK
+If there is a complex value in ``layout`` and not in ``data``, then this complex value must be created by clicking displayed button before it and its content can be edited.
+    
+``layout`` and ``pathLayouts`` are described in more detail here: https://github.com/oarepo/data-renderer/
 
 #### Dialog component
 

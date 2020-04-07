@@ -136,7 +136,7 @@ describe('data editor components', () => {
       }
     })
     expect(wrapper.html()).to.include(
-      '<q-btn-stub data-v-4d2fe0ea="" ripple="true" align="center" icon="playlist_add" flat="true" color="primary" dense="true"></q-btn-stub>'
+      '<q-btn-stub data-v-4d2fe0ea="" ripple="true" align="center" icon="playlist_add" flat="true" color="primary" dense="true">Vytvořit</q-btn-stub>'
     )
   })
 
@@ -155,7 +155,7 @@ describe('data editor components', () => {
       }
     })
     expect(wrapper.html()).to.include(
-      '<q-btn-stub data-v-6c6b2da7="" ripple="true" align="center" icon="playlist_add" flat="true" color="primary" dense="true"></q-btn-stub>'
+      '<q-btn-stub data-v-6c6b2da7="" ripple="true" align="center" icon="playlist_add" flat="true" color="primary" dense="true">Vytvořit</q-btn-stub>'
     )
   })
 
@@ -202,7 +202,7 @@ describe('data editor components', () => {
       }
     })
     expect(wrapper.html()).to.include(
-      '<q-btn-stub data-v-6c6b2da7="" ripple="true" align="center" icon="playlist_add" flat="true" color="primary" dense="true"></q-btn-stub>'
+      '<q-btn-stub data-v-6c6b2da7="" ripple="true" align="center" icon="playlist_add" flat="true" color="primary" dense="true">Vytvořit</q-btn-stub>'
     )
   })
 
@@ -224,7 +224,7 @@ describe('data editor components', () => {
       }
     })
     expect(wrapper.html()).to.include(
-      '<q-btn-stub data-v-6c6b2da7="" ripple="true" align="center" icon="playlist_add" flat="true" color="primary" dense="true"></q-btn-stub>'
+      '<q-btn-stub data-v-6c6b2da7="" ripple="true" align="center" icon="playlist_add" flat="true" color="primary" dense="true">Vytvořit</q-btn-stub>'
     )
   })
 
@@ -349,7 +349,7 @@ describe('data editor components', () => {
     const wrapper = mount(NonExistingObjectDefaultValueEdit, { localVue })
 
     expect(wrapper.vm.$data.record.object).to.equal(undefined)
-    expect(wrapper.html()).to.include('<div class="q-btn__content text-center col items-center q-anchor--skip justify-center row"><i aria-hidden="true" role="img" class="material-icons q-icon notranslate">playlist_add</i></div>')
+    expect(wrapper.html()).to.include('<div class="q-btn__content text-center col items-center q-anchor--skip justify-center row"><i aria-hidden="true" role="img" class="material-icons q-icon notranslate">playlist_add</i>Vytvořit</div>')
     expect(wrapper.html()).to.not.include('<div class="q-btn__content text-center col items-center q-anchor--skip justify-center row"><i aria-hidden="true" role="img" class="material-icons q-icon notranslate">edit</i></div>')
     wrapper.find('button').trigger('click')
     await Vue.nextTick()
@@ -368,7 +368,7 @@ describe('data editor components', () => {
     const wrapper = mount(NonExistingDefaultValueArrayEdit, { localVue })
 
     expect(wrapper.vm.$data.record.keywords).to.equal(undefined)
-    expect(wrapper.html()).to.include('<div class="q-btn__content text-center col items-center q-anchor--skip justify-center row"><i aria-hidden="true" role="img" class="material-icons q-icon notranslate">playlist_add</i></div>')
+    expect(wrapper.html()).to.include('<div class="q-btn__content text-center col items-center q-anchor--skip justify-center row"><i aria-hidden="true" role="img" class="material-icons q-icon notranslate">playlist_add</i>Vytvořit</div>')
     expect(wrapper.html()).to.not.include('<div class="q-btn__content text-center col items-center q-anchor--skip justify-center row"><i aria-hidden="true" role="img" class="material-icons q-icon notranslate">edit</i></div>')
     wrapper.find('button').trigger('click')
     await Vue.nextTick()

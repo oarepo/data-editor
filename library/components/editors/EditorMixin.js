@@ -55,7 +55,7 @@ export default {
       const submitData = {
         // path: this.path,
         value: this.editedValue,
-        op: this.patchOperation,
+        op: this.context[this.prop] === undefined ? 'add' : this.patchOperation,
         context: this.context,
         prop: this.prop
       }

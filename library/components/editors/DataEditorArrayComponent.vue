@@ -11,7 +11,7 @@ component(:is="rootComponent")
         q-btn(icon="done" color="primary" @click="addItem" outline) Uložit
         q-btn.q-ml-sm(icon="clear" color="grey" @click="onCancel" outline) Storno
   div(v-else)
-    q-btn(icon="playlist_add" dense flat color="primary" @click="createComplexValue()")
+    q-btn(icon="playlist_add" dense flat color="primary" @click="createComplexValue()") Vytvořit
 </template>
 
 <script>

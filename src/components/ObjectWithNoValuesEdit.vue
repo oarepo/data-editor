@@ -37,11 +37,7 @@ export default {
         }
       }
       if (op === 'replace') {
-        if (context[prop] === undefined) {
-          Vue.set(context, prop, value)
-        } else {
-          context[prop] = value
-        }
+        context[prop] = value
       }
       if (op === 'remove') {
         if (Array.isArray(context)) {
