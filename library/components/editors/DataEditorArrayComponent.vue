@@ -54,7 +54,7 @@ export default {
         // values: [value.value],
       }
       if (value.prop) {
-        let complexValue = {}
+        const complexValue = {}
         complexValue[value.prop] = value.value
         submittedData.context = this.currentValue
         submittedData.value = complexValue

@@ -14,7 +14,8 @@ export default {
         contact: [
           { phone: '+420123123124' },
           { phone: '+420123123125' },
-          { phone: '+4201231231246' }]
+          { phone: '+4201231231246' },
+          { email: 'mary.black@gmail.com' }]
       },
       options: {
         schema: 'table',
@@ -36,6 +37,12 @@ export default {
                   prop: 'phone',
                   label: {
                     label: 'phoneNumber'
+                  }
+                },
+                {
+                  prop: 'email',
+                  label: {
+                    label: 'emailAddress'
                   }
                 }
               ]
