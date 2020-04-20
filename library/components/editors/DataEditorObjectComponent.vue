@@ -4,7 +4,7 @@ component(:is="rootComponent")
     data-renderer-object-component(:value="value" :prop="prop" :layout="layout" :paths="paths" :schema="schema" :path-layouts="pathLayouts" :renderer-components="rendererComponents" :extraProps="extraProps" :level="level")
     q-btn(icon="playlist_add" dense flat color="primary" @click="beforeStart()" v-if="hasDefaultValue")
     q-btn(icon="playlist_add" dense flat color="primary" @click="openDialog(layout)" v-if="hasDialog")
-    q-btn(icon="remove" dense flat color="primary" size="x-small" v-if="isArrayItem" @click="onRemove")
+    q-btn(icon="remove" dense flat color="primary" size="x-small" v-if="isArrayItem" @click="remove")
   div(v-else)
     q-btn(icon="playlist_add" dense flat color="primary" @click="createComplexValue()") Vytvořit
 </template>
@@ -64,7 +64,7 @@ export default {
         submittedData.prop = prop
       }
       this.editing = false
-      this.$emit('stop-editing')
+      this.$emit('done')
       this.extraProps.submit(submittedData)
     },
     valueInput (value) {

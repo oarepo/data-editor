@@ -9,7 +9,7 @@ component(:is="rootComponent")
       q-input(@input="valueInput" ref="editor" autofocus)
       div.q-mt-sm
         q-btn(icon="done" color="primary" @click="addItem" outline) Uložit
-        q-btn.q-ml-sm(icon="clear" color="grey" @click="onCancel" outline) Storno
+        q-btn.q-ml-sm(icon="clear" color="grey" @click="cancel" outline) Storno
   div(v-else)
     q-btn(icon="playlist_add" dense flat color="primary" @click="createComplexValue()") Vytvořit
 </template>
@@ -63,7 +63,7 @@ export default {
         submittedData.value = value
       }
       this.editing = false
-      this.$emit('stop-editing')
+      this.$emit('done')
       this.extraProps.submit(submittedData)
     },
     addItem () {

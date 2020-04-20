@@ -1,14 +1,13 @@
 import DataEditorComponent from './components/DataEditorComponent.vue'
-import DataEditorStringComponent from './components/editors/DataEditorStringComponent.vue'
-import DataEditorNumberComponent from './components/editors/DataEditorNumberComponent.vue'
-import DataEditorBooleanComponent from './components/editors/DataEditorBooleanComponent.vue'
-import DataEditorUndefinedComponent from './components/editors/DataEditorUndefinedComponent.vue'
 import DataEditorArrayComponent from './components/editors/DataEditorArrayComponent.vue'
 import DataEditorObjectComponent from './components/editors/DataEditorObjectComponent.vue'
 import DataEditorInputComponent from './components/editors/DataEditorInputComponent.vue'
 import DataEditorCheckboxComponent from './components/editors/DataEditorCheckboxComponent.vue'
 import EditorMixin from './components/editors/EditorMixin.js'
 import AdditionMixin from './components/AdditionMixin.js'
+import { StringComponent, NumberComponent, BooleanComponent, UndefinedComponent } from '@oarepo/data-renderer'
+import DefaultSubmitter from './components/editors/DefaultSubmitter'
+import DefaultEditController from './components/editors/DefaultEditController'
 
 export default {
   install (Vue, options) {
@@ -24,18 +23,32 @@ export default {
 
     Vue.prototype.$oarepo.dataEditor = {
       editorComponents: {
-        string: DataEditorStringComponent,
-        number: DataEditorNumberComponent,
-        boolean: DataEditorBooleanComponent,
-        undefined: DataEditorUndefinedComponent,
-        array: DataEditorArrayComponent,
-        object: DataEditorObjectComponent
-      },
-      editorInputComponents: {
-        string: DataEditorInputComponent,
-        number: DataEditorInputComponent,
-        boolean: DataEditorCheckboxComponent,
-        undefined: DataEditorInputComponent
+        string: {
+          component: DefaultEditController,
+          submitter: DefaultSubmitter,
+          editor: DataEditorInputComponent,
+          view: StringComponent
+        },
+        number: {
+          component: DefaultEditController,
+          submitter: DefaultSubmitter,
+          editor: DataEditorInputComponent,
+          view: NumberComponent
+        },
+        boolean: {
+          component: DefaultEditController,
+          submitter: DefaultSubmitter,
+          editor: DataEditorCheckboxComponent,
+          view: BooleanComponent
+        },
+        undefined: {
+          component: DefaultEditController,
+          submitter: DefaultSubmitter,
+          editor: DataEditorInputComponent,
+          view: UndefinedComponent
+        },
+        array: { component: DataEditorArrayComponent },
+        object: { component: DataEditorObjectComponent }
       }
     }
   }

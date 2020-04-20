@@ -16,7 +16,6 @@ export default {
       type: String,
       default: 'inline'
     },
-    dialogComponent: Object,
     level: Number
   },
   computed: {
@@ -33,37 +32,29 @@ export default {
       return this.layout.value.element
     }
   },
+  mounted () {
+    this.editedValue = this.value
+  },
   data: function () {
     return {
-      editing: false
+      editedValue: null
     }
   },
   methods: {
-    startEditing () {
-      this.editing = true
-    },
-    onCancel () {
-      if (this.editing) {
-        this.editing = false
-      } else {
-        this.$parent.editing = false
-      }
-      this.$emit('stop-editing')
-      this.$parent.extraProps.cancel(this.$props)
-    },
     async save () {
-      const submitData = {
-        // path: this.path,
-        value: this.editedValue,
-        op: this.context[this.prop] === undefined ? 'add' : this.patchOperation,
-        context: this.context,
-        prop: this.prop
-      }
-      this.$parent.editing = false
-      this.$emit('stop-editing')
-      this.extraProps.submit(submitData)
+      this.$nextTick(() => {
+        const submitData = {
+          // path: this.path,
+          value: this.editedValue,
+          op: this.context[this.prop] === undefined ? 'add' : this.patchOperation,
+          context: this.context,
+          prop: this.prop
+        }
+        this.extraProps.submit(submitData)
+        this.$emit('done')
+      })
     },
-    async onRemove () {
+    async remove () {
       const removeData = {
         // path: this.path,
         op: 'remove',
@@ -71,9 +62,11 @@ export default {
         prop: this.prop,
         valueIndex: this.valueIndex
       }
-      this.$parent.editing = false
-      this.$emit('stop-editing')
       this.extraProps.submit(removeData)
+      this.$emit('done')
+    },
+    async cancel () {
+      this.$emit('done')
     }
   }
 }
