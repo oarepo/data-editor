@@ -6,8 +6,8 @@ import DataEditorCheckboxComponent from './components/editors/DataEditorCheckbox
 import EditorMixin from './components/editors/EditorMixin.js'
 import AdditionMixin from './components/AdditionMixin.js'
 import { StringComponent, NumberComponent, BooleanComponent, UndefinedComponent } from '@oarepo/data-renderer'
-import DefaultSubmitter from './components/editors/DefaultSubmitter'
-import DefaultEditController from './components/editors/DefaultEditController'
+import DefaultSubmitter from './components/editors/DefaultSubmitter.vue'
+import DefaultEditController from './components/editors/DefaultEditController.vue'
 
 export default {
   install (Vue, options) {
