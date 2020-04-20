@@ -13,7 +13,11 @@ export default {
     layout: Object,
     record: Object,
     options: Object,
-    pathLayouts: Object
+    pathLayouts: Object,
+    editorComponents: {
+      type: Object,
+      default: () => ({})
+    }
   },
   name: 'data-editor-component',
   computed: {
@@ -27,7 +31,11 @@ export default {
       return opts
     },
     currentEditorComponents () {
-      return this.editorComponents || this.$oarepo.dataEditor.editorComponents
+      const editorComponents = {}
+      Object.keys(this.$oarepo.dataEditor.editorComponents).forEach(type => {
+        editorComponents[type] = this.editorComponents[type] || this.$oarepo.dataEditor.editorComponents[type]
+      })
+      return editorComponents
     }
   }
 }

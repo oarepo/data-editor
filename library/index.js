@@ -7,6 +7,8 @@ import DataEditorArrayComponent from './components/editors/DataEditorArrayCompon
 import DataEditorObjectComponent from './components/editors/DataEditorObjectComponent.vue'
 import DataEditorInputComponent from './components/editors/DataEditorInputComponent.vue'
 import DataEditorCheckboxComponent from './components/editors/DataEditorCheckboxComponent.vue'
+import EditorMixin from './components/editors/EditorMixin.js'
+import AdditionMixin from './components/AdditionMixin.js'
 
 export default {
   install (Vue, options) {
@@ -39,5 +41,7 @@ export default {
   }
 }
 export {
+  EditorMixin,
+  AdditionMixin,
   DataEditorComponent
 }

@@ -3,7 +3,7 @@ component(:is="rootComponent")
   div(v-if="hasValue")
     data-renderer-object-component(:value="value" :prop="prop" :layout="layout" :paths="paths" :schema="schema" :path-layouts="pathLayouts" :renderer-components="rendererComponents" :extraProps="extraProps" :level="level")
     q-btn(icon="playlist_add" dense flat color="primary" @click="beforeStart()" v-if="hasDefaultValue")
-    q-btn(icon="playlist_add" dense flat color="primary" @click="openDialog()" v-if="hasDialog")
+    q-btn(icon="playlist_add" dense flat color="primary" @click="openDialog(layout)" v-if="hasDialog")
     q-btn(icon="remove" dense flat color="primary" size="x-small" v-if="isArrayItem" @click="onRemove")
   div(v-else)
     q-btn(icon="playlist_add" dense flat color="primary" @click="createComplexValue()") Vytvořit

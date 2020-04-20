@@ -3,7 +3,7 @@ component(:is="rootComponent")
   div(v-if="hasValue")
     data-renderer-array-component(:value="value" :prop="prop" :layout="layout" :paths="paths" :schema="schema" :path-layouts="pathLayouts" :renderer-components="rendererComponents" :extraProps="extraProps" :level="level")
     div(v-if="!editing")
-      q-btn(icon="playlist_add" dense flat color="primary" @click="openDialog()" v-if="hasDialog")
+      q-btn(icon="playlist_add" dense flat color="primary" @click="openDialog(layout)" v-if="hasDialog")
       q-btn(icon="playlist_add" dense flat color="primary" @click="beforeStart()" v-if="!hasDialog")
     div.row(v-else)
       q-input(@input="valueInput" ref="editor" autofocus)
@@ -54,7 +54,7 @@ export default {
         // values: [value.value],
       }
       if (value.prop) {
-        let complexValue = {}
+        const complexValue = {}
         complexValue[value.prop] = value.value
         submittedData.context = this.currentValue
         submittedData.value = complexValue

@@ -67,11 +67,11 @@ export default {
     stopEditing () {
       this.editing = false
     },
-    openDialog (initialValue = null, errorMessage = null) {
+    openDialog (layout = null, errorMessage = null) {
       this.$q.dialog({
         component: this.currentDialogComponent,
         parent: this,
-        initialValue: initialValue,
+        layout: layout,
         errorMessage: errorMessage
       }).onOk((value) => {
         try {
