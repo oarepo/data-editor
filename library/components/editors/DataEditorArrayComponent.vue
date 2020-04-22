@@ -5,6 +5,7 @@ component(:is="rootComponent")
     div(v-if="!editing")
       q-btn(icon="playlist_add" dense flat color="primary" @click="openDialog(layout)" v-if="hasDialog")
       q-btn(icon="playlist_add" dense flat color="primary" @click="beforeStart()" v-if="!hasDialog")
+      q-btn(icon="remove" dense flat color="primary" size="x-small" v-if="isArrayItem" @click="remove")
     div.row(v-else)
       q-input(@input="valueInput" ref="editor" autofocus)
       div.q-mt-sm
@@ -16,12 +17,13 @@ component(:is="rootComponent")
 
 <script>
 import EditorMixin from './EditorMixin'
-import AdditionMixin from '../AdditionMixin'
+import AdditionMixin from './AdditionMixin'
 import { ArrayComponent } from '@oarepo/data-renderer'
+import DeletionMixin from './DeletionMixin'
 
 export default {
   name: 'data-editor-array-component',
-  mixins: [EditorMixin, AdditionMixin],
+  mixins: [EditorMixin, AdditionMixin, DeletionMixin],
   components: {
     'data-renderer-array-component': ArrayComponent
   },

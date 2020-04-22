@@ -11,12 +11,13 @@ component(:is="rootComponent")
 
 <script>
 import EditorMixin from './EditorMixin'
-import AdditionMixin from '../AdditionMixin'
+import AdditionMixin from './AdditionMixin'
 import { ObjectComponent } from '@oarepo/data-renderer'
+import DeletionMixin from './DeletionMixin'
 
 export default {
   name: 'data-editor-object-component',
-  mixins: [EditorMixin, AdditionMixin],
+  mixins: [EditorMixin, AdditionMixin, DeletionMixin],
   components: {
     'data-renderer-object-component': ObjectComponent
   },

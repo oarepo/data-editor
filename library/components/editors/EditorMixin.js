@@ -22,9 +22,6 @@ export default {
     currentValue () {
       return this.context[this.prop]
     },
-    isArrayItem () {
-      return Array.isArray(this.context)
-    },
     rootComponent () {
       if (this.layout === undefined) {
         return 'div'
@@ -53,17 +50,6 @@ export default {
         this.extraProps.submit(submitData)
         this.$emit('done')
       })
-    },
-    async remove () {
-      const removeData = {
-        // path: this.path,
-        op: 'remove',
-        context: this.context,
-        prop: this.prop,
-        valueIndex: this.valueIndex
-      }
-      this.extraProps.submit(removeData)
-      this.$emit('done')
     },
     async cancel () {
       this.$emit('done')

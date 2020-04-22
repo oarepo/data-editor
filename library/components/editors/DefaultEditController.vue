@@ -1,23 +1,23 @@
 <template lang="pug">
 div.row(v-if="!editing")
-    component(v-bind="$props" :is="view")
+    component(:value="localValue" :extraProps="extraProps" :prop="prop" :layout="layout" :pathLayouts="pathLayouts" :level="level" :paths="paths" :is="view")
     q-btn(icon="edit" color="primary" size="x-small" dense flat @click="startEditing")
+    q-btn(icon="remove" dense flat color="primary" size="x-small" v-if="isArrayItem" @click="remove")
 div.row(v-else)
   component(v-bind="$props" :is="edit" @done="stopEditing")
 </template>
 
 <script>
+import DeletionMixin from './DeletionMixin'
+
 export default {
   name: 'default-edit-controller',
+  mixins: [DeletionMixin],
   props: {
     rendererComponents: Object,
     extraProps: Object,
     prop: [String, Number],
     context: [Object, Array],
-    patchOperation: {
-      type: String,
-      default: 'replace'
-    },
     level: Number,
     options: Object,
     value: [String, Number, Boolean, undefined],
@@ -31,7 +31,8 @@ export default {
   },
   data: function () {
     return {
-      editing: false
+      editing: false,
+      localValue: this.value
     }
   },
   computed: {
@@ -45,12 +46,16 @@ export default {
   methods: {
     stopEditing () {
       if (this.editing) {
+        this.updateLocalValue()
         this.editing = false
       }
       this.$emit('stop-editing')
     },
     startEditing () {
       this.editing = true
+    },
+    updateLocalValue () {
+      this.localValue = this.context[this.prop]
     }
   }
 }
