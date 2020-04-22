@@ -12,8 +12,8 @@ import SimpleEdit from '../../src/components/SimpleEdit'
 import NonExistingObjectDefaultValueEdit from '../../src/components/NonExistingObjectDefaultValueEdit'
 import DefaultValueArrayEdit from '../../src/components/DefaultValueArrayEdit'
 import ArrayEdit from '../../src/components/ArrayEdit'
-// eslint-disable-next-line camelcase
-import { html_beautify } from 'js-beautify'
+// // eslint-disable-next-line camelcase
+// import { html_beautify } from 'js-beautify'
 import NonExistingDefaultValueArrayEdit from '../../src/components/NonExistingDefaultValueArrayEdit'
 
 describe('data editor components', () => {
@@ -271,7 +271,6 @@ describe('data editor components', () => {
     expect(wrapper.html()).to.not.include('<td data-v-93bacc72="" class="iqdr-value iqdr-path-keywords-2 iqdr-path-2 iqdr-level-2" style="display: inline;">third keyword</td>')
     wrapper.findAll('button').at(4).trigger('click')
     await Vue.nextTick()
-    console.log(html_beautify(wrapper.html()))
     expect(wrapper.html()).to.include('<td data-v-93bacc72="" class="iqdr-value iqdr-path-keywords-2 iqdr-path-2 iqdr-level-2" style="display: inline;">third keyword</td>')
     expect(wrapper.vm.$data.record.keywords.length).to.equal(3)
     expect(wrapper.vm.$data.record.keywords[2]).to.equal('third keyword')
