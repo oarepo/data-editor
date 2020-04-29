@@ -10,7 +10,7 @@ import Vue from 'vue'
 function defaultValue ({ context, layout }) {
   for (const prop of 'abcdefghijklmnopqrstuvwxyz'.split('')) {
     if (context[layout.prop][prop] === undefined) {
-      return { prop: prop, value: 'keyword' }
+      return { [prop]: 'keyword' }
     }
   }
 }
@@ -40,7 +40,7 @@ export default {
     }
   },
   methods: {
-    submit ({ path, context, prop, value, op, pathValues }) {
+    submit ({ paths, context, prop, value, op, pathValues }) {
       if (op === 'add') {
         if (Array.isArray(context)) {
           context.push(value)
@@ -49,7 +49,11 @@ export default {
         }
       }
       if (op === 'replace') {
-        context[prop] = value
+        if (Array.isArray(context)) {
+          context.splice(prop, 1, value)
+        } else {
+          Vue.set(context, prop, value)
+        }
       }
       if (op === 'remove') {
         if (Array.isArray(context)) {

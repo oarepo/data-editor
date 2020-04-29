@@ -42,7 +42,7 @@ export default {
     },
     async onOKClick () {
       if (await this.$refs.form.validate()) {
-        this.$emit('ok', { prop: this.prop, value: this.value })
+        this.$emit('ok', { [this.prop]: this.value })
         this.hide()
       }
     },

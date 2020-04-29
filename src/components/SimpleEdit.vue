@@ -31,12 +31,27 @@ export default {
     }
   },
   methods: {
-    submit ({ context, prop, value, op }) {
+    submit ({ paths, context, prop, value, op, pathValues }) {
       if (op === 'add') {
-        Vue.set(context, prop, value)
+        if (Array.isArray(context)) {
+          context.push(value)
+        } else {
+          Vue.set(context, prop, value)
+        }
       }
       if (op === 'replace') {
-        context[prop] = value
+        if (Array.isArray(context)) {
+          context.splice(prop, 1, value)
+        } else {
+          Vue.set(context, prop, value)
+        }
+      }
+      if (op === 'remove') {
+        if (Array.isArray(context)) {
+          context.splice(prop, 1)
+        } else {
+          delete context[prop]
+        }
       }
     },
     cancel (props) {
