@@ -1,7 +1,6 @@
 <template lang="pug">
 div
-  component(:is="inputComponent" v-model="editedValue" @ok="save()" @cancel="cancel()" @remove="remove()")
-  // q-btn(icon="remove" color="primary" size="x-small" dense flat v-if="isArrayItem" @click="remove")
+  component(:is="inputComponent" v-model="editedValue" @ok="save()" @cancel="cancel()")
 </template>
 
 <script>

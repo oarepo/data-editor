@@ -1,3 +1,5 @@
+import DeleteDialogComponent from './DeleteDialogComponent'
+
 export default {
   computed: {
     isArrayItem () {
@@ -15,6 +17,15 @@ export default {
       }
       this.extraProps.submit(removeData)
       this.$emit('done')
+    },
+    async removeDialog (errorMessage = null) {
+      this.$q.dialog({
+        component: DeleteDialogComponent,
+        parent: this,
+        errorMessage: errorMessage
+      }).onOk(() => {
+        this.remove()
+      })
     }
   }
 }

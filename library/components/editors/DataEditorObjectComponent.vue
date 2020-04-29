@@ -1,10 +1,10 @@
 <template lang="pug">
 component(:is="rootComponent")
-  div(v-if="hasValue")
-    data-renderer-object-component(:value="value" :prop="prop" :layout="layout" :paths="paths" :schema="schema" :path-layouts="pathLayouts" :renderer-components="rendererComponents" :extraProps="extraProps" :level="level")
-    q-btn(icon="playlist_add" dense flat color="primary" @click="beforeStart()" v-if="hasDefaultValue")
-    q-btn(icon="playlist_add" dense flat color="primary" @click="openDialog(layout)" v-if="hasDialog")
-    q-btn(icon="remove" dense flat color="primary" size="x-small" v-if="isArrayItem" @click="remove")
+  div(v-if="hasValue").row
+    data-renderer-object-component.col-auto(:value="value" :prop="prop" :layout="layout" :paths="paths" :schema="schema" :path-layouts="pathLayouts" :renderer-components="rendererComponents" :extraProps="extraProps" :level="level")
+    q-btn.col-1-sm-1.object-editor-button(icon="playlist_add" dense flat color="primary" @click="addDefaultValue()" v-if="hasDefaultValue")
+    q-btn.col-1-sm-1.object-editor-button(icon="playlist_add" dense flat color="primary" @click="openDialog(layout)" v-if="hasDialog")
+    q-btn.col-1-sm-1.object-editor-button(icon="remove" dense flat color="primary" size="x-small" v-if="isArrayItem" @click="removeDialog")
   div(v-else)
     q-btn(icon="playlist_add" dense flat color="primary" @click="createComplexValue()") Vytvořit
 </template>
@@ -33,44 +33,28 @@ export default {
     pathLayouts: Object,
     rendererComponents: Object
   },
-  data: function () {
-    return {
-      editing: false,
-      editedValue: null
-    }
-  },
   computed: {
     hasAdditionalProps () {
       return !!this.layout.additionalProps
     }
   },
   methods: {
-    startEditing () {
-      this.editing = true
-    },
     submitData (value) {
-      const submittedData = {
-        op: 'add'
-        // pathValues: [],
-        // values: [value.value],
+      if (value === undefined || value === null) {
+        this.$emit('done')
+        return
       }
-      if (value.prop) {
-        submittedData.context = this.currentValue
-        submittedData.value = value.value
-        submittedData.prop = value.prop
-      } else {
-        const prop = Object.keys(value)
-        submittedData.context = this.currentValue
-        submittedData.value = value[prop]
-        submittedData.prop = prop
-      }
-      this.editing = false
+      Object.keys(value).forEach(prop => {
+        const submittedData = {
+          op: 'add',
+          context: this.currentValue,
+          value: value[prop],
+          prop: prop,
+          paths: this.paths
+        }
+        this.extraProps.submit(submittedData)
+      })
       this.$emit('done')
-      this.extraProps.submit(submittedData)
-    },
-    valueInput (value) {
-      this.editedValue = value
-      this.$emit('change', value)
     }
   }
 }

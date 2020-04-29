@@ -46,23 +46,9 @@ export default {
     }
   },
   methods: {
-    async beforeStart () {
+    async addDefaultValue () {
       const dv = await this.defaultValue
-      if (dv) {
-        this.addDefaultValue(dv)
-      } else {
-        this.editing = true
-        await Vue.nextTick()
-        if (this.$refs.editor) {
-          const input = this.$refs.editor.$refs.input
-          if (input.focus) {
-            input.focus()
-          }
-          if (input.select) {
-            input.select()
-          }
-        }
-      }
+      this.addValue(dv)
     },
     stopEditing () {
       this.editing = false
@@ -72,6 +58,7 @@ export default {
         component: this.currentDialogComponent,
         parent: this,
         layout: layout,
+        paths: this.paths,
         errorMessage: errorMessage
       }).onOk((value) => {
         try {
@@ -82,7 +69,7 @@ export default {
         }
       })
     },
-    addDefaultValue (dv) {
+    addValue (dv) {
       this.validate(dv)
       this.submitData(dv)
     },

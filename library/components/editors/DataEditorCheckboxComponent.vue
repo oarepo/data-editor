@@ -4,7 +4,7 @@ q-checkbox(:value="value" @input="valueInput")
 
 <script>
 export default {
-  name: 'data-editor-input-component',
+  name: 'data-editor-checkbox-component',
   props: {
     value: Boolean
   },

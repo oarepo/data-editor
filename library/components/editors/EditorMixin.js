@@ -43,11 +43,14 @@ export default {
         const submitData = {
           // path: this.path,
           value: this.editedValue,
-          op: this.context[this.prop] === undefined ? 'add' : this.patchOperation,
+          op: 'replace',
           context: this.context,
-          prop: this.prop
+          prop: this.prop,
+          paths: this.paths
         }
+        console.log(submitData)
         this.extraProps.submit(submitData)
+        console.log('a')
         this.$emit('done')
       })
     },

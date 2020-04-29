@@ -1,8 +1,8 @@
 <template lang="pug">
 div.row(v-if="!editing")
-    component(:value="localValue" :extraProps="extraProps" :prop="prop" :layout="layout" :pathLayouts="pathLayouts" :level="level" :paths="paths" :is="view")
-    q-btn(icon="edit" color="primary" size="x-small" dense flat @click="startEditing")
-    q-btn(icon="remove" dense flat color="primary" size="x-small" v-if="isArrayItem" @click="remove")
+  component.col-auto(v-bind="$props" :is="view")
+  q-btn.col-1-sm-1.object-editor-button(icon="edit" color="primary" size="x-small" dense flat @click="startEditing")
+  q-btn.col-1-sm-1.object-editor-button(icon="remove" color="primary" size="x-small" dense flat @click="removeDialog" v-if="isArrayItem")
 div.row(v-else)
   component(v-bind="$props" :is="edit" @done="stopEditing")
 </template>
@@ -31,8 +31,7 @@ export default {
   },
   data: function () {
     return {
-      editing: false,
-      localValue: this.value
+      editing: false
     }
   },
   computed: {
@@ -41,21 +40,24 @@ export default {
     },
     edit () {
       return this.layout.valueWrapper.submitter
+    },
+    localValue () {
+      return this.context[this.prop]
     }
   },
   methods: {
     stopEditing () {
+      console.log('b')
       if (this.editing) {
-        this.updateLocalValue()
         this.editing = false
+        // this.localValue = this.value
+        // this.localValue = this.context[this.prop]
+        // this.updateLocalValue()
       }
-      this.$emit('stop-editing')
+      // this.$emit('stop-editing')
     },
     startEditing () {
       this.editing = true
-    },
-    updateLocalValue () {
-      this.localValue = this.context[this.prop]
     }
   }
 }

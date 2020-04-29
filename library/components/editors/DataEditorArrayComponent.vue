@@ -1,17 +1,11 @@
 <template lang="pug">
-component(:is="rootComponent")
-  div(v-if="hasValue")
+component.array-editor-wrapper(:is="rootComponent")
+  template(v-if="hasValue")
     data-renderer-array-component(:value="value" :prop="prop" :layout="layout" :paths="paths" :schema="schema" :path-layouts="pathLayouts" :renderer-components="rendererComponents" :extraProps="extraProps" :level="level")
-    div(v-if="!editing")
-      q-btn(icon="playlist_add" dense flat color="primary" @click="openDialog(layout)" v-if="hasDialog")
-      q-btn(icon="playlist_add" dense flat color="primary" @click="beforeStart()" v-if="!hasDialog")
-      q-btn(icon="remove" dense flat color="primary" size="x-small" v-if="isArrayItem" @click="remove")
-    div.row(v-else)
-      q-input(@input="valueInput" ref="editor" autofocus)
-      div.q-mt-sm
-        q-btn(icon="done" color="primary" @click="addItem" outline) Uložit
-        q-btn.q-ml-sm(icon="clear" color="grey" @click="cancel" outline) Storno
-  div(v-else)
+    q-btn.object-editor-button(icon="playlist_add" dense flat color="primary" @click="openDialog(layout)" v-if="hasDialog")
+    q-btn.object-editor-button(icon="playlist_add" dense flat color="primary" @click="addDefaultValue()" v-if="!hasDialog")
+    q-btn.object-editor-button(icon="remove" dense flat color="primary" size="x-small" v-if="isArrayItem" @click="removeDialog")
+  template(v-else)
     q-btn(icon="playlist_add" dense flat color="primary" @click="createComplexValue()") Vytvořit
 </template>
 
@@ -41,40 +35,20 @@ export default {
   },
   data: function () {
     return {
-      editedValue: null
+      addedValue: null
     }
   },
   methods: {
-    valueInput (value) {
-      this.editedValue = value
-      this.$emit('change', value)
-    },
     submitData (value) {
       const submittedData = {
-        op: 'add'
-        // pathValues: [],
-        // values: [value.value],
+        op: 'add',
+        context: this.currentValue,
+        value: value,
+        paths: this.paths
       }
-      if (value.prop) {
-        const complexValue = {}
-        complexValue[value.prop] = value.value
-        submittedData.context = this.currentValue
-        submittedData.value = complexValue
-      } else {
-        submittedData.context = this.currentValue
-        submittedData.value = value
-      }
-      this.editing = false
-      this.$emit('done')
       this.extraProps.submit(submittedData)
-    },
-    addItem () {
-      this.submitData(this.editedValue)
+      this.$emit('done')
     }
   }
 }
 </script>
-
-<style scoped>
-
-</style>
