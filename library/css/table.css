@@ -1,0 +1,48 @@
+.iqde-root-component {
+    width: 100%;
+}
+
+table.iqdr-layout-table {
+    width: 100%;
+}
+
+.iqdr-layout-table table {
+    width: 100%;
+}
+
+.iqdr-layout-table table.iqdr-children-wrapper {
+    background-image: url("/bg.svg");
+    background-size: 100% 100%;
+    margin: 2px;
+}
+
+.iqdr-layout-table .iqde-object-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.iqdr-layout-table .iqdr-value {
+    width: 100%;
+}
+
+.iqdr-layout-table td.iqde-array-container {
+    width: 100%;
+}
+
+.iqdr-layout-table .iqde-buttons {
+    margin-right: 10px;
+}
+
+.iqdr-layout-table .iqde-selected.iqdr-children-wrapper{
+    background-image: url("/bgover.svg");
+    background-size: 100% 100%;
+}
+
+.iqdr-layout-table button {
+    opacity: 1;
+}
+
+.iqdr-layout-table button.iqde-selected {
+     opacity: 0.4;
+ }

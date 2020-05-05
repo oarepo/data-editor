@@ -1,0 +1,53 @@
+.iqde-root-component {
+    width: 100%;
+}
+
+div.iqdr-layout-block {
+    width: 100%;
+}
+
+.iqdr-level-0 .iqdr-layout-block {
+    width: 100%;
+}
+
+/*.iqdr-layout-block div {*/
+/*    width: 100%*/
+/*}*/
+
+.iqdr-layout-block div.iqdr-children-wrapper {
+    background-image: url("/bg.svg");
+    background-size: 100% 100%;
+    margin: 2px;
+    width: 100%;
+}
+
+.iqdr-layout-block .iqde-object-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.iqdr-layout-block .iqdr-value {
+    width: 100%;
+}
+
+.iqdr-layout-block div.iqde-array-container {
+    width: 100%;
+}
+
+.iqdr-layout-block .iqde-buttons {
+    margin-right: 10px;
+}
+
+.iqdr-layout-block .iqde-selected.iqdr-children-wrapper{
+    background-image: url("/bgover.svg");
+    background-size: 100% 100%;
+}
+
+.iqdr-layout-block button {
+    opacity: 1;
+}
+
+.iqdr-layout-block button.iqde-selected {
+     opacity: 0.4;
+ }

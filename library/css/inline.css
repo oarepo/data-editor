@@ -1,0 +1,45 @@
+.iqde-root-component {
+    width: 100%;
+}
+
+div.iqdr-layout-inline {
+    width: 100%;
+}
+
+.iqdr-layout-inline div.iqdr-children-wrapper {
+    background-image: url("/bg.svg");
+    background-size: 100% 100%;
+    margin: 2px;
+    width: 100%;
+}
+
+.iqdr-layout-inline .iqde-object-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.iqdr-layout-inline .iqdr-value {
+    width: 100%;
+}
+
+.iqdr-layout-inline div.iqde-array-container {
+    width: 100%;
+}
+
+.iqdr-layout-inline .iqde-buttons {
+    margin-right: 10px;
+}
+
+.iqdr-layout-inline .iqde-selected.iqdr-children-wrapper{
+    background-image: url("/bgover.svg");
+    background-size: 100% 100%;
+}
+
+.iqdr-layout-inline button {
+    opacity: 1;
+}
+
+.iqdr-layout-inline button.iqde-selected {
+     opacity: 0.4;
+ }
