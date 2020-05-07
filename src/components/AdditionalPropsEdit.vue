@@ -26,8 +26,8 @@ export default {
       },
       layout: {
         children: [
-          { prop: 'creator', additionalProps: { dialogComponent: DialogWithPropertyComponent } },
-          { prop: 'contact', additionalProps: { dialogComponent: DialogWithPropertyComponent } },
+          { prop: 'creator', additionalProps: { dialogComponent: DialogWithPropertyComponent }, children: [{ prop: 'name' }, { prop: 'a' }] },
+          { prop: 'contact', additionalProps: { dialogComponent: DialogWithPropertyComponent }, children: [{ prop: 'phone' }, { prop: 'b' }] },
           { prop: 'keywords', additionalProps: { defaultValue: defaultValue } }]
       },
       options: {

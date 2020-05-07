@@ -28,7 +28,7 @@ export default {
           {
             prop: 'object',
             additionalProps: { dialogComponent: DialogWithPropertyComponent },
-            children: [{ prop: 'creator' }]
+            children: [{ prop: 'creator' }, { prop: 'phone' }]
           }
         ]
       }

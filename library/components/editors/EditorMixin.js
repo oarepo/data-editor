@@ -23,7 +23,10 @@ export default {
       return this.context[this.prop]
     },
     rootComponent () {
-      if (this.layout === undefined) {
+      if (this.layout === undefined || this.layout.value === undefined) {
+        if (this.schema === 'table') {
+          return 'td'
+        }
         return 'div'
       }
       return this.layout.value.element
@@ -41,16 +44,13 @@ export default {
     async save () {
       this.$nextTick(() => {
         const submitData = {
-          // path: this.path,
           value: this.editedValue,
           op: 'replace',
           context: this.context,
           prop: this.prop,
           paths: this.paths
         }
-        console.log(submitData)
         this.extraProps.submit(submitData)
-        console.log('a')
         this.$emit('done')
       })
     },

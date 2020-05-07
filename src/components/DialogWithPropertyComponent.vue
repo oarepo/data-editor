@@ -21,14 +21,7 @@ export default {
     }
   },
   props: {
-    initialValue: Object,
     errorMessage: String
-  },
-  mounted () {
-    if (this.initialValue) {
-      this.prop = this.initialValue.prop
-      this.value = this.initialValue.value
-    }
   },
   methods: {
     show () {

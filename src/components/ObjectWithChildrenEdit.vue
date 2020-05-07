@@ -23,10 +23,12 @@ export default {
         children: [
           {
             prop: 'object',
+            showEmpty: true,
             children: [
               { prop: 'creator' },
               {
                 prop: 'contact',
+                showEmpty: true,
                 children: [
                   { prop: 'phone' },
                   { prop: 'email' }]

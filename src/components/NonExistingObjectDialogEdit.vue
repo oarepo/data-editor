@@ -25,7 +25,14 @@ export default {
           {
             prop: 'object',
             additionalProps: { dialogComponent: DialogWithPropertyComponent },
-            children: []
+            children: [
+              {
+                prop: 'phone'
+              },
+              {
+                prop: 'email'
+              }
+            ]
           }
         ]
       }

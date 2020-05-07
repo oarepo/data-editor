@@ -26,7 +26,9 @@ import {
   Dialog,
   QForm,
   QCardActions,
-  QCheckbox
+  QCheckbox,
+  QRadio,
+  QSelect
 } from 'quasar'
 
 Vue.use(Quasar, {
@@ -52,7 +54,9 @@ Vue.use(Quasar, {
     QForm,
     QCardActions,
     QDialog,
-    QCheckbox
+    QCheckbox,
+    QRadio,
+    QSelect
   },
   directives: {
   },

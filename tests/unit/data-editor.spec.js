@@ -12,8 +12,8 @@ import SimpleEdit from '../../src/components/SimpleEdit'
 import NonExistingObjectDefaultValueEdit from '../../src/components/NonExistingObjectDefaultValueEdit'
 import DefaultValueArrayEdit from '../../src/components/DefaultValueArrayEdit'
 import ArrayEdit from '../../src/components/ArrayEdit'
-// // eslint-disable-next-line camelcase
-// import { html_beautify } from 'js-beautify'
+// eslint-disable-next-line camelcase
+import { html_beautify } from 'js-beautify'
 import NonExistingDefaultValueArrayEdit from '../../src/components/NonExistingDefaultValueArrayEdit'
 
 describe('data editor components', () => {
@@ -31,8 +31,11 @@ describe('data editor components', () => {
         extraProps: {}
       }
     })
+    console.log(html_beautify(wrapper.html()))
     expect(wrapper.html()).to.include(
-      '<q-btn-stub data-v-4d2fe0ea="" ripple="true" align="center" icon="playlist_add" flat="true" color="primary" dense="true">Vytvořit</q-btn-stub>'
+      '<div class="iqde-array-container iqde-root-component">' +
+      '<q-btn-stub ripple="true" align="center" icon="playlist_add" flat="true" color="primary" dense="true">Vytvořit</q-btn-stub>' +
+      '</div>'
     )
   })
 
@@ -74,9 +77,7 @@ describe('data editor components', () => {
       }
     })
     expect(wrapper.html()).to.include(
-      '<div value="[object Object]" extraprops="[object Object]">' +
-      '<data-renderer-stub schema="table" layout="[object Object]" renderercomponents="[object Object]" extraprops="[object Object]" class="col"></data-renderer-stub>' +
-      '</div>'
+      '<data-renderer-stub schema="table" layout="[object Object]" renderercomponents="[object Object]" extraprops="[object Object]" class="iqde-editor col" value="[object Object]"></data-renderer-stub>'
     )
   })
 
@@ -154,7 +155,7 @@ describe('data editor components', () => {
       localVue
     })
     expect(wrapper.html()).to.include(
-      '<button data-v-4d2fe0ea="" tabindex="0" type="button" role="button" class="q-btn q-btn-item non-selectable no-outline q-btn--flat q-btn--rectangle text-primary q-btn--actionable q-focusable q-hoverable q-btn--wrap q-btn--dense">'
+      '<button data-v-93bacc72="" tabindex="0" type="button" role="button" class="q-btn q-btn-item non-selectable no-outline q-btn--flat q-btn--rectangle text-primary q-btn--actionable q-focusable q-hoverable q-btn--wrap q-btn--dense iqde-selected" style="font-size: x-small;">'
     )
     wrapper.find('button').trigger('click')
     await Vue.nextTick()
@@ -178,8 +179,11 @@ describe('data editor components', () => {
     wrapper.find('input').setValue('+1234567890')
     wrapper.find('button').trigger('click')
     await Vue.nextTick()
+    console.log(html_beautify(wrapper.html()))
     expect(wrapper.html()).to.include('<div class="q-btn__content text-center col items-center q-anchor--skip justify-center row"><i aria-hidden="true" role="img" class="material-icons q-icon notranslate">edit</i></div>')
-    expect(wrapper.html()).to.include('<td data-v-93bacc72="" class="iqdr-value iqdr-path-contact-phone iqdr-path-phone iqdr-level-2" style="display: inline;">+1234567890</td>')
+    expect(wrapper.html()).to.include(
+      '<td data-v-93bacc72="" class="iqdr-value iqdr-path-contact-phone iqdr-path-phone iqdr-level-2" context="[object Object]">+1234567890'
+    )
     expect(wrapper.vm.$data.record.contact.phone).to.equal('+1234567890')
   })
 
@@ -217,7 +221,8 @@ describe('data editor components', () => {
     await Vue.nextTick()
     wrapper.find('button').trigger('click')
     await Vue.nextTick()
-    expect(wrapper.html()).to.include('<td data-v-93bacc72="" class="iqdr-value iqdr-path-object-creator iqdr-path-creator iqdr-level-2" style="display: inline;">Mary Black</td>')
+    console.log(html_beautify(wrapper.html()))
+    expect(wrapper.html()).to.include('<td data-v-93bacc72="" class="iqdr-value iqdr-path-object-creator iqdr-path-creator iqdr-level-2" style="padding-left: 5px;" context="[object Object]">Mary Black')
     expect(wrapper.html()).to.include('<div class="q-btn__content text-center col items-center q-anchor--skip justify-center row"><i aria-hidden="true" role="img" class="material-icons q-icon notranslate">edit</i></div>')
     expect(wrapper.vm.$data.record.object.creator).to.equal('Mary Black')
   })
@@ -236,7 +241,8 @@ describe('data editor components', () => {
     await Vue.nextTick()
     wrapper.find('button').trigger('click')
     await Vue.nextTick()
-    expect(wrapper.html()).to.include('<td data-v-93bacc72="" class="iqdr-value iqdr-path-keywords-0 iqdr-path-0 iqdr-level-2" style="display: inline;">keyword</td>')
+    console.log(html_beautify(wrapper.html()))
+    expect(wrapper.html()).to.include('<td data-v-93bacc72="" class="iqdr-value iqdr-path-keywords-0 iqdr-path-0 iqdr-level-2" style="display: inline;">keyword')
     expect(wrapper.html()).to.include('<div class="q-btn__content text-center col items-center q-anchor--skip justify-center row"><i aria-hidden="true" role="img" class="material-icons q-icon notranslate">edit</i></div>')
     expect(wrapper.vm.$data.record.keywords[0]).to.equal('keyword')
   })
@@ -255,7 +261,8 @@ describe('data editor components', () => {
     wrapper.find('input').setValue('third keyword')
     wrapper.findAll('button').at(4).trigger('click')
     await Vue.nextTick()
-    expect(wrapper.html()).to.include('<td data-v-93bacc72="" class="iqdr-value iqdr-path-keywords-2 iqdr-path-2 iqdr-level-2" style="display: inline;">third keyword</td>')
+    console.log(html_beautify(wrapper.html()))
+    expect(wrapper.html()).to.include('<td data-v-93bacc72="" class="iqdr-value iqdr-path-keywords-2 iqdr-path-2 iqdr-level-2" style="display: inline;">third keyword')
     expect(wrapper.vm.$data.record.keywords.length).to.equal(3)
     expect(wrapper.vm.$data.record.keywords[2]).to.equal('third keyword')
   })
@@ -268,10 +275,11 @@ describe('data editor components', () => {
     const wrapper = mount(DefaultValueArrayEdit, { localVue })
 
     expect(wrapper.vm.$data.record.keywords.length).to.equal(2)
-    expect(wrapper.html()).to.not.include('<td data-v-93bacc72="" class="iqdr-value iqdr-path-keywords-2 iqdr-path-2 iqdr-level-2" style="display: inline;">third keyword</td>')
+    expect(wrapper.html()).to.not.include('<td data-v-93bacc72="" class="iqdr-value iqdr-path-keywords-2 iqdr-path-2 iqdr-level-2" style="display: inline;">third keyword')
     wrapper.findAll('button').at(4).trigger('click')
     await Vue.nextTick()
-    expect(wrapper.html()).to.include('<td data-v-93bacc72="" class="iqdr-value iqdr-path-keywords-2 iqdr-path-2 iqdr-level-2" style="display: inline;">third keyword</td>')
+    console.log(html_beautify(wrapper.html()))
+    expect(wrapper.html()).to.include('<td data-v-93bacc72="" class="iqdr-value iqdr-path-keywords-2 iqdr-path-2 iqdr-level-2" style="display: inline;">third keyword')
     expect(wrapper.vm.$data.record.keywords.length).to.equal(3)
     expect(wrapper.vm.$data.record.keywords[2]).to.equal('third keyword')
   })
@@ -284,10 +292,11 @@ describe('data editor components', () => {
     const wrapper = mount(DefaultValueArrayEdit, { localVue })
 
     expect(wrapper.vm.$data.record.keywords.length).to.equal(2)
-    expect(wrapper.html()).to.include('<td data-v-93bacc72="" class="iqdr-value iqdr-path-keywords-1 iqdr-path-1 iqdr-level-2" style="display: inline;">second keyword</td>')
+    expect(wrapper.html()).to.include('<td data-v-93bacc72="" class="iqdr-value iqdr-path-keywords-1 iqdr-path-1 iqdr-level-2" style="display: inline;">second keyword')
     wrapper.findAll('button').at(3).trigger('click')
     await Vue.nextTick()
-    expect(wrapper.html()).to.not.include('<td data-v-93bacc72="" class="iqdr-value iqdr-path-keywords-1 iqdr-path-1 iqdr-level-2" style="display: inline;">second keyword</td>')
+    console.log(html_beautify(wrapper.html()))
+    expect(wrapper.html()).to.not.include('<td data-v-93bacc72="" class="iqdr-value iqdr-path-keywords-1 iqdr-path-1 iqdr-level-2" style="display: inline;">second keyword')
     expect(wrapper.vm.$data.record.keywords.length).to.equal(1)
     expect(wrapper.vm.$data.record.keywords[0]).to.equal('first keyword')
   })

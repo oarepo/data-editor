@@ -24,17 +24,23 @@ export default {
           {
             prop: 'object',
             additionalProps: { defaultValue: { creator: 'Mary Black' } },
-            children: []
+            children: [
+              {
+                prop: 'creator'
+              }
+            ]
           }]
       }
     }
   },
   methods: {
     submit ({ paths, context, prop, value, op, pathValues }) {
+      // console.log({ paths, context, prop, value, op, pathValues })
       if (op === 'add') {
         if (Array.isArray(context)) {
           context.push(value)
         } else {
+          console.log(context, prop, value)
           Vue.set(context, prop, value)
         }
       }

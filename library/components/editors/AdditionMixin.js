@@ -78,7 +78,8 @@ export default {
         op: 'add',
         context: this.context,
         value: this.layout.children ? {} : [],
-        prop: this.prop
+        prop: this.prop,
+        paths: this.paths
       }
       this.extraProps.submit(submittedData)
     }

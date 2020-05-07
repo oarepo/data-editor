@@ -9,11 +9,11 @@ export default {
   methods: {
     async remove () {
       const removeData = {
-        // path: this.path,
         op: 'remove',
         context: this.context,
         prop: this.prop,
-        valueIndex: this.valueIndex
+        valueIndex: this.valueIndex,
+        paths: this.paths
       }
       this.extraProps.submit(removeData)
       this.$emit('done')
