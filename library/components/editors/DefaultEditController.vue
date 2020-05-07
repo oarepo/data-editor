@@ -1,9 +1,9 @@
 <template lang="pug">
-div.row(v-if="!editing")
-  component.col-auto(v-bind="$props" :is="view")
-  q-btn.col-1-sm-1.object-editor-button(icon="edit" color="primary" size="x-small" dense flat @click="startEditing")
-  q-btn.col-1-sm-1.object-editor-button(icon="remove" color="primary" size="x-small" dense flat @click="removeDialog" v-if="isArrayItem")
-div.row(v-else)
+component(v-bind="$props" :is="view" v-if="!editing" v-on:dblclick.native="startEditing")
+  template(v-slot:after)
+    q-btn.iqde-edit-button(icon="edit" color="primary" size="x-small" dense flat @click="startEditing" @mouseenter="hover=true" @mouseleave="hover=false" :class="{'iqde-selected': !hover}")
+    q-btn.iqde-edit-button(icon="remove" color="primary" size="x-small" dense flat @click="removeDialog" v-if="isArrayItem" @mouseenter="hover=true" @mouseleave="hover=false" :class="{'iqde-selected': !hover}")
+div(v-else)
   component(v-bind="$props" :is="edit" @done="stopEditing")
 </template>
 
@@ -31,7 +31,8 @@ export default {
   },
   data: function () {
     return {
-      editing: false
+      editing: false,
+      hover: false
     }
   },
   computed: {
@@ -47,7 +48,6 @@ export default {
   },
   methods: {
     stopEditing () {
-      console.log('b')
       if (this.editing) {
         this.editing = false
         // this.localValue = this.value

@@ -1,12 +1,12 @@
-.iqde-root-component {
+.iqdr-layout-block .iqde-root-component {
     width: 100%;
 }
 
-div.iqdr-layout-block {
+.iqdr-layout-block div.iqdr-layout-block {
     width: 100%;
 }
 
-.iqdr-level-0 .iqdr-layout-block {
+.iqdr-layout-block .iqdr-level-0 .iqdr-layout-block {
     width: 100%;
 }
 

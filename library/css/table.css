@@ -1,8 +1,8 @@
-.iqde-root-component {
+.iqdr-layout-table .iqde-root-component {
     width: 100%;
 }
 
-table.iqdr-layout-table {
+.iqdr-layout-table table.iqdr-layout-table {
     width: 100%;
 }
 
@@ -32,6 +32,10 @@ table.iqdr-layout-table {
 
 .iqdr-layout-table .iqde-buttons {
     margin-right: 10px;
+}
+
+.iqdr-layout-table .iqde-edit-button {
+    float: right;
 }
 
 .iqdr-layout-table .iqde-selected.iqdr-children-wrapper{

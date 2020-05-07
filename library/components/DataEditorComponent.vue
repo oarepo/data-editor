@@ -1,5 +1,5 @@
 <template lang="pug">
-data-renderer.col(:data="record" :layout="layout" :schema="options.schema" :path-layouts="pathLayouts" :renderer-components="currentEditorComponents" v-bind="currentOptions")
+data-renderer.iqde-editor.col(:data="record" :layout="layout" :schema="options.schema" :path-layouts="pathLayouts" :renderer-components="currentEditorComponents" v-bind="currentOptions")
 </template>
 
 <style>

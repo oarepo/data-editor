@@ -1,10 +1,11 @@
 <template lang="pug">
-component.array-editor-wrapper(:is="rootComponent")
+component.iqde-array-container(:is="rootComponent" class="iqde-root-component")
   template(v-if="hasValue")
-    data-renderer-array-component(:value="value" :prop="prop" :layout="layout" :paths="paths" :schema="schema" :path-layouts="pathLayouts" :renderer-components="rendererComponents" :extraProps="extraProps" :level="level")
-    q-btn.object-editor-button(icon="playlist_add" dense flat color="primary" @click="openDialog(layout)" v-if="hasDialog")
-    q-btn.object-editor-button(icon="playlist_add" dense flat color="primary" @click="addDefaultValue()" v-if="!hasDialog")
-    q-btn.object-editor-button(icon="remove" dense flat color="primary" size="x-small" v-if="isArrayItem" @click="removeDialog")
+    data-renderer-array-component(v-bind="$props" :class="{'iqde-selected': hover}")
+    div.iqde-buttons
+      q-btn(icon="playlist_add" dense flat color="primary" @click="openDialog(layout)" v-if="hasDialog")
+      q-btn(icon="playlist_add" dense flat color="primary" @click="addDefaultValue()" v-if="!hasDialog")
+      q-btn(icon="remove" dense flat color="primary" size="x-small" v-if="isArrayItem" @click="removeDialog" @mouseenter="hover=true" @mouseleave="hover=false")
   template(v-else)
     q-btn(icon="playlist_add" dense flat color="primary" @click="createComplexValue()") Vytvořit
 </template>
@@ -35,7 +36,8 @@ export default {
   },
   data: function () {
     return {
-      addedValue: null
+      addedValue: null,
+      hover: false
     }
   },
   methods: {

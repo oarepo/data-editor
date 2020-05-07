@@ -1,10 +1,11 @@
 <template lang="pug">
-component(:is="rootComponent")
-  div(v-if="hasValue").row
-    data-renderer-object-component.col-auto(:value="value" :prop="prop" :layout="layout" :paths="paths" :schema="schema" :path-layouts="pathLayouts" :renderer-components="rendererComponents" :extraProps="extraProps" :level="level")
-    q-btn.col-1-sm-1.object-editor-button(icon="playlist_add" dense flat color="primary" @click="addDefaultValue()" v-if="hasDefaultValue")
-    q-btn.col-1-sm-1.object-editor-button(icon="playlist_add" dense flat color="primary" @click="openDialog(layout)" v-if="hasDialog")
-    q-btn.col-1-sm-1.object-editor-button(icon="remove" dense flat color="primary" size="x-small" v-if="isArrayItem" @click="removeDialog")
+component(:is="rootComponent" class="iqde-root-component")
+  div.iqde-object-container(v-if="hasValue")
+    data-renderer-object-component(v-bind="$props" :class="{'iqde-selected': hover}")
+    div.iqde-buttons
+      q-btn(icon="playlist_add" dense flat color="primary" @click="addDefaultValue()" v-if="hasDefaultValue")
+      q-btn(icon="playlist_add" dense flat color="primary" @click="openDialog(layout)" v-if="hasDialog")
+      q-btn(icon="remove" dense flat color="primary" size="x-small" v-if="isArrayItem" @click="removeDialog" @mouseenter="hover=true" @mouseleave="hover=false")
   div(v-else)
     q-btn(icon="playlist_add" dense flat color="primary" @click="createComplexValue()") Vytvořit
 </template>
@@ -36,6 +37,11 @@ export default {
   computed: {
     hasAdditionalProps () {
       return !!this.layout.additionalProps
+    }
+  },
+  data () {
+    return {
+      hover: false
     }
   },
   methods: {

@@ -6,7 +6,7 @@
 /*    width: 100%*/
 /*}*/
 
-.iqde-root-component {
+.iqdr-layout-flex .iqde-root-component {
     width: 100%;
 }
 
@@ -31,6 +31,7 @@
 
 .iqdr-layout-flex div.iqde-array-container {
     width: 100%;
+    margin-left: 5px;
 }
 
 .iqdr-layout-flex .iqde-buttons {
