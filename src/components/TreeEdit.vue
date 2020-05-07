@@ -1,14 +1,6 @@
 <template lang="pug">
 div
-  div
-    span Display schema:
-    q-radio(v-model="options.schema" val="inline" label="inline" color="yellow")
-    q-radio(v-model="options.schema" val="block" label="block" color="yellow")
-    q-radio(v-model="options.schema" val="table" label="table" color="yellow")
-    q-radio(v-model="options.schema" val="flex" label="flex" color="yellow")
-  hr
-  div
-    data-editor(:record="record" :options="options" :layout="layout")
+  data-editor(:record="record" :options="options" :layout="layout")
 </template>
 
 <script>
