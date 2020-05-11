@@ -9,8 +9,7 @@
 .iqdr-layout-inline div.iqdr-children-wrapper {
     background-image: url("/bg.svg");
     background-size: 100% 100%;
-    margin-left: 7px;
-    margin-top: 5px;
+    margin: 2px;
     width: 100%;
 }
 
@@ -18,6 +17,7 @@
     width: 100%;
     display: flex;
     align-items: center;
+    padding-right: 5px;
 }
 
 .iqdr-layout-inline .iqde-array-container {

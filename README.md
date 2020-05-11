@@ -53,7 +53,7 @@ export default async ({ Vue, store, router }) => {
 
 ## Usage
 
-To use data editor, add ``data-editor-component`` to template. ``data-editor-component`` accepts``record``, ``options``, ``layout`` and ``pathLayouts`` and renders interface to edit received data with buttons to edit, add and remove buttons based on data type.
+To use data editor, add ``data-editor`` to template. ``data-editor`` accepts``record``, ``options``, ``layout`` and ``pathLayouts`` and renders interface to edit received data with buttons to edit, add and remove buttons based on data type.
 Dialog components and default values can be passed to ``data-editor``
 
 #### Record
@@ -103,7 +103,7 @@ Example of a simple object. Src at [/src/components/SimpleEdit.vue](https://gith
 ```vue
 <template lang="pug">
 div
-  data-editor-component(:record="record" :options="options" :layout="layout")
+  data-editor(:record="record" :options="options" :layout="layout")
 </template>
 
 <script>
@@ -159,7 +159,7 @@ Example of a simple array. Src at [/src/components/SimpleArray.vue](https://gith
 ```vue
 <template lang="pug">
 div
-  data-editor-component(:record="record" :options="options" :layout="layout")
+  data-editor(:record="record" :options="options" :layout="layout")
 </template>
 
 <script>
@@ -230,7 +230,7 @@ Example of a complex array with default value for newly added items. Src at [/sr
 ```vue
 <template lang="pug">
 div
-  data-editor-component(:record="record" :options="options" :layout="layout")
+  data-editor(:record="record" :options="options" :layout="layout")
 </template>
 
 <script>
@@ -291,7 +291,7 @@ Example of a complex array with dialog for addition of new items. Src at [/src/c
 ```vue
 <template lang="pug">
 div
-  data-editor-component(:record="record" :options="options" :layout="layout")
+  data-editor(:record="record" :options="options" :layout="layout")
 </template>
 
 <script>
@@ -356,7 +356,7 @@ Example of an empty record with layout and dialog. Src at [/src/components/NonEx
 ```vue
 <template lang="pug">
 div
-  data-editor-component(:record="record" :options="options" :layout="layout")
+  data-editor(:record="record" :options="options" :layout="layout")
 </template>
 
 <script>
@@ -467,7 +467,7 @@ Example of object with default value as a function and dialog component. (src at
 ```vue
 <template lang="pug">
 div
-  data-editor-component(:record="record" :options="options" :layout="layout")
+  data-editor(:record="record" :options="options" :layout="layout")
 </template>
 
 <script>
@@ -540,7 +540,7 @@ Example of record as a tree with a complex default value for addition of new ite
 ```vue
 <template lang="pug">
 div
-  data-editor-component(:record="record" :options="options" :layout="layout" :path-layouts="pathLayouts")
+  data-editor(:record="record" :options="options" :layout="layout" :path-layouts="pathLayouts")
 </template>
 
 <script>
