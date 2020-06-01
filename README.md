@@ -1,6 +1,6 @@
 # @oarepo/data-editor
 
-A library for editing of rendered JSON data
+A library for editing of rendered JSON data.
 
 <p align="center">
     <a href="https://travis-ci.org/oarepo/data-editor" target="_blank">
@@ -20,12 +20,13 @@ A library for editing of rendered JSON data
   * [Layout](#layout)
   * [Dialog component](#dialog-component)
 - [Examples](#examples)
+  * [Simple object](#simple-object)
   * [Simple array](#simple-array)
   * [Complex array with default value](#complex-array-with-default-value)
   * [Complex array with dialog](#complex-array-with-dialog)
   * [Record with dialog component and no data layout](#record-with-dialog-component-and-no-data)
   * [Empty object with dialog component and default value function](#empty-object-with-dialog-component-and-default-value-function)
-  * [Record as a tree](#record-as-a-tree)
+  * [Record as tree](#record-as-tree)
 
 <!-- tocstop -->
 
@@ -53,8 +54,8 @@ export default async ({ Vue, store, router }) => {
 
 ## Usage
 
-To use data editor, add ``data-editor`` to template. ``data-editor`` accepts``record``, ``options``, ``layout`` and ``pathLayouts`` and renders interface to edit received data with buttons to edit, add and remove buttons based on data type.
-Dialog components and default values can be passed to ``data-editor``
+To use data editor, add ``data-editor`` to template. ``data-editor`` accepts``record``, ``options``, ``layout`` and ``pathLayouts`` and renders interface to edit received data with buttons for editing, addition and removal based on data type.
+Dialog components and default values can be passed to ``data-editor``.
 
 #### Record
 
@@ -75,13 +76,13 @@ Dialog components and default values can be passed to ``data-editor``
 
 #### Layout
 
-``layout`` can be used to define layout of empty record, to associate dialog components or default values with props, to define children.
+``layout`` can be used to define the layout of an empty record, to associate dialog components or default values with props, to define children.
  * basic layout: ```layout: [{ 'path': 'a', 'label': 'a' }]```
  * layout with dialog component: ```layout: [{ 'path': 'a', 'label': 'a', dialogComponent: DialogComponent, dynamic: true }]```
  * layout with default value: ```layout: [{ 'path': 'a', 'label': 'a', defaultValue: () => 1, dynamic: true }]```
  * layout with default value as a function: ```layout: [{ 'path': 'a', 'label': 'a', defaultValue: defaultValue, dynamic: true }]```
  
-``pathLayouts`` can be used to associate dialog components or default values with objects or arrays regardless of their position within layout.
+``pathLayouts`` can be used to associate dialog components or default values with objects or arrays regardless of their position within the layout.
     * simple default value ```options: { pathLayouts: { simpleArray: defaultValue: () => 1 } }```
     * complex default value ```options: { pathLayouts: { complexArray: defaultValue: () => { a: 1 } } }```
     
@@ -91,7 +92,7 @@ If there is a complex value in ``layout`` and not in ``data``, then this complex
 
 #### Dialog component
 
-Specifies dialog component to be used with data editor, e.g. dialog to add object with default property to array, dialog to enter property and value to be added to object etc.
+Specifies dialog component to be used with data editor, e.g. dialog to add a new object with default property to array, dialog to enter property and value to be added to object etc.
 
 ## Examples
 
@@ -102,8 +103,7 @@ Examples are located at [/src/components](https://github.com/oarepo/data-editor/
 Example of a simple object. Src at [/src/components/SimpleEdit.vue](https://github.com/oarepo/data-editor/blob/master/src/components/SimpleEdit.vue):
 ```vue
 <template lang="pug">
-div
-  data-editor(:record="record" :options="options" :layout="layout")
+data-editor(:record="record" :options="options" :layout="layout")
 </template>
 
 <script>
@@ -158,12 +158,12 @@ export default {
 Example of a simple array. Src at [/src/components/SimpleArray.vue](https://github.com/oarepo/data-editor/blob/master/src/components/SimpleArray.vue):
 ```vue
 <template lang="pug">
-div
-  data-editor(:record="record" :options="options" :layout="layout")
+data-editor(:record="record" :options="options" :layout="layout")
 </template>
 
 <script>
 import Vue from 'vue'
+
 export default {
   name: 'array-edit',
   data: function () {
@@ -229,12 +229,10 @@ export default {
 Example of a complex array with default value for newly added items. Src at [/src/components/SimpleArray.vue](https://github.com/oarepo/data-editor/blob/master/src/components/SimpleArray.vue):
 ```vue
 <template lang="pug">
-div
-  data-editor(:record="record" :options="options" :layout="layout")
+data-editor(:record="record" :options="options" :layout="layout")
 </template>
 
 <script>
-
 export default {
   name: 'default-value-complex-array-edit',
   data: function () {
@@ -290,8 +288,7 @@ export default {
 Example of a complex array with dialog for addition of new items. Src at [/src/components/ComplexArrayDialogEdit.vue](https://github.com/oarepo/data-editor/blob/master/src/components/ComplexArrayDialogEdit.vue):
 ```vue
 <template lang="pug">
-div
-  data-editor(:record="record" :options="options" :layout="layout")
+data-editor(:record="record" :options="options" :layout="layout")
 </template>
 
 <script>
@@ -355,8 +352,7 @@ export default {
 Example of an empty record with layout and dialog. Src at [/src/components/NonExistingObjectDialogEdit.vue](https://github.com/oarepo/data-editor/blob/master/src/components/NonExistingObjectDialogEdit.vue):
 ```vue
 <template lang="pug">
-div
-  data-editor(:record="record" :options="options" :layout="layout")
+data-editor(:record="record" :options="options" :layout="layout")
 </template>
 
 <script>
@@ -408,7 +404,7 @@ export default {
 </script>
 ```
 
-Example of a dialog component (src at [/src/components/DialogComponent.vue](https://github.com/oarepo/data-editor/blob/master/src/components/DialogComponent.vue)): 
+Example of a dialog component. Src at [/src/components/DialogComponent.vue](https://github.com/oarepo/data-editor/blob/master/src/components/DialogComponent.vue): 
  ```vue
 <template lang="pug">
 q-dialog(ref="dialog" @hide="onDialogHide")
@@ -463,11 +459,10 @@ export default {
 
 #### Empty object with dialog component and default value function
 
-Example of object with default value as a function and dialog component. (src at [/src/components/AdditionalPropsEdit.vue](https://github.com/oarepo/data-editor/blob/master/src/components/AdditionalPropsEdit.vue)): 
+Example of object with default value as a function and dialog component. Src at [/src/components/AdditionalPropsEdit.vue](https://github.com/oarepo/data-editor/blob/master/src/components/AdditionalPropsEdit.vue): 
 ```vue
 <template lang="pug">
-div
-  data-editor(:record="record" :options="options" :layout="layout")
+data-editor(:record="record" :options="options" :layout="layout")
 </template>
 
 <script>
@@ -534,13 +529,12 @@ export default {
 </script>
 ```
 
-#### Record as a tree
+#### Record as tree
 
-Example of record as a tree with a complex default value for addition of new items.  Src at [/src/components/TreeEdit.vue](https://github.com/oarepo/data-editor/blob/master/src/components/TreeEdit.vue):
+Example of a record as tree with a complex default value for addition of new items. Src at [/src/components/TreeEdit.vue](https://github.com/oarepo/data-editor/blob/master/src/components/TreeEdit.vue):
 ```vue
 <template lang="pug">
-div
-  data-editor(:record="record" :options="options" :layout="layout" :path-layouts="pathLayouts")
+data-editor(:record="record" :options="options" :layout="layout" :path-layouts="pathLayouts")
 </template>
 
 <script>

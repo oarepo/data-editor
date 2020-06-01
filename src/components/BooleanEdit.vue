@@ -1,6 +1,5 @@
 <template lang="pug">
-div
-  data-editor(:record="record" :options="options" :layout="layout")
+data-editor(:record="record" :options="options")
 </template>
 
 <script>
@@ -21,8 +20,7 @@ export default {
           submit: this.submit,
           cancel: this.cancel
         }
-      },
-      layout: {}
+      }
     }
   },
   methods: {

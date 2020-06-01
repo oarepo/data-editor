@@ -1,6 +1,5 @@
 <template lang="pug">
-div
-  data-editor(:record="record" :options="options" :layout="layout")
+data-editor(:record="record" :options="options" :layout="layout")
 </template>
 
 <script>
