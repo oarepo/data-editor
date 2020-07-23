@@ -1,13 +1,11 @@
-import DataEditorComponent from './components/DataEditorComponent.vue'
-import DataEditorArrayComponent from './components/editors/DataEditorArrayComponent.vue'
-import DataEditorObjectComponent from './components/editors/DataEditorObjectComponent.vue'
-import DataEditorInputComponent from './components/editors/DataEditorInputComponent.vue'
-import DataEditorCheckboxComponent from './components/editors/DataEditorCheckboxComponent.vue'
-import EditorMixin from './components/editors/EditorMixin.js'
-import AdditionMixin from './components/editors/AdditionMixin.js'
-import { StringComponent, NumberComponent, BooleanComponent, UndefinedComponent } from '@oarepo/data-renderer'
-import DefaultSubmitter from './components/editors/DefaultSubmitter.vue'
-import DefaultEditController from './components/editors/DefaultEditController.vue'
+import DataEditorComponent from "./components/DataEditorComponent.vue"
+import DataEditorArrayComponent from "./components/editors/DataEditorArrayComponent.vue"
+import DataEditorObjectComponent from "./components/editors/DataEditorObjectComponent.vue"
+import DataEditorInputComponent from "./components/editors/DataEditorInputComponent.vue"
+import DataEditorCheckboxComponent from "./components/editors/DataEditorCheckboxComponent.vue"
+import DefaultSubmitter from "./components/editors/DefaultSubmitter.vue"
+import DefaultEditController from "./components/editors/DefaultEditController.vue"
+import {StringComponent, NumberComponent, BooleanComponent, UndefinedComponent} from "@oarepo/data-renderer"
 
 export default {
   install (Vue, options) {
@@ -52,9 +50,4 @@ export default {
       }
     }
   }
-}
-export {
-  EditorMixin,
-  AdditionMixin,
-  DataEditorComponent
 }

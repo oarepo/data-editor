@@ -1,4 +1,4 @@
-import DeleteDialogComponent from './DeleteDialogComponent'
+import DeleteDialogComponent from './DeleteDialogComponent.vue'
 
 export default {
   computed: {
