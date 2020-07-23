@@ -38,7 +38,7 @@ export default {
     }
   },
   methods: {
-    submit ({ paths, context, prop, value, op, pathValues }) {
+    submit ({ context, prop, value, op }) {
       if (op === 'add') {
         if (Array.isArray(context)) {
           context.push(value)
@@ -61,7 +61,7 @@ export default {
         }
       }
     },
-    cancel ({ props }) {
+    cancel () {
       console.log('cancelling')
     }
   }
