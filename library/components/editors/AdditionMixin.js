@@ -72,6 +72,7 @@ export default {
       this.submitData(dv)
     },
     validate (value) {
+      console.log(value)
     },
     createComplexValue () {
       const submittedData = {
