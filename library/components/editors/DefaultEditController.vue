@@ -1,6 +1,6 @@
 <template lang="pug">
 component(v-bind="$props" :is="view" v-if="!editing" v-on:dblclick.native="startEditing")
-  template(slot="after")
+  template(v-slot:after)
     q-btn.iqde-edit-button(icon="edit" color="primary" size="x-small" dense flat @click="startEditing" @mouseenter="hover=true" @mouseleave="hover=false" :class="{'iqde-selected': !hover}")
     q-btn.iqde-edit-button(icon="remove" color="primary" size="x-small" dense flat @click="removeDialog" v-if="isArrayItem" @mouseenter="hover=true" @mouseleave="hover=false" :class="{'iqde-selected': !hover}")
 div(v-else)
