@@ -1,6 +1,5 @@
 <template lang="pug">
-div
-  data-renderer.col(:data="record" :layout="layout" :schema="options.schema" :path-layouts="pathLayouts" :renderer-components="currentEditorComponents" v-bind="currentOptions")
+data-renderer.iqde-editor.col(:data="record" :layout="layout" :schema="options.schema" :path-layouts="pathLayouts" :renderer-components="currentEditorComponents" v-bind="currentOptions")
 </template>
 
 <style>
@@ -19,7 +18,7 @@ export default {
       default: () => ({})
     }
   },
-  name: 'data-editor-component',
+  name: 'data-editor',
   computed: {
     currentOptions () {
       const opts = {

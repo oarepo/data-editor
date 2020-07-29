@@ -1,6 +1,5 @@
 <template lang="pug">
-div
-  data-editor-component(:record="record" :options="options" :layout="layout")
+data-editor(:record="record" :options="options")
 </template>
 
 <script>
@@ -21,8 +20,7 @@ export default {
           submit: this.submit,
           cancel: this.cancel
         }
-      },
-      layout: {}
+      }
     }
   },
   methods: {
@@ -35,10 +33,21 @@ export default {
         }
       }
       if (op === 'replace') {
-        context[prop] = value
+        if (Array.isArray(context)) {
+          context.splice(prop, 1, value)
+        } else {
+          Vue.set(context, prop, value)
+        }
+      }
+      if (op === 'remove') {
+        if (Array.isArray(context)) {
+          context.splice(prop, 1)
+        } else {
+          delete context[prop]
+        }
       }
     },
-    cancel (props) {
+    cancel () {
       console.log('cancelling')
     }
   }

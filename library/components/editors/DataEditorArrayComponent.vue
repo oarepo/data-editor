@@ -1,27 +1,24 @@
 <template lang="pug">
-component(:is="rootComponent")
-  div(v-if="hasValue")
-    data-renderer-array-component(:value="value" :prop="prop" :layout="layout" :paths="paths" :schema="schema" :path-layouts="pathLayouts" :renderer-components="rendererComponents" :extraProps="extraProps" :level="level")
-    div(v-if="!editing")
+component.iqde-array-container(:is="rootComponent" class="iqde-root-component")
+  template(v-if="hasValue")
+    data-renderer-array-component(v-bind="$props" :class="{'iqde-selected': hover}")
+    div.iqde-buttons
       q-btn(icon="playlist_add" dense flat color="primary" @click="openDialog(layout)" v-if="hasDialog")
-      q-btn(icon="playlist_add" dense flat color="primary" @click="beforeStart()" v-if="!hasDialog")
-    div.row(v-else)
-      q-input(@input="valueInput" ref="editor" autofocus)
-      div.q-mt-sm
-        q-btn(icon="done" color="primary" @click="addItem" outline) Uložit
-        q-btn.q-ml-sm(icon="clear" color="grey" @click="onCancel" outline) Storno
-  div(v-else)
+      q-btn(icon="playlist_add" dense flat color="primary" @click="addDefaultValue()" v-if="!hasDialog")
+      q-btn(icon="remove" dense flat color="primary" size="x-small" v-if="isArrayItem" @click="removeDialog" @mouseenter="hover=true" @mouseleave="hover=false")
+  template(v-else)
     q-btn(icon="playlist_add" dense flat color="primary" @click="createComplexValue()") Vytvořit
 </template>
 
 <script>
 import EditorMixin from './EditorMixin'
-import AdditionMixin from '../AdditionMixin'
+import AdditionMixin from './AdditionMixin'
 import { ArrayComponent } from '@oarepo/data-renderer'
+import DeletionMixin from './DeletionMixin'
 
 export default {
   name: 'data-editor-array-component',
-  mixins: [EditorMixin, AdditionMixin],
+  mixins: [EditorMixin, AdditionMixin, DeletionMixin],
   components: {
     'data-renderer-array-component': ArrayComponent
   },
@@ -39,40 +36,21 @@ export default {
   },
   data: function () {
     return {
-      editedValue: null
+      addedValue: null,
+      hover: false
     }
   },
   methods: {
-    valueInput (value) {
-      this.editedValue = value
-      this.$emit('change', value)
-    },
     submitData (value) {
       const submittedData = {
-        op: 'add'
-        // pathValues: [],
-        // values: [value.value],
+        op: 'add',
+        context: this.currentValue,
+        value: value,
+        paths: this.paths
       }
-      if (value.prop) {
-        const complexValue = {}
-        complexValue[value.prop] = value.value
-        submittedData.context = this.currentValue
-        submittedData.value = complexValue
-      } else {
-        submittedData.context = this.currentValue
-        submittedData.value = value
-      }
-      this.editing = false
-      this.$emit('stop-editing')
       this.extraProps.submit(submittedData)
-    },
-    addItem () {
-      this.submitData(this.editedValue)
+      this.$emit('done')
     }
   }
 }
 </script>
-
-<style scoped>
-
-</style>

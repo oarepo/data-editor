@@ -1,33 +1,26 @@
 <template lang="pug">
 div
-  q-input(v-model="editedValue" @input="valueInput" ref="editor" autofocus)
+  q-input(:value="value" @input="valueInput" ref="editor" autofocus)
   div.q-mt-sm
-    q-btn(icon="done" color="primary" @click="save" outline) Uložit
-    q-btn.q-ml-sm(icon="clear" color="grey" @click="onCancel" outline) Storno
+    q-btn(icon="done" color="primary" @click="ok" outline) Uložit
+    q-btn.q-ml-sm(icon="clear" color="grey" @click="cancel" outline) Storno
 </template>
 
 <script>
-import EditorMixin from './EditorMixin'
-
 export default {
   name: 'data-editor-input-component',
   props: {
-    extraProps: Object,
-    prop: [String, Number]
-  },
-  mixins: [EditorMixin],
-  data: function () {
-    return {
-      editedValue: null
-    }
-  },
-  mounted () {
-    this.editedValue = this.value
+    value: [String, Number, undefined]
   },
   methods: {
     valueInput (value) {
-      this.editedValue = value
-      this.$emit('change', value)
+      this.$emit('input', value)
+    },
+    ok () {
+      this.$emit('ok')
+    },
+    cancel () {
+      this.$emit('cancel')
     }
   }
 }

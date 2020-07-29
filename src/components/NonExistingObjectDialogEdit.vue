@@ -1,6 +1,5 @@
 <template lang="pug">
-div
-  data-editor-component(:record="record" :options="options" :layout="layout")
+data-editor(:record="record" :options="options" :layout="layout")
 </template>
 
 <script>
@@ -25,14 +24,21 @@ export default {
           {
             prop: 'object',
             additionalProps: { dialogComponent: DialogWithPropertyComponent },
-            children: []
+            children: [
+              {
+                prop: 'phone'
+              },
+              {
+                prop: 'email'
+              }
+            ]
           }
         ]
       }
     }
   },
   methods: {
-    submit ({ path, context, prop, value, op, pathValues }) {
+    submit ({ context, prop, value, op }) {
       if (op === 'add') {
         if (Array.isArray(context)) {
           context.push(value)
@@ -41,10 +47,21 @@ export default {
         }
       }
       if (op === 'replace') {
-        context[prop] = value
+        if (Array.isArray(context)) {
+          context.splice(prop, 1, value)
+        } else {
+          Vue.set(context, prop, value)
+        }
+      }
+      if (op === 'remove') {
+        if (Array.isArray(context)) {
+          context.splice(prop, 1)
+        } else {
+          delete context[prop]
+        }
       }
     },
-    cancel ({ props }) {
+    cancel () {
       console.log('cancelling')
     }
   }

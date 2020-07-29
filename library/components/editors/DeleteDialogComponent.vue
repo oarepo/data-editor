@@ -2,10 +2,7 @@
 q-dialog(ref="dialog" @hide="onDialogHide")
   q-card
     q-card-section
-      q-form(ref="form")
-        q-input(label="Property" v-model="prop" autofocus)
-        q-input(label="Value" v-model="value")
-      div.text-warning(v-if="errorMessage") {{errorMessage}}
+      q-item Chcete smazat tento záznam?
     q-card-actions(align="right")
       q-btn(color="primary" type="submit" label="OK" @click="onOKClick")
       q-btn(color="primary" label="Cancel" @click="onCancelClick")
@@ -13,16 +10,7 @@ q-dialog(ref="dialog" @hide="onDialogHide")
 
 <script>
 export default {
-  name: 'dialog-with-property-component',
-  data: function () {
-    return {
-      value: null,
-      prop: null
-    }
-  },
-  props: {
-    errorMessage: String
-  },
+  name: 'delete-dialog',
   methods: {
     show () {
       this.$refs.dialog.show()
@@ -34,10 +22,8 @@ export default {
       this.$emit('hide')
     },
     async onOKClick () {
-      if (await this.$refs.form.validate()) {
-        this.$emit('ok', { [this.prop]: this.value })
-        this.hide()
-      }
+      this.$emit('ok')
+      this.hide()
     },
     onCancelClick () {
       this.hide()

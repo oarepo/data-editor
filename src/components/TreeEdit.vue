@@ -1,6 +1,13 @@
 <template lang="pug">
 div
-  data-editor-component(:record="record" :options="options" :layout="layout")
+  div
+    span Display schema:
+    q-radio(v-model="options.schema" val="inline" label="inline" color="yellow")
+    q-radio(v-model="options.schema" val="block" label="block" color="yellow")
+    q-radio(v-model="options.schema" val="table" label="table" color="yellow")
+    q-radio(v-model="options.schema" val="flex" label="flex" color="yellow")
+  hr
+  data-editor(:record="record" :options="options" :layout="layout")
 </template>
 
 <script>
@@ -37,7 +44,7 @@ export default {
     }
   },
   methods: {
-    submit ({ path, context, prop, value, op, pathValues }) {
+    submit ({ context, prop, value, op }) {
       if (op === 'add') {
         if (Array.isArray(context)) {
           context.push(value)
@@ -46,7 +53,11 @@ export default {
         }
       }
       if (op === 'replace') {
-        context[prop] = value
+        if (Array.isArray(context)) {
+          context.splice(prop, 1, value)
+        } else {
+          Vue.set(context, prop, value)
+        }
       }
       if (op === 'remove') {
         if (Array.isArray(context)) {
@@ -56,7 +67,7 @@ export default {
         }
       }
     },
-    cancel ({ props }) {
+    cancel () {
       console.log('cancelling')
     }
   }
