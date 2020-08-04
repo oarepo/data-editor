@@ -34,8 +34,7 @@ describe('data editor components', () => {
     console.log(html_beautify(wrapper.html()))
     expect(wrapper.html()).to.include(
       '<div class="iqde-array-container iqde-root-component">' +
-      '<q-btn-stub ripple="true" align="center" icon="playlist_add" flat="true" color="primary" dense="true">Vytvořit</q-btn-stub>' +
-      '</div>'
+      '<q-btn-stub ripple="true" align="center" icon="playlist_add" flat="true" color="primary" dense="true">Vytvořit</q-btn-stub>'
     )
   })
 
