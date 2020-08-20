@@ -1,6 +1,6 @@
 {
   "name": "@oarepo/data-editor",
-  "version": "v3.1.2",
+  "version": "v3.1.3",
   "private": false,
   "keywords": [
     "ui",
@@ -19,7 +19,7 @@
   },
   "main": "oarepo-data-editor.esm.js",
   "dependencies": {
-    "@oarepo/data-renderer": "2.4.6",
+    "@oarepo/data-renderer": "2.4.7",
     "@quasar/extras": "^1.0.0",
     "core-js": "^3.4.4",
     "jsonpath-plus": "^2.0.0",
