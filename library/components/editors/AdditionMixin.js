@@ -1,4 +1,9 @@
+import DialogWithPropertyComponent from '@/components/DialogWithPropertyComponent'
+
 export default {
+  components: {
+    defaultDialogComponent: DialogWithPropertyComponent
+  },
   computed: {
     hasDialog () {
       return !!this.currentDialogComponent
@@ -13,6 +18,8 @@ export default {
       }
       if (layout.dialogComponent) {
         return layout.dialogComponent
+      } else {
+        return DialogWithPropertyComponent
       }
     },
     hasDefaultValue () {

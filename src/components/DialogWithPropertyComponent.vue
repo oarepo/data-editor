@@ -3,8 +3,9 @@ q-dialog(ref="dialog" @hide="onDialogHide")
   q-card
     q-card-section
       q-form(ref="form")
-        q-input(label="Property" v-model="prop" autofocus)
-        q-input(label="Value" v-model="value")
+        q-select("Type" :options="valueTypes" v-model="valueType")
+        q-input(label="Property" v-model="prop")
+        q-input(v-if="valueType==='simple'" label="Value" v-model="value")
       div.text-warning(v-if="errorMessage") {{errorMessage}}
     q-card-actions(align="right")
       q-btn(color="primary" type="submit" label="OK" @click="onOKClick")
@@ -16,6 +17,8 @@ export default {
   name: 'dialog-with-property-component',
   data: function () {
     return {
+      valueTypes: ['simple', 'object', 'array'],
+      valueType: 'simple',
       value: null,
       prop: null
     }
@@ -35,7 +38,13 @@ export default {
     },
     async onOKClick () {
       if (await this.$refs.form.validate()) {
-        this.$emit('ok', { [this.prop]: this.value })
+        if (this.valueType === 'object') {
+          this.$emit('ok', { [this.prop]: {} })
+        } else if (this.valueType === 'array') {
+          this.$emit('ok', { [this.prop]: [] })
+        } else {
+          this.$emit('ok', { [this.prop]: this.value })
+        }
         this.hide()
       }
     },
