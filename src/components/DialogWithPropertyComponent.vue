@@ -1,15 +1,15 @@
 <template lang="pug">
-  q-dialog(ref="dialog" @hide="onDialogHide")
-    q-card
-      q-card-section
-        q-form(ref="form")
-          q-select("Type" :options="valueTypes" v-model="valueType")
-          q-input(v-if="showProperty" label="Property" v-model="prop")
-          q-input(v-if="showValue" label="Value" v-model="value")
-        div.text-warning(v-if="errorMessage") {{errorMessage}}
-      q-card-actions(align="right")
-        q-btn(color="primary" type="submit" label="OK" @click="onOKClick")
-        q-btn(color="primary" label="Cancel" @click="onCancelClick")
+q-dialog(ref="dialog" @hide="onDialogHide")
+  q-card
+    q-card-section
+      q-form(ref="form")
+        q-select("Type" :options="valueTypes" v-model="valueType")
+        q-input(label="Property" v-model="prop")
+        q-input(v-if="valueType==='simple'" label="Value" v-model="value")
+      div.text-warning(v-if="errorMessage") {{errorMessage}}
+    q-card-actions(align="right")
+      q-btn(color="primary" type="submit" label="OK" @click="onOKClick")
+      q-btn(color="primary" label="Cancel" @click="onCancelClick")
 </template>
 
 <script>
@@ -17,7 +17,7 @@ export default {
   name: 'dialog-with-property-component',
   data: function () {
     return {
-      valueTypes: ['simple', 'complex', 'object', 'array'],
+      valueTypes: ['simple', 'object', 'array'],
       valueType: 'simple',
       value: null,
       prop: null
@@ -25,15 +25,6 @@ export default {
   },
   props: {
     errorMessage: String
-  },
-  computed: {
-    showProperty () {
-      return this.valueType !== 'simple'
-    },
-    showValue () {
-      const valueTypes = ['simple', 'complex']
-      return valueTypes.includes(this.valueType)
-    }
   },
   methods: {
     show () {
@@ -51,8 +42,6 @@ export default {
           this.$emit('ok', { [this.prop]: {} })
         } else if (this.valueType === 'array') {
           this.$emit('ok', { [this.prop]: [] })
-        } else if (this.valueType === 'simple') {
-          this.$emit('ok', this.value)
         } else {
           this.$emit('ok', { [this.prop]: this.value })
         }
