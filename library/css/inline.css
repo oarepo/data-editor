@@ -7,7 +7,7 @@
 }
 
 .iqdr-layout-inline div.iqdr-children-wrapper {
-    background-image: url("/bg.svg");
+    background-image: url("bg.svg");
     background-size: 100% 100%;
     margin: 2px;
     width: 100%;
@@ -46,7 +46,7 @@
 }
 
 .iqdr-layout-inline .iqde-selected.iqdr-children-wrapper{
-    background-image: url("/bgover.svg");
+    background-image: url("bgover.svg");
     background-size: 100% 100%;
 }
 
