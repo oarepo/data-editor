@@ -4,7 +4,7 @@ q-dialog(ref="dialog" @hide="onDialogHide")
     q-card-section
       q-form(ref="form")
         q-select("Type" :options="valueTypes" v-model="valueType")
-        q-input(label="Property" v-model="prop")
+        q-input(v-if="valueType!=='simple'" label="Property" v-model="prop")
         q-input(v-if="valueType==='simple'" label="Value" v-model="value")
       div.text-warning(v-if="errorMessage") {{errorMessage}}
     q-card-actions(align="right")
@@ -43,7 +43,7 @@ export default {
         } else if (this.valueType === 'array') {
           this.$emit('ok', { [this.prop]: [] })
         } else {
-          this.$emit('ok', { [this.prop]: this.value })
+          this.$emit('ok', this.value)
         }
         this.hide()
       }
