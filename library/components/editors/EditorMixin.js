@@ -59,7 +59,8 @@ export default {
     },
     getPrimitiveValue (value) {
       if (Object.prototype.toString.call(value) === '[object String]') {
-        if (+value === +value) {
+        const regex =/^[0-9]+$/
+        if (value.match(regex) != null) {
           return parseInt(value)
         } else {
           return value
