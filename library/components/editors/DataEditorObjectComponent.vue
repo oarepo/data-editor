@@ -51,16 +51,27 @@ export default {
         this.$emit('done')
         return
       }
-      Object.keys(value).forEach(prop => {
+      if (Object.prototype.toString.call(value) === '[object String]') {
         const submittedData = {
           op: 'add',
-          context: this.currentValue,
-          value: value[prop],
-          prop: prop,
+          context: this.context,
+          value: value,
+          prop: this.prop,
           paths: this.paths
         }
         this.extraProps.submit(submittedData)
-      })
+      } else {
+        Object.keys(value).forEach(prop => {
+          const submittedData = {
+            op: 'add',
+            context: this.currentValue,
+            value: value[prop],
+            prop: prop,
+            paths: this.paths
+          }
+          this.extraProps.submit(submittedData)
+        })
+      }
       this.$emit('done')
     }
   }
