@@ -55,7 +55,7 @@ export default {
         const submittedData = {
           op: 'add',
           context: this.context,
-          value: value,
+          value: this.getPrimitiveValue(value),
           prop: this.prop,
           paths: this.paths
         }
@@ -65,7 +65,7 @@ export default {
           const submittedData = {
             op: 'add',
             context: this.currentValue,
-            value: value[prop],
+            value: this.getPrimitiveValue(value[prop]),
             prop: prop,
             paths: this.paths
           }

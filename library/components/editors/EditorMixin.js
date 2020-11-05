@@ -44,7 +44,7 @@ export default {
     async save () {
       this.$nextTick(() => {
         const submitData = {
-          value: this.editedValue,
+          value: this.getPrimitiveValue(this.editedValue),
           op: 'replace',
           context: this.context,
           prop: this.prop,
@@ -56,6 +56,15 @@ export default {
     },
     async cancel () {
       this.$emit('done')
+    },
+    getPrimitiveValue (value) {
+      if (Object.prototype.toString.call(value) === '[object String]') {
+        if (+value === +value) {
+          return parseInt(value)
+        } else {
+          return value
+        }
+      } return value
     }
   }
 }

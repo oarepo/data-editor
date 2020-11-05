@@ -46,7 +46,7 @@ export default {
       const submittedData = {
         op: 'add',
         context: this.currentValue,
-        value: value,
+        value: this.getPrimitiveValue(value),
         paths: this.paths
       }
       this.extraProps.submit(submittedData)
