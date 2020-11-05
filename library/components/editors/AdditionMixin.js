@@ -1,4 +1,4 @@
-import DialogWithPropertyComponent from '@/components/DialogWithPropertyComponent'
+import DialogWithPropertyComponent from './DialogWithPropertyComponent.vue'
 
 export default {
   components: {
