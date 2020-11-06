@@ -1,11 +1,7 @@
-import ArrayDialogComponent from './ArrayDialogComponent'
-import ObjectDialogComponent from './ObjectDialogComponent'
+import ArrayDialogComponent from './ArrayDialogComponent.vue'
+import ObjectDialogComponent from './ObjectDialogComponent.vue'
 
 export default {
-  components: {
-    arrayDialogComponent: ArrayDialogComponent,
-    objectDialogComponent: ObjectDialogComponent
-  },
   computed: {
     hasDialog () {
       return !!this.currentDialogComponent
