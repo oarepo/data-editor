@@ -2,6 +2,10 @@ import ArrayDialogComponent from './ArrayDialogComponent'
 import ObjectDialogComponent from './ObjectDialogComponent'
 
 export default {
+  components: {
+    arrayDialogComponent: ArrayDialogComponent,
+    objectDialogComponent: ObjectDialogComponent
+  },
   computed: {
     hasDialog () {
       return !!this.currentDialogComponent
@@ -84,14 +88,26 @@ export default {
       console.log(value)
     },
     createComplexValue () {
-      const submittedData = {
-        op: 'add',
-        context: this.context,
-        value: this.layout.children ? {} : [],
-        prop: this.prop,
-        paths: this.paths
+      let value = this.layout.children ? {} : []
+      if (this.layout.childrenProps !== undefined) {
+        const submittedData = {
+          op: 'add',
+          context: this.context,
+          value: this.layout.childrenProps,
+          prop: this.prop,
+          paths: this.paths
+        }
+        this.extraProps.submit(submittedData)
+      } else {
+        const submittedData = {
+          op: 'add',
+          context: this.context,
+          value: value,
+          prop: this.prop,
+          paths: this.paths
+        }
+        this.extraProps.submit(submittedData)
       }
-      this.extraProps.submit(submittedData)
     }
   }
 }
