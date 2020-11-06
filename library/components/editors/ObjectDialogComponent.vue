@@ -1,20 +1,20 @@
 <template lang="pug">
-q-dialog(ref="dialog" @hide="onDialogHide")
-  q-card
-    q-card-section
-      q-form(ref="form")
-        q-select("Type" :options="valueTypes" v-model="valueType")
-        q-input(v-if="valueType!=='simple'" label="Property" v-model="prop")
-        q-input(v-if="valueType==='simple'" label="Value" v-model="value")
-      div.text-warning(v-if="errorMessage") {{errorMessage}}
-    q-card-actions(align="right")
-      q-btn(color="primary" type="submit" label="OK" @click="onOKClick")
-      q-btn(color="primary" label="Cancel" @click="onCancelClick")
+  q-dialog(ref="dialog" @hide="onDialogHide")
+    q-card
+      q-card-section
+        q-form(ref="form")
+          q-select("Type" :options="valueTypes" v-model="valueType")
+          q-input(label="Property" v-model="prop")
+          q-input(v-if="valueType==='simple'" label="Value" v-model="value")
+        div.text-warning(v-if="errorMessage") {{errorMessage}}
+      q-card-actions(align="right")
+        q-btn(color="primary" type="submit" label="OK" @click="onOKClick")
+        q-btn(color="primary" label="Cancel" @click="onCancelClick")
 </template>
 
 <script>
 export default {
-  name: 'dialog-with-property-component',
+  name: 'object-dialog-component',
   data: function () {
     return {
       valueTypes: ['simple', 'object', 'array'],
@@ -39,11 +39,11 @@ export default {
     async onOKClick () {
       if (await this.$refs.form.validate()) {
         if (this.valueType === 'object') {
-          this.$emit('ok', { [this.prop]: {} })
+          this.$emit('ok',{[this.prop]: {}})
         } else if (this.valueType === 'array') {
-          this.$emit('ok', { [this.prop]: [] })
+          this.$emit('ok', {[this.prop]: []})
         } else {
-          this.$emit('ok', this.value)
+          this.$emit('ok', {[this.prop]: this.value})
         }
         this.hide()
       }

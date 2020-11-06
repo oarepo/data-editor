@@ -1,9 +1,7 @@
-import DialogWithPropertyComponent from './DialogWithPropertyComponent.vue'
+import ArrayDialogComponent from './ArrayDialogComponent'
+import ObjectDialogComponent from './ObjectDialogComponent'
 
 export default {
-  components: {
-    defaultDialogComponent: DialogWithPropertyComponent
-  },
   computed: {
     hasDialog () {
       return !!this.currentDialogComponent
@@ -18,8 +16,12 @@ export default {
       }
       if (layout.dialogComponent) {
         return layout.dialogComponent
-      } else {
-        return DialogWithPropertyComponent
+      }
+      if (Object.prototype.toString.call(this.value) === '[object Array]') {
+        return ArrayDialogComponent
+      }
+      else {
+        return ObjectDialogComponent
       }
     },
     hasDefaultValue () {
