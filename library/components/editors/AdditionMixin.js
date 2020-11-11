@@ -3,6 +3,13 @@ import ObjectDialogComponent from './ObjectDialogComponent.vue'
 
 export default {
   computed: {
+    buttonTitle () {
+      if (Object.prototype.toString.call(this.value) === '[object Array]') {
+        return `add item to ${this.prop}`
+      } else {
+        return `add property to ${this.prop}`
+      }
+    },
     hasDialog () {
       return !!this.currentDialogComponent
     },

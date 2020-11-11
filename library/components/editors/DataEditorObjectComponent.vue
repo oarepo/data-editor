@@ -3,8 +3,8 @@ component(:is="rootComponent" class="iqde-root-component")
   div.iqde-object-container(v-if="hasValue")
     data-renderer-object-component(v-bind="$props" :class="{'iqde-selected': hover}")
     div.iqde-buttons
-      q-btn(icon="add" label="default value" dense flat color="primary" @click="addDefaultValue()" v-if="hasDefaultValue")
-      q-btn(icon="playlist_add" dense flat color="primary" @click="openDialog(layout)" v-if="hasDialog")
+      q-btn(icon="add" label="dv" :title="buttonTitle" dense flat color="primary" @click="addDefaultValue()" v-if="hasDefaultValue")
+      q-btn(icon="playlist_add" :title="buttonTitle" dense flat color="primary" @click="openDialog(layout)" v-if="hasDialog")
       q-btn(icon="remove" dense flat color="primary" size="x-small" v-if="isArrayItem" @click="removeDialog" @mouseenter="hover=true" @mouseleave="hover=false")
   div(v-else)
     q-btn(icon="playlist_add" dense flat color="primary" @click="createComplexValue()") Vytvořit
