@@ -109,6 +109,11 @@
                     q-icon(name='list')
                   q-item-section
                     q-item-label Edit object with boolean value
+                q-item(clickable='' :to="{name: 'object-with-children-layout-edit'}")
+                  q-item-section(avatar='')
+                    q-icon(name='list')
+                  q-item-section
+                    q-item-label Edit object with children layout
     q-page-container
       q-page.q-ma-lg
         router-view
